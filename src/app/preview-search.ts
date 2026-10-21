@@ -40,9 +40,11 @@ function closeWord(query: string, word: string): boolean {
 export function searchProducts(products: Product[], query: string): Product[] {
   const q = query.trim().toLowerCase();
   if (!q) return products.filter((p) => p.bestseller).slice(0, 5);
-  const terms = words(aliases[q] ?? q).flatMap((word) =>
-    words(aliases[word] ?? word),
-  );
+  const phrase = aliases[q]?.includes(" ") ? aliases[q] : q;
+  const terms = words(phrase).map((term) => [
+    term,
+    ...words(aliases[term] ?? ""),
+  ]);
   if (!terms.length) return [];
   return products
     .map((product) => {
@@ -52,6 +54,7 @@ export function searchProducts(products: Product[], query: string): Product[] {
           product.name,
           product.tagline,
           product.step,
+          product.spf ? "sunscreen" : "",
           SUBTYPE_LABEL[product.subtype],
           ...product.actives.map((a) => a.id),
           ...product.targets.flatMap((t) => [
@@ -63,12 +66,16 @@ export function searchProducts(products: Product[], query: string): Product[] {
           ]),
         ].join(" "),
       );
-      const scores = terms.map((term) =>
-        nameWords.some((w) => w.includes(term))
+      const scores = terms.map((variants) =>
+        variants.some((term) => nameWords.some((word) => word.includes(term)))
           ? 4
-          : allWords.some((w) => w.includes(term))
+          : variants.some((term) =>
+                allWords.some((word) => word.includes(term)),
+              )
             ? 3
-            : allWords.some((w) => closeWord(term, w))
+            : variants.some((term) =>
+                  allWords.some((word) => closeWord(term, word)),
+                )
               ? 1
               : 0,
       );

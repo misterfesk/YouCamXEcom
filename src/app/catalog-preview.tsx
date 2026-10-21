@@ -123,10 +123,14 @@ export function CatalogPreview({ step, goal }: { step?: Step; goal?: GoalId }) {
   const routine = (["cleanse", "moisturize", "protect"] as Step[])
     .map((step) => essentials.find((item) => item.product.step === step))
     .filter((item): item is ProductListing => !!item);
+  const featuredIds = new Set([
+    ...sections.flatMap((section) =>
+      section.items.map((item) => item.product.id),
+    ),
+    ...essentials.map((item) => item.product.id),
+  ]);
   const everythingElse = items.filter(
-    (item) =>
-      item.fit?.level === "avoid" ||
-      !focus.some((goal) => matchesGoal(item.product, goal)),
+    (item) => !featuredIds.has(item.product.id),
   );
   const forYou = showFits && view === "for-you" && !step && !goal;
   const title = step

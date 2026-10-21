@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ScanModal } from "@/components/scan/scan-flow";
@@ -72,7 +72,6 @@ export function usePreview() {
 }
 export function PreviewProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const pathname = usePathname();
   const [sampleId, setSampleId] = useState<SampleFaceId>();
   const [recommendations, setRecommendations] = useState(true);
   const [bag, setBag] = useState<Record<string, number>>({});
@@ -93,7 +92,7 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
   const [analysisStage, setAnalysisStage] = useState(0);
   const [error, setError] = useState<ScanErrorCode>("unknown");
   const [revisiting, setRevisiting] = useState(false);
-  const returnPath = useRef(pathname);
+  const returnPath = useRef("/");
   const uploadGeneration = useRef(0);
   const blobUrl = useRef<string | undefined>(undefined);
   const profile = sampleId ? summarizeProfile(sampleId) : undefined;
@@ -128,7 +127,7 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
     clearPhoto();
     setPendingSample(undefined);
     setConsent(false);
-    returnPath.current = pathname;
+    returnPath.current = window.location.pathname;
     const results = source === "results" && !!profile;
     setRevisiting(results);
     setStep(results ? "reveal" : "intro");

@@ -218,6 +218,10 @@ test("search supports terms, synonyms and keyboard focus return", async ({
   await expect(
     page.getByRole("link", { name: /Balance Notes Serum/ }),
   ).toBeVisible();
+  await search.fill("Sheer Veil Tinted SPF 50");
+  await expect(
+    page.getByRole("link", { name: /Sheer Veil Tinted SPF 50/ }),
+  ).toBeVisible();
   await search.fill("nothing matches this");
   await expect(
     page.getByRole("heading", { name: "A different word might help." }),
@@ -239,4 +243,69 @@ test("tablet and reduced motion retain the shopping journey", async ({
     .locator(".product-grid > li")
     .evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
   expect(transforms.every((value) => value === "none")).toBe(true);
+});
+
+test("For you keeps the complete catalog available for every sample", async ({
+  page,
+}) => {
+  for (const label of [
+    "breakouts & oil",
+    "dehydration & redness",
+    "under-eyes & firmness",
+  ]) {
+    await page.goto("/shop");
+    const links = page.locator(".product-card-link");
+    const expected = (
+      await links.evaluateAll((elements) =>
+        elements.map((el) => el.getAttribute("href")),
+      )
+    ).sort();
+    expect(expected).toHaveLength(24);
+    await page
+      .getByRole("button", { name: "✦ Scan my skin", exact: true })
+      .first()
+      .click();
+    await page
+      .getByRole("button", { name: "Try with a sample face", exact: true })
+      .click();
+    await page
+      .getByRole("button", { name: `Try ${label} sample`, exact: true })
+      .click();
+    await page
+      .getByRole("button", {
+        name: "✦ Continue with recommendations",
+        exact: true,
+      })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "For you", exact: true }),
+    ).toHaveAttribute("aria-pressed", "true");
+    const available = [
+      ...new Set(
+        await links.evaluateAll((elements) =>
+          elements.map((el) => el.getAttribute("href")),
+        ),
+      ),
+    ].sort();
+    expect(available).toEqual(expected);
+  }
+});
+
+test("unknown catalog URLs render the branded not-found page", async ({
+  page,
+}) => {
+  for (const route of [
+    "/products/not-a-product",
+    "/shop/not-a-step",
+    "/concerns/not-a-goal",
+  ]) {
+    const response = await page.goto(route);
+    expect([200, 404]).toContain(response?.status());
+    await expect(
+      page.getByText("404 / A small detour", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Shop the collection", exact: true }),
+    ).toBeVisible();
+  }
 });

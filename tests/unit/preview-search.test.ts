@@ -22,6 +22,21 @@ describe("storefront preview search", () => {
     expect(searchProducts(products, "nothing matches this")).toEqual([]);
     expect(searchProducts(products, "!!!")).toEqual([]);
   });
+  it("preserves exact names and concern words while expanding synonyms", () => {
+    expect(searchProducts(products, "Sheer Veil Tinted SPF 50")[0]?.name).toBe(
+      "Sheer Veil Tinted SPF 50",
+    );
+    expect(
+      searchProducts(products, "spf").filter((product) => product.spf).length,
+    ).toBe(3);
+    expect(
+      searchProducts(products, "sunscreen").filter((product) => product.spf)
+        .length,
+    ).toBe(3);
+    expect(
+      searchProducts(products, "dark spots").map((product) => product.name),
+    ).toContain("Bright Notes Vitamin C Serum");
+  });
   it("puts exact product names first and keeps the fixture order intact", () => {
     const before = products.map((p) => p.id);
     expect(searchProducts(products, "Water Reserve Serum")[0].name).toBe(
