@@ -515,8 +515,6 @@ export const products: Product[] = seeds.map((seed, index) => ({
     frequency: seed.frequency ?? "Use daily, as comfortable.",
   },
   ingredientsInci: seed.inci,
-  rating: 0,
-  reviewCount: 0,
   bestseller: seed.bestseller,
   new: index === 23,
 }));

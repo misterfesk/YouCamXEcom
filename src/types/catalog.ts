@@ -69,17 +69,31 @@ export interface Product {
   safety: SafetyNote[];
   usage: { when: "am" | "pm" | "both"; howTo: string; frequency: string };
   ingredientsInci: string;
-  /** Mock numbers only; no review text exists. */
-  rating: number;
-  reviewCount: number;
   bestseller?: boolean;
   new?: boolean;
 }
+
+/** What an active does to skin, as far as ranking rules care. */
+export const ACTIVE_TAGS = [
+  "exfoliant",
+  "retinoid",
+  "drying",
+  "soothing",
+  "barrier",
+  "humectant",
+  "tone",
+  "uv-filter",
+  "visible-light",
+] as const;
+export type ActiveTag = (typeof ACTIVE_TAGS)[number];
 
 export interface Active {
   id: string;
   name: string;
   helps: Concern[];
-  cautions: string[];
-  source: string;
+  tags: ActiveTag[];
+  /** Leave-on use deserves an "ask your doctor if pregnant" note. */
+  pregnancyCaution?: boolean;
+  /** Source ids from the knowledge sources table. */
+  source: string[];
 }
