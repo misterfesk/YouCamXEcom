@@ -8,6 +8,6 @@ Work in progress.
 
 ```bash
 pnpm install
-cp .env.example .env.local   # mock mode works without an API key
+cp .env.example .env   # mock mode works without an API key
 pnpm dev
 ```
