@@ -38,10 +38,20 @@ export function DialogSurface({
           className="dialog-panel"
           data-sheet={sheet}
           onOpenAutoFocus={(event) => {
-            opener.current =
+            const active =
               document.activeElement instanceof HTMLElement
                 ? document.activeElement
                 : null;
+            // Menu items and sheets unmount on close; return focus to what opened them.
+            const host = active?.closest<HTMLElement>(
+              '[role="menu"], [role="dialog"]',
+            );
+            opener.current =
+              (host?.id &&
+                document.querySelector<HTMLElement>(
+                  `[aria-controls="${host.id}"]`,
+                )) ||
+              active;
             if (initialFocus === "search") {
               const search = content.current?.querySelector<HTMLInputElement>(
                 'input[type="search"]',

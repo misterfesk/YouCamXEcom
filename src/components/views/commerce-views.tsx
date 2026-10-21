@@ -22,7 +22,7 @@ export function BagView({
     0,
   );
   return (
-    <main id="main-content" className="section">
+    <main id="main-content" tabIndex={-1} className="section">
       <Container>
         <p className="type-label text-brand mb-3">
           Your routine, coming together
@@ -64,7 +64,7 @@ export function CheckoutView({
   onPlaceOrder: () => void;
 }) {
   return (
-    <main id="main-content" className="section">
+    <main id="main-content" tabIndex={-1} className="section">
       <Container>
         <p className="type-label text-brand mb-3">Try the last step</p>
         <h1 className="type-h1 mb-6">
@@ -138,7 +138,7 @@ export function CheckoutView({
 }
 export function ConfirmationView({ order }: { order?: DemoOrder }) {
   return (
-    <main id="main-content" className="section">
+    <main id="main-content" tabIndex={-1} className="section">
       <Container>
         <div className="confirmation-hero on-brand">
           <p className="type-label">

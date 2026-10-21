@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Accent } from "@/components/ui/accent";
 export function MethodView() {
   return (
-    <main id="main-content">
+    <main id="main-content" tabIndex={-1}>
       <Container>
         <section className="confirmation-hero on-brand">
           <p className="type-label">A little clarity</p>
@@ -86,7 +86,7 @@ export function MethodView() {
 }
 export function NotFoundView() {
   return (
-    <main id="main-content" className="section">
+    <main id="main-content" tabIndex={-1} className="section">
       <Container>
         <div className="confirmation-hero on-brand">
           <p className="type-label">404 / A small detour</p>

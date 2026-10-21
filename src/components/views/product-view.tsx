@@ -145,7 +145,7 @@ export function ProductView({
   onStartScan,
 }: ProductViewProps) {
   return (
-    <main id="main-content" className="product-page">
+    <main id="main-content" tabIndex={-1} className="product-page">
       <Container>
         <nav aria-label="Breadcrumb" className="breadcrumbs">
           <Link href="/shop">Shop</Link>

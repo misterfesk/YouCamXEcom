@@ -75,7 +75,11 @@ export function CameraFrame({
   };
   return (
     <div className="scan-stack">
-      <div className="camera-frame" aria-label="Camera capture area">
+      <div
+        className="camera-frame"
+        role="group"
+        aria-label="Camera capture area"
+      >
         {cameraSlot ?? (
           <div className="camera-placeholder">
             <FaceMap />
@@ -141,19 +145,20 @@ export function ScanFlow(props: ScanFlowProps) {
     onClose,
   } = props;
   const reduced = useReducedMotion();
-  const heading = useRef<HTMLHeadingElement>(null);
+  const stack = useRef<HTMLDivElement>(null);
   const lastStep = useRef(step);
   useEffect(() => {
     if (lastStep.current !== step) {
       lastStep.current = step;
-      heading.current?.focus();
+      const title = stack.current
+        ?.closest('[role="dialog"]')
+        ?.querySelector<HTMLElement>("h2");
+      title?.setAttribute("tabindex", "-1");
+      title?.focus();
     }
   }, [step]);
   return (
-    <div className="scan-stack">
-      <h2 className="sr-only" ref={heading} tabIndex={-1}>
-        {SCAN_TITLES[step]}
-      </h2>
+    <div className="scan-stack" ref={stack}>
       {step === "intro" && (
         <>
           <div className="scan-intro-art">
@@ -309,14 +314,14 @@ export function ScanFlow(props: ScanFlowProps) {
               initial={{ opacity: 0 }}
               animate={
                 reduced
-                  ? { opacity: [0.3, 0.8, 0.3], y: 0 }
+                  ? { opacity: 0.6, y: 0 }
                   : { opacity: 1, y: ["0%", "8000%", "0%"] }
               }
-              transition={{
-                duration: 2.4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              transition={
+                reduced
+                  ? { duration: 0 }
+                  : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
+              }
             />
           </div>
           <p className="type-label text-brand">Replaying a recorded sample</p>
