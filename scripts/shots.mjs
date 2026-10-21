@@ -10,7 +10,7 @@ if (!outDir) {
   process.exit(1);
 }
 const baseUrl = process.env.BASE_URL ?? "http://localhost:3000";
-const widths = [1440, 390];
+const widths = [1440, 768, 390];
 
 await mkdir(outDir, { recursive: true });
 const browser = await chromium.launch();
@@ -18,8 +18,17 @@ for (const path of paths.length ? paths : ["/styleguide"]) {
   for (const width of widths) {
     const page = await browser.newPage({ viewport: { width, height: 900 } });
     await page.goto(baseUrl + path, { waitUntil: "networkidle" });
+    await page.evaluate(async () => {
+      for (let y = 0; y < document.documentElement.scrollHeight; y += window.innerHeight) {
+        window.scrollTo(0, y);
+        await new Promise(requestAnimationFrame);
+      }
+      await Promise.all(Array.from(document.images, (image) => image.decode().catch(() => undefined)));
+      await document.fonts.ready;
+      window.scrollTo(0, 0);
+    });
     const name = (path.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home") + `-${width}.png`;
-    await page.screenshot({ path: join(outDir, name), fullPage: true });
+    await page.screenshot({ path: join(outDir, name), fullPage: true, caret: "initial" });
     console.log(join(outDir, name));
     await page.close();
   }
