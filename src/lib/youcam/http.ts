@@ -17,16 +17,25 @@ const defaultSleep = (ms: number) => new Promise<void>((resolve) => setTimeout(r
 
 const retryable = (status: number) => status >= 500 || status === 429;
 
-/** Authenticated JSON request. Retries network errors, 5xx and 429; maps failures to YouCamError. */
+export interface RequestOptions {
+  /** Task-creation POSTs must pass false: a retry after an ambiguous failure could charge twice. */
+  retry?: boolean;
+}
+
+/**
+ * Authenticated JSON request. Retries network errors, 5xx and 429 unless retry is false;
+ * maps failures to YouCamError (flagged ambiguous when the server may have acted on the request).
+ */
 export async function youcamRequest(
   options: HttpOptions,
   method: "GET" | "POST",
   path: string,
   body?: unknown,
+  { retry = true }: RequestOptions = {},
 ): Promise<unknown> {
   const doFetch = options.fetch ?? globalThis.fetch;
   const sleep = options.sleep ?? defaultSleep;
-  const backoff = options.backoffMs ?? DEFAULT_BACKOFF;
+  const backoff = retry ? (options.backoffMs ?? DEFAULT_BACKOFF) : [];
 
   for (let attempt = 0; ; attempt++) {
     const last = attempt >= backoff.length;
@@ -44,7 +53,7 @@ export async function youcamRequest(
         signal: AbortSignal.timeout(options.timeoutMs ?? 15_000),
       });
     } catch {
-      if (last) throw new YouCamError(scanFailure("network"), `${method} ${path}: network error`);
+      if (last) throw new YouCamError(scanFailure("network"), `${method} ${path}: network error`, true);
       await sleep(backoff[attempt]);
       continue;
     }
@@ -53,7 +62,7 @@ export async function youcamRequest(
       try {
         return await response.json();
       } catch {
-        throw new YouCamError(scanFailure("unknown"), `${method} ${path}: invalid JSON`);
+        throw new YouCamError(scanFailure("unknown"), `${method} ${path}: invalid JSON`, true);
       }
     }
     if (retryable(response.status) && !last) {
@@ -75,5 +84,6 @@ async function failureFromResponse(response: Response, method: string, path: str
   const failure = retryable(response.status)
     ? scanFailure("network")
     : failureFromCode(code, response.status);
-  return new YouCamError(failure, `${method} ${path}: HTTP ${response.status}${code ? ` ${code}` : ""}`);
+  const message = `${method} ${path}: HTTP ${response.status}${code ? ` ${code}` : ""}`;
+  return new YouCamError(failure, message, response.status >= 500);
 }

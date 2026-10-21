@@ -14,6 +14,7 @@ const input = {
   fitzTaskId: "fitz-1",
   source: "camera" as const,
   sha256: "a".repeat(64),
+  ipHash: "b".repeat(32),
 };
 const t0 = 1_800_000_000_000;
 

@@ -7,8 +7,11 @@ export type YouCamFailure =
 
 export class YouCamError extends Error {
   readonly failure: YouCamFailure;
-  constructor(failure: YouCamFailure, message: string) {
+  /** True when the provider may have acted on the request despite the failure (timeout, 5xx, unreadable reply). */
+  readonly ambiguous: boolean;
+  constructor(failure: YouCamFailure, message: string, ambiguous = false) {
     super(message);
+    this.ambiguous = ambiguous;
     this.name = "YouCamError";
     this.failure = failure;
   }

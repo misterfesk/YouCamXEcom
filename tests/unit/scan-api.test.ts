@@ -1,8 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { createScanLimits } from "@/lib/server/limits";
+import { createScanLimits, type LimitsConfig, type ScanLimits } from "@/lib/server/limits";
 import { createScanApi, POLL_TIMEOUT_MS } from "@/lib/server/scan-api";
 import { signScanToken } from "@/lib/server/scan-token";
 import { createMemoryStore } from "@/lib/server/store";
+import { YouCamError } from "@/lib/youcam/errors";
 import { createMockClient } from "@/lib/youcam/mock";
 import type { YouCamClient } from "@/lib/youcam/types";
 import type { ScanStatusResponse, ScanUploadResponse } from "@/types/scan";
@@ -15,20 +16,24 @@ function setup({
   env = {},
   limits = {},
   client,
+  wrapLimits,
 }: {
   env?: Record<string, string>;
-  limits?: Partial<{ capPerIp: number; capGlobal: number; reserveFloor: number }>;
+  limits?: Partial<LimitsConfig>;
   client?: (base: YouCamClient) => YouCamClient;
+  wrapLimits?: (base: ScanLimits) => ScanLimits;
 } = {}) {
   let now = START;
   const clock = () => now;
   const base = createMockClient({ env: { YOUCAM_MOCK_FACE: "oily", ...env }, now: clock });
   const api = createScanApi({
     client: client ? client(base) : base,
-    limits: createScanLimits(
-      createMemoryStore(clock),
-      { capPerIp: 3, capGlobal: 20, reserveFloor: 425, ...limits },
-      clock,
+    limits: (wrapLimits ?? ((base: ScanLimits) => base))(
+      createScanLimits(
+        createMemoryStore(clock),
+        { capPerIp: 3, capGlobal: 20, reserveFloor: 425, reserveReleaseAt: START + 1e12, ...limits },
+        clock,
+      ),
     ),
     mode: "mock",
     secret: SECRET,
@@ -147,6 +152,74 @@ describe("typed errors", () => {
     expect(second.response.status).toBe(503);
   });
 
+  it("keeps the slot and units when a task start fails ambiguously", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    const { api } = setup({
+      limits: { capPerIp: 1 },
+      client: (base) => ({
+        ...base,
+        startSkinAnalysis: async () => {
+          throw new YouCamError({ kind: "scan_error", code: "network" }, "timeout", true);
+        },
+      }),
+    });
+    const first = await startScan(api);
+    expect(first.response.status).toBe(502);
+    const second = await api.upload(post(uploadBody("4".repeat(64))));
+    expect(second.status).toBe(429);
+  });
+
+  it("keeps the slot when only one task started", async () => {
+    const { api } = setup({
+      limits: { capPerIp: 1 },
+      client: (base) => ({
+        ...base,
+        startFitzpatrick: async () => {
+          throw new YouCamError({ kind: "scan_error", code: "unknown" }, "rejected");
+        },
+      }),
+    });
+    expect((await startScan(api)).response.status).toBe(500);
+    expect((await api.upload(post(uploadBody("4".repeat(64))))).status).toBe(429);
+  });
+
+  it("holds credit units for started scans and refuses once the reserve is spent", async () => {
+    // balance 800, floor 740: two scans fit (800 - 52 >= 740), the third does not
+    const { api } = setup({ limits: { reserveFloor: 740, capPerIp: 10 } });
+    expect((await startScan(api, "5".repeat(64))).response.status).toBe(200);
+    expect((await startScan(api, "6".repeat(64))).response.status).toBe(200);
+    const blocked = await api.start(post({ fileId: "x", sha256: "7".repeat(64), source: "camera" }));
+    expect(blocked.status).toBe(503);
+    expect(await blocked.json()).toEqual({ error: { kind: "scan_unavailable", reason: "reserve_reached" } });
+  });
+
+  it("returns the profile even when the result cache write fails", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    const { api } = setup({
+      wrapLimits: (base) => ({
+        ...base,
+        cacheProfile: async () => {
+          throw new Error("store down");
+        },
+      }),
+    });
+    const { response } = await startScan(api);
+    const { scanId } = (await response.json()) as { scanId: string };
+    const body = (await (await api.status(scanId)).json()) as ScanStatusResponse;
+    expect(body.status).toBe("done");
+  });
+
+  it("does not serve one visitor's cached result to another", async () => {
+    const { api } = setup();
+    const { response } = await startScan(api, SHA, "203.0.113.1");
+    const { scanId } = (await response.json()) as { scanId: string };
+    await api.status(scanId);
+    const same = (await (await api.upload(post(uploadBody(), "203.0.113.1"))).json()) as ScanUploadResponse;
+    const other = (await (await api.upload(post(uploadBody(), "203.0.113.2"))).json()) as ScanUploadResponse;
+    expect(same.cached).toBe(true);
+    expect(other.cached).toBe(false);
+  });
+
   it("stops at the per-IP cap with a 429", async () => {
     const { api } = setup({ limits: { capPerIp: 1 } });
     expect((await startScan(api, "e".repeat(64))).response.status).toBe(200);
@@ -196,7 +269,7 @@ describe("typed errors", () => {
     const { api, advance } = setup();
     expect((await api.status("garbage")).status).toBe(400);
     const token = signScanToken(
-      { skinTaskId: "mock.skin.oily.success.1", fitzTaskId: "mock.fitz.oily.success.1", source: "camera", sha256: SHA },
+      { skinTaskId: "mock.skin.oily.success.1", fitzTaskId: "mock.fitz.oily.success.1", source: "camera", sha256: SHA, ipHash: "a".repeat(32) },
       SECRET,
       START,
     );
@@ -226,7 +299,7 @@ describe("typed errors", () => {
   it("hides the mock upload sink outside mock mode", async () => {
     const api = createScanApi({
       client: createMockClient({ env: {} }),
-      limits: createScanLimits(createMemoryStore(), { capPerIp: 1, capGlobal: 1, reserveFloor: 0 }),
+      limits: createScanLimits(createMemoryStore(), { capPerIp: 1, capGlobal: 1, reserveFloor: 0, reserveReleaseAt: 0 }),
       mode: "live",
       secret: SECRET,
     });
@@ -262,6 +335,20 @@ describe("route modules", () => {
     const body = (await res.json()) as ScanStatusResponse;
     expect(body.status).toBe("done");
     if (body.status === "done") expect(body.profile.fitzpatrick).toBe("II");
+  });
+
+  it("refuse live mode on per-instance memory unless opted in", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.stubEnv("YOUCAM_MODE", "live");
+    vi.stubEnv("YOUCAM_API_KEY", "k");
+    vi.stubEnv("SCAN_TOKEN_SECRET", "s".repeat(32));
+    vi.stubEnv("UPSTASH_REDIS_REST_URL", "");
+    vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "");
+    vi.stubEnv("SCAN_STORE", "");
+    const upload = await import("@/app/api/scan/upload/route");
+    const res = await upload.POST(post(uploadBody()));
+    expect(res.status).toBe(500);
+    expect(await res.json()).toEqual({ error: { kind: "scan_error", code: "unknown" } });
   });
 
   it("answer misconfigured live mode with a typed error", async () => {

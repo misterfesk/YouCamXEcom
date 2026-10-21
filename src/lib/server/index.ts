@@ -2,15 +2,19 @@ import { createYouCamClient, getYouCamMode } from "@/lib/youcam";
 import { createScanApi } from "./scan-api";
 import { createScanLimits, limitsFromEnv } from "./limits";
 import { resolveScanSecret } from "./scan-token";
-import { createStoreFromEnv } from "./store";
+import { createStoreFromEnv, prefixStore } from "./store";
 
 /** Builds the scan handlers from the environment; throws if live mode is misconfigured. */
 export function scanApiFromEnv(env: Record<string, string | undefined> = process.env) {
+  const mode = getYouCamMode(env);
+  // Mock, preview and production must never share counters or the cached balance.
+  const store = prefixStore(createStoreFromEnv(env), `${mode}:${env.VERCEL_ENV ?? "local"}:`);
   return createScanApi({
     client: createYouCamClient(env),
-    limits: createScanLimits(createStoreFromEnv(env), limitsFromEnv(env)),
-    mode: getYouCamMode(env),
+    limits: createScanLimits(store, limitsFromEnv(env)),
+    mode,
     secret: resolveScanSecret(env),
+    env,
   });
 }
 

@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { getYouCamMode } from "@/lib/youcam/config";
 import { SCAN_COST_UNITS } from "@/lib/youcam/constants";
 import type { ScanUnavailableReason } from "@/types/scan";
 import type { SkinProfile } from "@/types/skin";
@@ -7,16 +8,26 @@ import type { KeyValueStore } from "./store";
 export interface LimitsConfig {
   capPerIp: number;
   capGlobal: number;
+  /** Units held back for judging until reserveReleaseAt (epoch ms). */
   reserveFloor: number;
+  reserveReleaseAt: number;
 }
 
 const DAY_SECONDS = 25 * 60 * 60;
 const BALANCE_TTL_SECONDS = 5 * 60;
 const RESULT_TTL_SECONDS = 24 * 60 * 60;
 
+/** Submission deadline: the judging reserve is spendable from here on. */
+export const DEFAULT_RESERVE_RELEASE_AT = "2026-11-02T16:45:00Z";
+
 function intFromEnv(value: string | undefined, fallback: number): number {
   const parsed = Number(value);
   return value !== undefined && value.trim() !== "" && Number.isInteger(parsed) && parsed >= 0 ? parsed : fallback;
+}
+
+function timeFromEnv(value: string | undefined): number {
+  const parsed = Date.parse(value?.trim() ?? "");
+  return Number.isNaN(parsed) ? Date.parse(DEFAULT_RESERVE_RELEASE_AT) : parsed;
 }
 
 export function limitsFromEnv(env: Record<string, string | undefined> = process.env): LimitsConfig {
@@ -24,17 +35,38 @@ export function limitsFromEnv(env: Record<string, string | undefined> = process.
     capPerIp: intFromEnv(env.SCAN_CAP_PER_IP, 3),
     capGlobal: intFromEnv(env.SCAN_CAP_GLOBAL, 20),
     reserveFloor: intFromEnv(env.CREDIT_RESERVE_FLOOR, 425),
+    reserveReleaseAt: timeFromEnv(env.RESERVE_RELEASE_AT),
   };
 }
 
-/** Client address from proxy headers; only its salted hash is ever used as a key. */
-export function clientIp(headers: Headers): string {
+/**
+ * Client address for per-visitor caps. Forwarding headers are client-controlled unless a proxy we
+ * run behind sets them, so live mode trusts them only on Vercel or with TRUST_PROXY=1; otherwise
+ * everyone shares one "direct" bucket. Mock mode spends nothing and always reads the headers.
+ */
+export function clientIp(headers: Headers, env: Record<string, string | undefined> = process.env): string {
+  const trusted = Boolean(env.VERCEL) || env.TRUST_PROXY === "1" || getYouCamMode(env) !== "live";
+  if (!trusted) return "direct";
   const forwarded = headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   return forwarded || headers.get("x-real-ip")?.trim() || "unknown";
 }
 
+/** IPv4 as is; IPv6 reduced to its /64 so one household or host cannot dodge caps by rotating suffixes. */
+export function normalizeIp(ip: string): string {
+  const text = ip.trim().toLowerCase().split("%")[0];
+  if (!text.includes(":")) return text;
+  const mapped = /^(?:0*:)*ffff:(\d+\.\d+\.\d+\.\d+)$/.exec(text);
+  if (mapped) return mapped[1];
+  const [head, tail] = text.split("::");
+  const left = head ? head.split(":") : [];
+  const right = tail === undefined ? [] : tail ? tail.split(":") : [];
+  const groups = tail === undefined ? left : [...left, ...Array(Math.max(0, 8 - left.length - right.length)).fill("0"), ...right];
+  const prefix = groups.slice(0, 4).map((group) => (Number.parseInt(group || "0", 16) || 0).toString(16));
+  return `${prefix.join(":")}::/64`;
+}
+
 export function hashIp(ip: string, salt: string): string {
-  return createHash("sha256").update(`${salt}:${ip}`).digest("hex").slice(0, 32);
+  return createHash("sha256").update(`${salt}:${normalizeIp(ip)}`).digest("hex").slice(0, 32);
 }
 
 /** Cached profiles must not carry mask URLs: they expire and belong to the live reveal only. */
@@ -53,20 +85,23 @@ type SlotResult = { ok: true; release: () => Promise<void> } | { ok: false; reas
 
 interface CachedBalance {
   value: number;
+  /** Doubles as the epoch that scopes the spent-units counter. */
   at: number;
 }
 
 export interface ScanLimits {
   /** Read-only check, used before an upload is created. */
   checkCaps(ipHash: string): Promise<ScanUnavailableReason | null>;
-  /** Counts a scan against both daily caps; release() rolls it back if the tasks never started. */
-  reserveSlot(ipHash: string): Promise<SlotResult>;
-  /** Refuses when the remaining balance minus one scan would fall below the floor. */
+  /** Read-only: would one more scan stay above the floor? */
   checkReserve(getBalance: () => Promise<number>): Promise<ScanUnavailableReason | null>;
-  /** Keeps the cached balance honest between refreshes. */
-  noteScanStarted(): Promise<void>;
-  getCachedProfile(sha256: string): Promise<SkinProfile | null>;
-  cacheProfile(sha256: string, profile: SkinProfile): Promise<void>;
+  /**
+   * Atomically counts a scan against both daily caps and holds its credit units against the cached
+   * balance. release() gives all of it back; call it only when no task was started.
+   */
+  reserveSlot(ipHash: string, getBalance: () => Promise<number>): Promise<SlotResult>;
+  getCachedProfile(ipHash: string, sha256: string): Promise<SkinProfile | null>;
+  /** Write-once; later polls of the same scan do not rewrite the entry. */
+  cacheProfile(ipHash: string, sha256: string, profile: SkinProfile): Promise<void>;
 }
 
 export function createScanLimits(
@@ -78,8 +113,20 @@ export function createScanLimits(
   const ipKey = (ipHash: string) => `scan:ip:${ipHash}:${day()}`;
   const globalKey = () => `scan:global:${day()}`;
   const balanceKey = "scan:balance";
+  const spentKey = (epoch: number) => `scan:spent:${epoch}`;
+  const resultKey = (ipHash: string, sha256: string) => `scan:result:${ipHash}:${sha256}`;
 
+  const floor = () => (now() >= config.reserveReleaseAt ? 0 : config.reserveFloor);
   const count = async (key: string) => (await store.get<number>(key)) ?? 0;
+
+  /** One shared balance snapshot per window; concurrent refreshes settle on the first writer. */
+  async function balance(getBalance: () => Promise<number>): Promise<CachedBalance> {
+    const cached = await store.get<CachedBalance>(balanceKey);
+    if (cached) return cached;
+    const fresh: CachedBalance = { value: await getBalance(), at: now() };
+    if (await store.setNx(balanceKey, fresh, BALANCE_TTL_SECONDS)) return fresh;
+    return (await store.get<CachedBalance>(balanceKey)) ?? fresh;
+  }
 
   return {
     async checkCaps(ipHash) {
@@ -88,45 +135,55 @@ export function createScanLimits(
       return null;
     },
 
-    async reserveSlot(ipHash) {
+    async checkReserve(getBalance) {
+      const { value, at } = await balance(getBalance);
+      const spent = await count(spentKey(at));
+      return value - spent - SCAN_COST_UNITS < floor() ? "reserve_reached" : null;
+    },
+
+    async reserveSlot(ipHash, getBalance) {
       const gKey = globalKey();
       const iKey = ipKey(ipHash);
-      if ((await store.incr(gKey, DAY_SECONDS)) > config.capGlobal) {
-        await store.decr(gKey);
+      if ((await store.incrBy(gKey, 1, DAY_SECONDS)) > config.capGlobal) {
+        await store.decrBy(gKey, 1);
         return { ok: false, reason: "daily_cap" };
       }
-      if ((await store.incr(iKey, DAY_SECONDS)) > config.capPerIp) {
-        await store.decr(iKey);
-        await store.decr(gKey);
+      if ((await store.incrBy(iKey, 1, DAY_SECONDS)) > config.capPerIp) {
+        await store.decrBy(iKey, 1);
+        await store.decrBy(gKey, 1);
         return { ok: false, reason: "daily_cap" };
       }
-      return {
-        ok: true,
-        release: async () => {
-          await store.decr(iKey);
-          await store.decr(gKey);
-        },
+      const giveBackCaps = async () => {
+        await store.decrBy(iKey, 1);
+        await store.decrBy(gKey, 1);
       };
-    },
 
-    async checkReserve(getBalance) {
-      let cached = await store.get<CachedBalance>(balanceKey);
-      if (!cached) {
-        cached = { value: await getBalance(), at: now() };
-        await store.set(balanceKey, cached, BALANCE_TTL_SECONDS);
+      try {
+        const { value, at } = await balance(getBalance);
+        const units = spentKey(at);
+        const spent = await store.incrBy(units, SCAN_COST_UNITS, BALANCE_TTL_SECONDS * 2);
+        if (value - spent < floor()) {
+          await store.decrBy(units, SCAN_COST_UNITS);
+          await giveBackCaps();
+          return { ok: false, reason: "reserve_reached" };
+        }
+        return {
+          ok: true,
+          release: async () => {
+            await store.decrBy(units, SCAN_COST_UNITS);
+            await giveBackCaps();
+          },
+        };
+      } catch (error) {
+        await giveBackCaps().catch(() => {});
+        throw error;
       }
-      return cached.value - SCAN_COST_UNITS < config.reserveFloor ? "reserve_reached" : null;
     },
 
-    async noteScanStarted() {
-      const cached = await store.get<CachedBalance>(balanceKey);
-      if (!cached) return;
-      const remaining = Math.max(1, BALANCE_TTL_SECONDS - Math.floor((now() - cached.at) / 1000));
-      await store.set(balanceKey, { ...cached, value: cached.value - SCAN_COST_UNITS }, remaining);
+    getCachedProfile: (ipHash, sha256) => store.get<SkinProfile>(resultKey(ipHash, sha256)),
+
+    async cacheProfile(ipHash, sha256, profile) {
+      await store.setNx(resultKey(ipHash, sha256), stripMasks(profile), RESULT_TTL_SECONDS);
     },
-
-    getCachedProfile: (sha256) => store.get<SkinProfile>(`scan:result:${sha256}`),
-
-    cacheProfile: (sha256, profile) => store.set(`scan:result:${sha256}`, stripMasks(profile), RESULT_TTL_SECONDS),
   };
 }

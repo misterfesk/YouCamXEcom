@@ -20,9 +20,9 @@ export interface LiveClientOptions extends Partial<HttpOptions> {
   apiKey: string;
 }
 
-function parse<T extends z.ZodType>(schema: T, raw: unknown, what: string): z.output<T> {
+function parse<T extends z.ZodType>(schema: T, raw: unknown, what: string, ambiguous = false): z.output<T> {
   const parsed = schema.safeParse(raw);
-  if (!parsed.success) throw new YouCamError(scanFailure("unknown"), `Unexpected ${what} response`);
+  if (!parsed.success) throw new YouCamError(scanFailure("unknown"), `Unexpected ${what} response`, ambiguous);
   return parsed.data;
 }
 
@@ -31,12 +31,13 @@ const FORBIDDEN_UPLOAD_HEADERS = new Set(["content-length", "host"]);
 
 export function createLiveClient(options: LiveClientOptions): YouCamClient {
   const http: HttpOptions = { baseUrl: DEFAULT_API_BASE_URL, ...options };
-  const request = (method: "GET" | "POST", path: string, body?: unknown) =>
-    youcamRequest(http, method, path, body);
+  const request = (method: "GET" | "POST", path: string, body?: unknown, retry = true) =>
+    youcamRequest(http, method, path, body, { retry });
 
   const startTask = async (feature: string, body: unknown) => {
-    const raw = await request("POST", `/s2s/v2.0/task/${feature}`, body);
-    return parse(taskCreateSchema, raw, "task").data.task_id;
+    // Never retried: a repeat after a lost reply would start (and charge) a second task.
+    const raw = await request("POST", `/s2s/v2.0/task/${feature}`, body, false);
+    return parse(taskCreateSchema, raw, "task", true).data.task_id;
   };
 
   return {

@@ -10,6 +10,8 @@ const claimsSchema = z.object({
   fitzTaskId: z.string().min(1),
   source: z.enum(["camera", "upload"]),
   sha256: z.string().regex(/^[a-f0-9]{64}$/),
+  /** Salted visitor hash from the start request; scopes the result cache. */
+  ipHash: z.string().regex(/^[a-f0-9]{32}$/),
   iat: z.number().int(),
   exp: z.number().int(),
 });

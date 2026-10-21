@@ -29,6 +29,8 @@ export interface ScanApiDeps {
   /** Signs scan tokens and salts IP hashes. */
   secret: string;
   now?: () => number;
+  /** Read for proxy-trust settings. */
+  env?: Record<string, string | undefined>;
 }
 
 const sha256Schema = z.string().regex(/^[a-f0-9]{64}$/);
@@ -98,7 +100,8 @@ async function guarded(run: () => Promise<Response>): Promise<Response> {
 export function createScanApi(deps: ScanApiDeps) {
   const { client, limits, mode, secret } = deps;
   const now = deps.now ?? Date.now;
-  const ipHashOf = (request: Request) => hashIp(clientIp(request.headers), secret);
+  const env = deps.env ?? process.env;
+  const ipHashOf = (request: Request) => hashIp(clientIp(request.headers, env), secret);
 
   /** POST /api/scan/upload */
   const upload = (request: Request) =>
@@ -109,13 +112,14 @@ export function createScanApi(deps: ScanApiDeps) {
       if (contentType !== "image/jpeg") return errorResponse(scanError("unknown"), 415);
       if (fileSize > MAX_UPLOAD_BYTES) return errorResponse(scanError("image_too_large"));
 
-      const cached = await limits.getCachedProfile(sha256);
+      const ipHash = ipHashOf(request);
+      const cached = await limits.getCachedProfile(ipHash, sha256);
       if (cached) {
         const body: ScanUploadResponse = { cached: true, profile: cached };
         return json(body);
       }
 
-      const capped = await limits.checkCaps(ipHashOf(request));
+      const capped = await limits.checkCaps(ipHash);
       if (capped) return errorResponse(unavailable(capped));
       const reserved = await limits.checkReserve(() => client.getCreditBalance());
       if (reserved) return errorResponse(unavailable(reserved));
@@ -132,28 +136,36 @@ export function createScanApi(deps: ScanApiDeps) {
       if (!parsed.success) return errorResponse(scanError("unknown"), 400);
       const { fileId, sha256, source } = parsed.data;
 
-      const slot = await limits.reserveSlot(ipHashOf(request));
+      const ipHash = ipHashOf(request);
+      const slot = await limits.reserveSlot(ipHash, () => client.getCreditBalance());
       if (!slot.ok) return errorResponse(unavailable(slot.reason));
 
-      let started = false;
+      // Once any task may exist the slot and its units stay counted: YouCam can charge even if we never see the reply.
+      let mayHaveCharged = false;
       try {
-        const reserved = await limits.checkReserve(() => client.getCreditBalance());
-        if (reserved) return errorResponse(unavailable(reserved));
-
         const [skin, fitz] = await Promise.allSettled([
           client.startSkinAnalysis(fileId),
           client.startFitzpatrick(fileId),
         ]);
-        started = skin.status === "fulfilled" || fitz.status === "fulfilled";
+        mayHaveCharged = [skin, fitz].some(
+          (result) => result.status === "fulfilled" || (result.reason instanceof YouCamError && result.reason.ambiguous),
+        );
         if (skin.status === "rejected") throw skin.reason;
         if (fitz.status === "rejected") throw fitz.reason;
 
-        await limits.noteScanStarted();
-        const scanId = signScanToken({ skinTaskId: skin.value, fitzTaskId: fitz.value, source, sha256 }, secret, now());
+        const scanId = signScanToken(
+          { skinTaskId: skin.value, fitzTaskId: fitz.value, source, sha256, ipHash },
+          secret,
+          now(),
+        );
         const body: ScanStartResponse = { scanId };
         return json(body);
       } finally {
-        if (!started) await slot.release();
+        if (!mayHaveCharged) {
+          await slot.release().catch((error: unknown) => {
+            console.error("scan: slot release failed", error instanceof Error ? error.name : "unknown");
+          });
+        }
       }
     });
 
@@ -182,7 +194,10 @@ export function createScanApi(deps: ScanApiDeps) {
           scannedAt: new Date(now()).toISOString(),
           keepMasks: true,
         });
-        await limits.cacheProfile(claims.sha256, profile);
+        // The result is already in hand; a cache failure must not lose it.
+        await limits.cacheProfile(claims.ipHash, claims.sha256, profile).catch((error: unknown) => {
+          console.error("scan: result cache write failed", error instanceof Error ? error.name : "unknown");
+        });
         const body: ScanStatusResponse = { status: "done", profile };
         return json(body);
       }

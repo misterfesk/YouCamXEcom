@@ -164,6 +164,45 @@ describe("retry and backoff", () => {
     expect(sleep).not.toHaveBeenCalled();
   });
 
+  it.each([
+    ["network error", () => vi.fn<typeof fetch>().mockRejectedValue(new TypeError("fetch failed"))],
+    ["HTTP 503", () => vi.fn<typeof fetch>(async () => reply({}, 503))],
+  ])("never retries task creation after a %s, and flags it ambiguous", async (_name, makeFetch) => {
+    const fetchMock = makeFetch();
+    const { client, sleep } = liveClient(fetchMock);
+    for (const start of [() => client.startSkinAnalysis("f1"), () => client.startFitzpatrick("f1")]) {
+      fetchMock.mockClear();
+      const error = (await start().catch((e: unknown) => e)) as YouCamError;
+      expect(error).toBeInstanceOf(YouCamError);
+      expect(error.ambiguous).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    }
+    expect(sleep).not.toHaveBeenCalled();
+  });
+
+  it("flags an unreadable task-creation reply as ambiguous", async () => {
+    const { client } = liveClient(vi.fn<typeof fetch>(async () => reply({ status: 200, data: {} })));
+    await expect(client.startSkinAnalysis("f1")).rejects.toMatchObject({ ambiguous: true });
+  });
+
+  it("does not flag definite rejections as ambiguous", async () => {
+    const { client } = liveClient(vi.fn<typeof fetch>(async () => reply({ error: "error_insufficient_units" }, 400)));
+    await expect(client.startSkinAnalysis("f1")).rejects.toMatchObject({ ambiguous: false });
+  });
+
+  it("still retries file creation", async () => {
+    const fileBody = {
+      data: { files: [{ file_id: "f1", requests: [{ method: "PUT", url: "https://s3.test/put" }] }] },
+    };
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockRejectedValueOnce(new TypeError("fetch failed"))
+      .mockResolvedValueOnce(reply(fileBody));
+    const { client } = liveClient(fetchMock);
+    expect((await client.createFile({ contentType: "image/jpeg", fileSize: 1 })).fileId).toBe("f1");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
   it("treats HTTP 402 as out of credits", async () => {
     const { client } = liveClient(vi.fn<typeof fetch>(async () => reply({}, 402)));
     await expect(client.startFitzpatrick("f1")).rejects.toMatchObject({ failure: { kind: "out_of_credits" } });
