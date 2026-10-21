@@ -118,7 +118,7 @@ export function buildSearchIndex(products: Product[]): SearchIndex {
 }
 
 /**
- * Every query term (or one of its synonyms) must match: name hit 4, other field 3, typo 1.
+ * Every query term (or one of its synonyms) must match: name hit 4, other field 3, typo in name 2, other typo 1.
  * Empty query → bestsellers. Results best first; ties keep catalog order.
  */
 export function search(index: SearchIndex, query: string): Product[] {
@@ -138,9 +138,11 @@ export function search(index: SearchIndex, query: string): Product[] {
           ? 4
           : variants.some((t) => all.some((w) => w.includes(t)))
             ? 3
-            : variants.some((t) => all.some((w) => closeWord(t, w)))
-              ? 1
-              : 0;
+            : variants.some((t) => name.some((w) => closeWord(t, w)))
+              ? 2
+              : variants.some((t) => all.some((w) => closeWord(t, w)))
+                ? 1
+                : 0;
         if (!score) return { product, total: 0 };
         total += score;
       }

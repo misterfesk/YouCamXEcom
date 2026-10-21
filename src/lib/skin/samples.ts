@@ -15,8 +15,11 @@ const RECORDED = {
   mature: [matureSkin, matureFitz],
 } as const;
 
+/** When the sample faces were scanned (a fixed date keeps prerendered pages stable). */
+const RECORDED_AT = "2026-10-20T00:00:00.000Z";
+
 /** Sample results go through the same normalizer as live scans; masks are local files. */
-export function sampleProfile(id: SampleFaceId, scannedAt = new Date().toISOString()): SkinProfile {
+export function sampleProfile(id: SampleFaceId, scannedAt = RECORDED_AT): SkinProfile {
   const [skin, fitz] = RECORDED[id];
   return normalizeScan({
     output: skin.data.results.output,

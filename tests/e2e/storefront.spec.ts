@@ -102,7 +102,7 @@ test("keyboard journey from sample scan to demo order", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test("scan stays optional and reopened results contain no photo", async ({
+test("scan stays optional and reopened sample results keep the sample photo", async ({
   page,
 }) => {
   await page.goto("/");
@@ -118,12 +118,8 @@ test("scan stays optional and reopened results contain no photo", async ({
       : page.locator(".profile-chip"),
   );
   await activate(page, page.getByText("View my results", { exact: true }));
-  await expect(
-    page.getByRole("img", {
-      name: "Illustrated face map; your photo is no longer kept",
-    }),
-  ).toBeVisible();
-  await expect(page.locator(".reveal-photo img")).toHaveCount(0);
+  // A sample face is a public image, so its reveal keeps the photo and masks.
+  await expect(page.locator(".reveal-photo img")).toHaveCount(1);
   await activate(
     page,
     page.getByRole("button", {
@@ -134,7 +130,8 @@ test("scan stays optional and reopened results contain no photo", async ({
   await expect(
     page.getByRole("button", { name: "For you", exact: true }),
   ).toBeHidden();
-  await expect(page.locator(".fit-badge")).toHaveCount(0);
+  // Next keeps the previous page hidden in the DOM; only visible badges count.
+  await expect(page.locator(".fit-badge:visible")).toHaveCount(0);
   await activate(
     page,
     (await mobileProfile.isVisible())
@@ -212,15 +209,15 @@ test("search supports terms, synonyms and keyboard focus return", async ({
   await expect(search).toBeFocused();
   await search.fill("pimples");
   await expect(
-    page.getByRole("link", { name: /Balance Notes Serum/ }),
+    page.getByRole("link", { name: /Clarify Daily BHA Wash/ }),
   ).toBeVisible();
   await search.fill("niacinamde");
   await expect(
-    page.getByRole("link", { name: /Balance Notes Serum/ }),
+    page.getByRole("link", { name: /Even Ground Niacinamide Serum/ }),
   ).toBeVisible();
-  await search.fill("Sheer Veil Tinted SPF 50");
+  await search.fill("Terra Tint Mineral SPF 50");
   await expect(
-    page.getByRole("link", { name: /Sheer Veil Tinted SPF 50/ }),
+    page.getByRole("link", { name: /Terra Tint Mineral SPF 50/ }),
   ).toBeVisible();
   await search.fill("nothing matches this");
   await expect(
@@ -253,14 +250,18 @@ test("For you keeps the complete catalog available for every sample", async ({
     "dehydration & redness",
     "under-eyes & firmness",
   ]) {
+    // Start each sample from a fresh visitor: the profile persists in localStorage.
     await page.goto("/shop");
-    const links = page.locator(".product-card-link");
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+    const links = page.locator(".product-card-link:visible");
+    await expect(links).toHaveCount(60);
     const expected = (
       await links.evaluateAll((elements) =>
         elements.map((el) => el.getAttribute("href")),
       )
     ).sort();
-    expect(expected).toHaveLength(24);
+    expect(expected).toHaveLength(60);
     await page
       .getByRole("button", { name: "✦ Scan my skin", exact: true })
       .first()
