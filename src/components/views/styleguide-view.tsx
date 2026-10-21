@@ -123,7 +123,7 @@ export function StyleguideView({
   const announce = (message: string) => () => setNotice(message);
   return (
     <>
-      <a href="#main" className="skip-link control button-primary type-button">
+      <a href="#main-content" className="skip-link control button-primary type-button">
         Skip to specimens
       </a>
       <header>
@@ -141,7 +141,7 @@ export function StyleguideView({
           </span>
         </Container>
       </header>
-      <main id="main">
+      <main id="main-content" tabIndex={-1}>
         <Container className="pb-12 pt-4 tablet:pb-16">
           <div className="spec-cover on-brand">
             <div className="flex min-w-0 flex-col items-start gap-6">
@@ -765,7 +765,7 @@ export function StyleguideView({
           <p className="type-small text-text-muted">
             Swiss Cover / Design system specimen
           </p>
-          <Button variant="ghost" href="#main">
+          <Button variant="ghost" href="#main-content">
             Back to top <Icon name="back" className="size-icon rotate-90" />
           </Button>
         </Container>

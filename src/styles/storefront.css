@@ -1,0 +1,37 @@
+.skip-link { position: fixed; top: var(--spacing-2); left: var(--spacing-4); z-index: var(--z-dialog); transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }
+.site-header { background: var(--color-bg); }
+.header-inner { display: flex; align-items: center; gap: var(--spacing-3); padding-block: var(--spacing-4); }
+.wordmark { display: inline-flex; align-items: center; min-height: var(--size-icon-button); margin-right: auto; }
+.header-actions { display: flex; align-items: center; gap: var(--spacing-2); }
+.desktop-nav, .desktop-profile { display: none; }
+.bag-link { position: relative; }
+.bag-count { position: absolute; top: calc(-1 * var(--spacing-1)); right: calc(-1 * var(--spacing-1)); min-width: var(--spacing-5); height: var(--spacing-5); border-radius: var(--radius-pill); background: var(--color-brand); color: var(--color-bg); display: grid; place-items: center; }
+.mobile-fab { position: fixed; right: var(--spacing-4); bottom: calc(var(--spacing-5) + env(safe-area-inset-bottom)); z-index: var(--z-menu); }
+.profile-chip { display: inline-flex; align-items: center; justify-content: center; gap: var(--spacing-2); min-height: var(--size-control-height); padding-inline: var(--spacing-4); border: var(--border-width-strong) solid var(--color-text); border-radius: var(--radius-pill); background: var(--color-bg); }
+.profile-dot { display: inline-block; flex-shrink: 0; width: var(--spacing-2); height: var(--spacing-2); border-radius: var(--radius-pill); border: var(--border-width-strong) solid var(--color-neutral); }
+.profile-dot[data-on="true"] { background: var(--color-brand); border-color: var(--color-brand); }
+.profile-fab { width: var(--size-mobile-scan-fab); height: var(--size-mobile-scan-fab); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--spacing-1); border: var(--border-width-strong) solid var(--color-text); border-radius: var(--radius-pill); background: var(--color-bg); box-shadow: var(--shadow-raised); }
+.mobile-menu { display: grid; gap: var(--spacing-8); margin-bottom: var(--spacing-8); }
+.mobile-menu-link { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-4); min-height: var(--size-control-height); }
+.site-footer { background: var(--color-surface); padding-block: var(--spacing-12) var(--spacing-20); }
+.footer-grid { display: grid; gap: var(--spacing-8); }
+.footer-grid nav a { display: flex; align-items: center; min-height: var(--size-icon-button); color: var(--color-text-muted); }
+.footer-grid a:hover { color: var(--color-brand); text-decoration: underline; }
+.footer-note { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--spacing-4); color: var(--color-text-muted); border-top: var(--border-width-default) solid var(--color-border); margin-top: var(--spacing-12); padding-top: var(--spacing-6); }
+.sample-options { display: grid; gap: var(--spacing-6); }
+.sample-option { display: flex; align-items: center; gap: var(--spacing-4); }
+.sample-option img { width: var(--spacing-20); height: var(--spacing-20); object-fit: cover; border-radius: var(--radius-card); }
+@media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+@media (min-width: 1024px) {
+  .header-inner { gap: var(--spacing-8); padding-block: var(--spacing-5); }
+  .wordmark { margin-right: 0; }
+  .desktop-nav { display: flex; padding: var(--spacing-1); border-radius: var(--radius-pill); background: var(--color-surface); margin-right: auto; }
+  .nav-trigger { display: flex; align-items: center; gap: var(--spacing-2); min-height: var(--size-icon-button); padding-inline: var(--spacing-4); border-radius: var(--radius-pill); }
+  .nav-trigger:hover, .nav-trigger[data-state="open"] { background: var(--color-bg); }
+  .desktop-profile { display: block; }
+  .mobile-only, .mobile-fab { display: none; }
+}
+
+.skin-goals { display: grid; gap: var(--spacing-3); }
+.skin-goals li { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-3); padding-block: var(--spacing-3); border-bottom: var(--border-width-default) solid var(--color-border); }
