@@ -55,7 +55,7 @@ export const GOAL_DEFS: Record<GoalId, Goal> = {
   },
   "under-eyes": {
     id: "under-eyes",
-    title: "Brighten under-eyes",
+    title: "Under-eye care",
     blurb: "A little extra care for the under-eye routine.",
     concerns: ["dark_circle_v2", "eye_bag", "tear_trough"],
   },

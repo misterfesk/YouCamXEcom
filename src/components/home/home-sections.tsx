@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { editorialImageSizes } from "@/styles/image-sizes";
 import Link from "next/link";
+import { SKIN_TYPE_LABEL } from "@/types/skin";
 import type { CSSProperties } from "react";
 import { Accent } from "@/components/ui/accent";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -146,7 +147,7 @@ export function SampleResultCard({
         </Eyebrow>
         <h3 className="type-h3">Three places to start.</h3>
         <p className="type-small text-text-muted mt-2 mb-6">
-          Oily skin · YouCam sample results
+          {SKIN_TYPE_LABEL[profile.skinType]} skin · YouCam sample results
         </p>
         <ol className="severity-list">
           {profile.goals.slice(0, 3).map((item) => (
