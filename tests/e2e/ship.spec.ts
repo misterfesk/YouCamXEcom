@@ -3,6 +3,17 @@ import { expect, test, type Page } from "@playwright/test";
 
 const scanButton = (page: Page) => page.getByRole("button", { name: "✦ Scan my skin", exact: true }).first();
 
+test("scan mode follows the running server", async ({ page }) => {
+  await page.route("**/api/scan**", (route) => route.abort());
+  await page.goto("/");
+  await scanButton(page).click();
+  await expect(page.getByRole("heading", { name: "Find care for your skin" })).toBeVisible();
+  if (process.env.EXPECT_SCAN_MODE === "live")
+    await expect(page.locator(".demo-banner")).toHaveCount(0);
+  else
+    await expect(page.locator(".demo-banner")).toContainText("Demo mode");
+});
+
 async function upload(page: Page) {
   await scanButton(page).click();
   await page.getByRole("checkbox").check();

@@ -9,7 +9,6 @@ import { bagCount, useBagStore } from "@/stores/bag";
 import { useSkinStore } from "@/stores/skin";
 import { useUiStore } from "@/stores/ui";
 import { startScan } from "./actions";
-import { ScanController } from "./scan-controller";
 import { listing, usePersonalization } from "./use-fits";
 
 /** Persisted stores load after the first paint, so server and client render the same HTML. */
@@ -74,7 +73,7 @@ function Header() {
   );
 }
 
-export function StoreShell({ children, demoMode }: { children: ReactNode; demoMode: boolean }) {
+export function StoreShell({ children }: { children: ReactNode }) {
   useHydrateStores();
   return (
     <>
@@ -82,7 +81,6 @@ export function StoreShell({ children, demoMode }: { children: ReactNode; demoMo
       {children}
       <SiteFooter />
       <Search />
-      <ScanController demoMode={demoMode} />
       <Notice />
     </>
   );
