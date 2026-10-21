@@ -5,6 +5,7 @@
 @import "../styles/primitives.css";
 @import "../styles/styleguide.css";
 @import "../styles/storefront.css";
+@import "../styles/details.css";
 
 :root {
   color-scheme: light;

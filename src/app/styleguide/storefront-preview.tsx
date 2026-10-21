@@ -1,4 +1,5 @@
 "use client";
+import { ProductDetails } from "@/components/views/product-view";
 import { useState } from "react";
 import { CatalogSpecimens } from "@/components/views/catalog-specimens";
 import { catalogFilterOptions } from "@/fixtures/ui/catalog-options";
@@ -23,6 +24,7 @@ export function StorefrontPreview() {
         onStartScan={onStartScan}
         onAddToBag={onAddToBag}
       />
+      <section id="product-details" className="container section"><h2 className="type-h2 mb-6">Product details · Matches & safety</h2>{[products[0], products[13], products[2]].map(product => <ProductDetails key={product.id} product={product} fit={sampleFits.oily[product.id]} profile={summarizeProfile("oily")}/>)}</section>
       <CatalogSpecimens
         filters={{
           values: filters,
