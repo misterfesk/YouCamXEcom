@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { archivo, bodoni } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "[BRAND]",
@@ -8,8 +9,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${bodoni.variable} h-full antialiased`}
+    >
+      <body className="flex min-h-full flex-col font-sans">{children}</body>
     </html>
   );
 }

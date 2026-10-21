@@ -1,1 +1,61 @@
 @import "tailwindcss";
+@import "../styles/theme.css";
+@import "../styles/extensions.css";
+@import "../styles/typography.css";
+@import "../styles/primitives.css";
+@import "../styles/styleguide.css";
+
+:root {
+  color-scheme: light;
+}
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--typography-body-font-size);
+  line-height: var(--typography-body-line-height);
+}
+::selection {
+  background: var(--color-lilac);
+  color: var(--color-text);
+}
+:focus-visible {
+  outline: var(--border-width-focus) solid var(--color-brand);
+  outline-offset: var(--border-width-focus);
+}
+.on-brand :focus-visible {
+  outline-color: var(--color-bg);
+}
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+button:not(:disabled),
+a {
+  touch-action: manipulation;
+}
+button:not(:disabled) {
+  cursor: pointer;
+}
+:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: var(--opacity-disabled);
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control:not(:disabled):not([aria-disabled="true"]):active {
+    transform: none;
+  }
+}

@@ -1,0 +1,89 @@
+@utility type-display {
+  font-size: var(--typography-display-font-size);
+  line-height: var(--typography-display-line-height);
+  font-weight: var(--typography-display-font-weight);
+  font-stretch: var(--typography-display-font-stretch);
+  letter-spacing: var(--typography-display-letter-spacing);
+  text-wrap: balance;
+}
+@utility type-h1 {
+  font-size: var(--typography-h1-mobile-font-size);
+  line-height: var(--typography-h1-mobile-line-height);
+  font-weight: var(--typography-h1-font-weight);
+  font-stretch: var(--typography-h1-font-stretch);
+  letter-spacing: var(--typography-h1-letter-spacing);
+  text-wrap: balance;
+  @media (min-width: 768px) {
+    font-size: var(--typography-h1-font-size);
+    line-height: var(--typography-h1-line-height);
+  }
+}
+@utility type-h2 {
+  font-size: var(--typography-h2-mobile-font-size);
+  line-height: var(--typography-h2-mobile-line-height);
+  font-weight: var(--typography-h2-font-weight);
+  font-stretch: var(--typography-h2-font-stretch);
+  letter-spacing: var(--typography-h2-letter-spacing);
+  text-wrap: balance;
+  @media (min-width: 768px) {
+    font-size: var(--typography-h2-font-size);
+    line-height: var(--typography-h2-line-height);
+  }
+}
+@utility type-h3 {
+  font-size: var(--typography-h3-font-size);
+  line-height: var(--typography-h3-line-height);
+  font-weight: var(--typography-h3-font-weight);
+}
+@utility type-body-lg {
+  font-size: var(--typography-body-lg-font-size);
+  line-height: var(--typography-body-lg-line-height);
+  font-weight: var(--typography-body-lg-font-weight);
+}
+@utility type-body {
+  font-size: var(--typography-body-font-size);
+  line-height: var(--typography-body-line-height);
+  font-weight: var(--typography-body-font-weight);
+}
+@utility type-small {
+  font-size: var(--typography-small-font-size);
+  line-height: var(--typography-small-line-height);
+  font-weight: var(--typography-small-font-weight);
+}
+@utility type-label {
+  font-size: var(--typography-label-font-size);
+  line-height: var(--typography-label-line-height);
+  font-weight: var(--typography-label-font-weight);
+  letter-spacing: var(--typography-label-letter-spacing);
+  text-transform: uppercase;
+}
+@utility type-button {
+  font-size: var(--typography-button-font-size);
+  line-height: var(--typography-button-line-height);
+  font-weight: var(--typography-button-font-weight);
+}
+@utility type-badge {
+  font-size: var(--typography-badge-font-size);
+  line-height: var(--typography-badge-line-height);
+  font-weight: var(--typography-badge-font-weight);
+}
+@utility type-price {
+  font-size: var(--typography-price-font-size);
+  line-height: var(--typography-price-line-height);
+  font-weight: var(--typography-body-font-weight);
+  color: var(--color-text-muted);
+}
+@utility type-wordmark {
+  font-size: var(--typography-wordmark-font-size);
+  line-height: var(--typography-wordmark-line-height);
+  font-weight: var(--typography-display-font-weight);
+  font-stretch: var(--typography-display-font-stretch);
+  letter-spacing: var(--typography-display-letter-spacing);
+}
+.accent {
+  font-family: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
+  font-style: var(--typography-accent-font-style);
+  font-weight: var(--typography-accent-font-weight);
+  font-stretch: var(--typography-accent-font-stretch);
+  letter-spacing: var(--typography-accent-letter-spacing);
+}

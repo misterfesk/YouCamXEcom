@@ -1,0 +1,42 @@
+/* Values specified in DESIGN.md beyond its JSON snapshot, plus named UI geometry. */
+@theme static {
+  --spacing: 4px;
+  --spacing-control: var(--size-control-height);
+  --spacing-control-lg: var(--size-control-height-lg);
+  --spacing-chip: var(--size-chip-height);
+  --spacing-icon-button: var(--size-icon-button);
+  --spacing-fab: var(--size-mobile-scan-fab);
+  --spacing-icon: 18px;
+  --spacing-icon-grid: 24px;
+  --spacing-chip-pad: 18px;
+  --spacing-badge-x: 11px;
+  --spacing-badge-y: 5px;
+  --spacing-badge-dot: 6px;
+  --spacing-press: 1px;
+  --spacing-enter: 16px;
+  --spacing-swatch: 64px;
+  --container-page: var(--size-container-max);
+  --container-modal: 640px;
+  --container-copy: 460px;
+  --container-tile: 260px;
+  --typography-h1-mobile-font-size: 40px;
+  --typography-h1-mobile-line-height: 42px;
+  --typography-h2-mobile-font-size: 32px;
+  --typography-h2-mobile-line-height: 36px;
+  --typography-price-font-size: 15px;
+  --typography-price-line-height: 21px;
+  --typography-chip-font-size: 14px;
+  --typography-wordmark-font-size: 26px;
+  --typography-wordmark-line-height: 30px;
+  --opacity-disabled: 0.4;
+  --opacity-avoid: 0.6;
+  --z-menu: 40;
+  --z-overlay: 50;
+  --z-dialog: 51;
+}
+@theme inline {
+  --font-sans: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+}
+@utility control-outline {
+  border-width: var(--border-width-strong);
+}
