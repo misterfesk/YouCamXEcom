@@ -1,4 +1,11 @@
 "use client";
+import Link from "next/link";
+import {
+  ConcernTiles,
+  ScanExplainer,
+  TrustStrip,
+  type ConcernTileData,
+} from "@/components/home/home-sections";
 import { ProfileChip } from "@/components/layout/site-header";
 import { Container } from "@/components/ui/container";
 import { ProductGrid, ProductRail } from "@/components/product/product-grid";
@@ -17,6 +24,8 @@ export type FrontendSpecimensProps = {
   fits: Fit[];
   onStartScan: (source: ScanSource) => void;
   onAddToBag: (id: string) => void;
+  tiles: ConcernTileData[];
+  sampleResult: ProfileSummary;
 };
 const colors: PackColor[] = ["brand", "lilac", "tangerine", "surface", "ink"];
 export function FrontendSpecimens({
@@ -25,6 +34,8 @@ export function FrontendSpecimens({
   fits,
   onStartScan,
   onAddToBag,
+  tiles,
+  sampleResult,
 }: FrontendSpecimensProps) {
   return (
     <section id="storefront" className="section">
@@ -94,6 +105,30 @@ export function FrontendSpecimens({
             <ScanCard onStartScan={onStartScan} />
             <ScanCard profile={profile} onStartScan={onStartScan} />
           </div>
+        </section>
+        <section id="home-hero" className="mt-12">
+          <h3 className="type-h3 mb-4">Campaign hero</h3>
+          <Link href="/" className="concern-text-link">
+            View the home hero on its route
+          </Link>
+          <p className="type-small text-text-muted">
+            Scan card before analysis; your skin card after choosing a sample
+            face. Both card states appear above.
+          </p>
+        </section>
+        <section id="concern-tiles" className="mt-12">
+          <h3 className="type-h3 mb-4">Concern tiles</h3>
+          <ConcernTiles tiles={tiles} otherGoals={[]} />
+        </section>
+        <section id="scan-explainer" className="mt-12">
+          <h3 className="type-h3 mb-4">
+            Scan explainer and recorded sample result
+          </h3>
+          <ScanExplainer profile={sampleResult} onStartScan={onStartScan} />
+        </section>
+        <section id="trust-strip" className="mt-12">
+          <h3 className="type-h3 mb-4">Trust strip</h3>
+          <TrustStrip />
         </section>
       </Container>
     </section>

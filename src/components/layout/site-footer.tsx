@@ -8,7 +8,7 @@ export function SiteFooter() {
       <Container>
         <div className="footer-grid">
           <div>
-            <Link className="type-wordmark" href="/">
+            <Link className="type-wordmark wordmark" href="/">
               [BRAND]
             </Link>
             <h2 className="type-h2 mt-6">
