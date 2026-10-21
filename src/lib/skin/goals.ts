@@ -43,5 +43,6 @@ export function summarizeProfile(profile: SkinProfile): ProfileSummary {
     label: [SKIN_TYPE_LABEL[profile.skinType.whole.type], goals[0] && GOAL_DEFS[goals[0].goal].title]
       .filter(Boolean)
       .join(" · "),
+    dermatologist: dermatologistConcerns(profile).length > 0,
   };
 }

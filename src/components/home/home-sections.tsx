@@ -134,7 +134,7 @@ export function SampleResultCard({
       <div className="sample-result-photo">
         <Image
           src="/samples/mature.jpg"
-          alt="AI-generated sample face used for recorded under-eye, hydration and firmness analysis"
+          alt="AI-generated sample face used for recorded under-eye, firmness and oil analysis"
           width={600}
           height={600}
           sizes={editorialImageSizes.sample}
@@ -177,7 +177,7 @@ export function SampleResultCard({
         <Button
           variant="secondary"
           className="mt-6"
-          onClick={() => onStartScan("hero")}
+          onClick={() => onStartScan("sample")}
         >
           Explore a sample
         </Button>

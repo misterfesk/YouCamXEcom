@@ -172,10 +172,12 @@ export function ScanFlow(props: ScanFlowProps) {
             Use a front-facing photo in soft, even light. Keep your face relaxed
             and remove anything covering it.
           </p>
-          <p className="demo-banner type-small">
-            Try the complete journey with a recorded sample. Live camera and
-            photo analysis are not connected in this preview.
-          </p>
+          {livePreview && (
+            <p className="demo-banner type-small">
+              Demo mode: live analysis is not connected here, so any photo
+              returns a recorded sample’s results.
+            </p>
+          )}
           <label className="check-control">
             <input
               type="checkbox"
@@ -247,8 +249,8 @@ export function ScanFlow(props: ScanFlowProps) {
             />
           </label>
           <p className="type-small text-text-muted">
-            JPEG, PNG or WebP · under 2.5 MB · at least 1080 × 1080. Your photo
-            stays in browser memory and is cleared when you close this preview.
+            JPEG, PNG or WebP · under 15 MB · at least 1080 × 1080. We send a
+            resized copy for analysis and never store it.
           </p>
           <Button variant="secondary" onClick={() => onStepChange("samples")}>
             Use a sample face instead
@@ -278,8 +280,9 @@ export function ScanFlow(props: ScanFlowProps) {
             another photo if you need to.
           </p>
           <p className="type-small text-text-muted">
-            Live analysis is not connected. Your photo is never sent from this
-            preview.
+            {livePreview
+              ? "Demo mode: this photo stays in your browser and gets a recorded sample’s results."
+              : "Your photo goes to our analysis partner, YouCam, only for this scan. We keep the scores, never the photo."}
           </p>
           <ScanButton fullWidth onClick={onUsePhoto}>
             ✦ Use this photo
@@ -324,7 +327,9 @@ export function ScanFlow(props: ScanFlowProps) {
               }
             />
           </div>
-          <p className="type-label text-brand">Replaying a recorded sample</p>
+          <p className="type-label text-brand">
+            {photoSource === "sample" ? "Replaying a recorded sample" : "Analyzing your photo"}
+          </p>
           <p role="status" aria-live="polite" className="type-h3">
             {ANALYSIS_STEPS[Math.min(analysisStage, 3)]}
           </p>
@@ -339,8 +344,9 @@ export function ScanFlow(props: ScanFlowProps) {
             ))}
           </ol>
           <p className="type-small text-text-muted">
-            No live request is made. Your sample’s real YouCam results are
-            already recorded.
+            {photoSource === "sample"
+              ? "No live request is made. Your sample’s real YouCam results are already recorded."
+              : "This usually takes a few seconds. Keep this window open."}
           </p>
         </>
       )}
@@ -398,9 +404,7 @@ export function ScanFlow(props: ScanFlowProps) {
           </div>
           <h2 className="type-h2">Good care can start here.</h2>
           <p>
-            {livePreview
-              ? "Live analysis is not connected in this preview. You can explore the whole experience with a sample face and its recorded results."
-              : UNAVAILABLE_COPY[unavailableReason]}
+            {UNAVAILABLE_COPY[unavailableReason]}
           </p>
           <ScanButton fullWidth onClick={() => onStepChange("samples")}>
             ✦ Try a sample face

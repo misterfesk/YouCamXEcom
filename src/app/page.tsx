@@ -1,4 +1,4 @@
-import { HomePreview } from "./home-preview";
+import { HomePage } from "./_store/pages";
 export default function Home() {
-  return <HomePreview />;
+  return <HomePage />;
 }

@@ -11,20 +11,21 @@ import { CatalogSpecimens } from "@/components/views/catalog-specimens";
 import { catalogFilterOptions } from "@/fixtures/ui/catalog-options";
 import { sampleFits } from "@/fixtures/ui/product-fits";
 import { EMPTY_FILTERS } from "@/types/catalog-view";
-import { usePreview, summarizeProfile } from "@/app/preview-provider";
+import { summarizeProfile } from "@/lib/skin/goals";
+import { sampleProfile } from "@/lib/skin/samples";
+import { addToBag as onAddToBag, startScan as onStartScan } from "@/app/_store/actions";
 import { FrontendSpecimens } from "@/components/views/frontend-specimens";
 import { concernTiles } from "@/fixtures/ui/home";
 import { products } from "@/fixtures/ui/products";
 import { fitExamples } from "@/fixtures/ui/fit";
 export function StorefrontPreview() {
-  const { onStartScan, onAddToBag } = usePreview();
   const [filters, setFilters] = useState(EMPTY_FILTERS);
   return (
     <>
       <FrontendSpecimens
         tiles={concernTiles}
-        sampleResult={summarizeProfile("mature")}
-        profile={summarizeProfile("oily")}
+        sampleResult={summarizeProfile(sampleProfile("mature"))}
+        profile={summarizeProfile(sampleProfile("oily"))}
         items={products.map((product) => ({ product }))}
         fits={fitExamples}
         onStartScan={onStartScan}
@@ -37,7 +38,7 @@ export function StorefrontPreview() {
             key={product.id}
             product={product}
             fit={sampleFits.oily[product.id]}
-            profile={summarizeProfile("oily")}
+            profile={summarizeProfile(sampleProfile("oily"))}
           />
         ))}
       </section>
@@ -76,7 +77,7 @@ export function StorefrontPreview() {
           onChange: (key, value) =>
             setFilters((current) => ({ ...current, [key]: value })),
         }}
-        profile={summarizeProfile("mature")}
+        profile={summarizeProfile(sampleProfile("mature"))}
         items={products.map((product) => ({
           product,
           fit: sampleFits.mature[product.id],

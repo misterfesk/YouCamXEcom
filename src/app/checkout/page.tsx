@@ -1,5 +1,5 @@
-import { CommercePreview } from "@/app/commerce-preview";
+import { CheckoutPage } from "@/app/_store/pages";
 export const metadata = { title: "Demo checkout | [BRAND]" };
 export default function Page() {
-  return <CommercePreview page="checkout" />;
+  return <CheckoutPage />;
 }

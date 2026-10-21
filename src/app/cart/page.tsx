@@ -1,5 +1,5 @@
-import { CommercePreview } from "@/app/commerce-preview";
+import { BagPage } from "@/app/_store/pages";
 export const metadata = { title: "Your bag | [BRAND]" };
 export default function Page() {
-  return <CommercePreview page="bag" />;
+  return <BagPage />;
 }

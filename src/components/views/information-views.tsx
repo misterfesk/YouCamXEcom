@@ -1,7 +1,8 @@
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Accent } from "@/components/ui/accent";
-export function MethodView() {
+export type MethodSource = { title: string; publisher: string; url: string };
+export function MethodView({ sources }: { sources: MethodSource[] }) {
   return (
     <main id="main-content" tabIndex={-1}>
       <Container>
@@ -59,25 +60,34 @@ export function MethodView() {
             measure an allergy or replace a clinician’s advice. If a concern
             persists or feels uncomfortable, speak with a qualified clinician.
           </p>
-          <h2 className="type-h2">What this demo shows</h2>
+          <h2 className="type-h2">What is real, what is a demo</h2>
           <p>
-            The sample faces use recorded YouCam results. Product formulas,
-            prices and match levels are illustrative fixtures. Live camera
-            capture, live analysis and the final ranking rules will be connected
-            separately.
+            Skin analysis is real: live scans use YouCam Skin Analysis and its
+            Fitzpatrick estimate, and the sample faces replay real recorded
+            results. The products, formulas and prices are a fictional house
+            line made to show how matching works. Orders are never placed.
           </p>
           <h2 className="type-h2">A note on your photo</h2>
           <p>
-            This frontend preview keeps an uploaded photo only in browser memory
-            while the scan is open and never sends it for analysis. Closing
-            clears it. Only the sample’s derived scores remain for this visit.
+            Your browser resizes the photo and sends it straight to YouCam for
+            this one analysis. We never store it. Only the derived scores are
+            kept, in this browser, until you delete them from the skin menu.
           </p>
           <h2 className="type-h2">Research & sources</h2>
           <p>
-            [PLACEHOLDER] — Verified references for ingredient guidance, ranking
-            rules and Fitzpatrick sun notes will be supplied before live
-            recommendations launch.
+            Every ingredient rule and caution behind a match cites one of these
+            references.
           </p>
+          <ul className="method-sources">
+            {sources.map((source) => (
+              <li key={source.url}>
+                <a href={source.url} className="text-brand underline" target="_blank" rel="noreferrer">
+                  {source.title}
+                </a>
+                <span className="type-small text-text-muted"> · {source.publisher}</span>
+              </li>
+            ))}
+          </ul>
           <Button href="/shop">Explore the collection</Button>
         </div>
       </Container>

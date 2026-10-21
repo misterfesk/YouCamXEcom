@@ -134,13 +134,5 @@ export const CAUTION_RULES: CautionRule[] = [
   },
 ];
 
-/** Sun copy for the reveal and the protect step, keyed by Fitzpatrick type. Never "whitening". */
-export const SUN_NOTE: Record<FitzpatrickType, string> = {
-  I: "Your skin likely burns easily. A high SPF every morning matters most.",
-  II: "Your skin likely burns easily. A high SPF every morning matters most.",
-  III: "Your skin can burn and tan. Daily SPF also helps prevent dark marks.",
-  IV: "Your skin tans more than it burns, and dark marks can linger. Daily SPF helps, and a tint adds visible-light protection.",
-  V: "Your skin rarely burns, but dark marks can linger. Daily SPF helps, and a tint adds visible-light protection.",
-  VI: "Your skin rarely burns, but dark marks can linger. Daily SPF helps, and a tint adds visible-light protection.",
-};
+/** Behind the sun notes in the reveal (copy lives with the scan screens). */
 export const SUN_SOURCES: SourceId[] = ["aad-sunscreen-faq", "lyons-2021", "davis-2010"];

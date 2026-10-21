@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { CatalogPreview } from "@/app/catalog-preview";
+import { CatalogPage } from "@/app/_store/catalog-page";
 import { RouteFallback } from "@/app/route-fallback";
 import { STEPS, STEP_LABEL, type Step } from "@/types/catalog";
 export function generateStaticParams() {
@@ -20,5 +20,5 @@ export default function StepPage({ params }: PageProps<"/shop/[step]">) {
 async function StepContent({ params }: Pick<PageProps<"/shop/[step]">, "params">) {
   const { step } = await params;
   if (!STEPS.includes(step as Step)) notFound();
-  return <CatalogPreview key={step} step={step as Step} />;
+  return <CatalogPage key={step} step={step as Step} />;
 }

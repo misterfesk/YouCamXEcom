@@ -61,7 +61,7 @@ export function ScanReveal({
       </div>
       <p className="type-small text-text-muted">
         {photo
-          ? "Recorded YouCam masks highlight the selected goal. Tap a goal below to change the area."
+          ? "YouCam masks highlight the selected goal. Tap a goal below to change the area."
           : "This illustration shows the general area for each goal, not a measured map of your face."}
       </p>
       <div>
@@ -114,18 +114,15 @@ export function ScanReveal({
           Shade and protective clothing matter too.
         </p>
       </aside>
-      {result.concerns.some(
-        (c) =>
-          (c.concern === "acne" || c.concern === "redness") && c.severity >= 75,
-      ) && (
+      {summary.dermatologist && (
         <p className="safety-note">
           If breakouts or redness persist or feel uncomfortable, a qualified
           clinician can help you choose your next steps.
         </p>
       )}
       <p className="type-small text-text-muted">
-        Everyday guidance, not a diagnosis. Recorded sample scores; product
-        matches are illustrative.
+        Everyday guidance, not a diagnosis. Product matches follow our
+        published method.
       </p>
       <Link
         className="scan-method-link text-brand underline"

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { CatalogPreview } from "@/app/catalog-preview";
+import { CatalogPage } from "@/app/_store/catalog-page";
 import { RouteFallback } from "@/app/route-fallback";
 import { GOALS, GOAL_DEFS, type GoalId } from "@/types/goal";
 export function generateStaticParams() {
@@ -26,5 +26,5 @@ async function GoalContent({
 }: Pick<PageProps<"/concerns/[goal]">, "params">) {
   const { goal } = await params;
   if (!GOALS.includes(goal as GoalId)) notFound();
-  return <CatalogPreview key={goal} goal={goal as GoalId} />;
+  return <CatalogPage key={goal} goal={goal as GoalId} />;
 }

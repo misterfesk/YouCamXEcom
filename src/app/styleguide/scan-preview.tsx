@@ -8,8 +8,9 @@ import {
   SCAN_ERRORS,
   UNAVAILABLE_COPY,
 } from "@/components/scan/scan-copy";
-import { sampleProfiles } from "@/fixtures/ui/profiles";
-import { summarizeProfile, sampleOptions } from "@/app/preview-provider";
+import { sampleProfile } from "@/lib/skin/samples";
+import { summarizeProfile } from "@/lib/skin/goals";
+import { SAMPLES } from "@/app/_store/scan-controller";
 import type {
   SampleFaceId,
   ScanStep,
@@ -85,12 +86,12 @@ export function ScanPreview() {
               step={step}
               consent={consent}
               onConsentChange={setConsent}
-              samples={sampleOptions}
+              samples={SAMPLES}
               photo={step === "reveal" ? undefined : `/samples/${sample}.jpg`}
               photoAlt="AI-generated face used for this component specimen"
               photoSource={code === "camera" ? "camera" : "upload"}
-              result={sampleProfiles[sample]}
-              summary={summarizeProfile(sample)}
+              result={sampleProfile(sample)}
+              summary={summarizeProfile(sampleProfile(sample))}
               checks={{
                 hasFace: false,
                 position: false,

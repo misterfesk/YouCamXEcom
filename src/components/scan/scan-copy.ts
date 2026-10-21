@@ -41,7 +41,7 @@ export const SCAN_ERRORS: Record<
   },
   image_too_large: {
     title: "A slightly smaller file",
-    fix: "Choose a JPEG, PNG or WebP photo under 2.5 MB.",
+    fix: "Choose a JPEG, PNG or WebP photo under 15 MB.",
   },
   no_face: {
     title: "We couldn’t find a face",

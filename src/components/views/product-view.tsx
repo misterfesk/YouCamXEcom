@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { STEPS, STEP_LABEL } from "@/types/catalog";
-import { CONCERN_LABEL, SKIN_TYPE_LABEL, BAND_LABEL } from "@/types/skin";
+import { CONCERN_LABEL, BAND_LABEL } from "@/types/skin";
 import type { ProductListing, ProfileSummary } from "@/types/storefront";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
@@ -28,33 +28,35 @@ export function ProductDetails({
         <details open={fit.level === "avoid" || fit.level === "care"}>
           <summary>Why this fits you</summary>
           <div className="detail-content">
-            <p>{fit.reason}</p>
+            {fit.reasons?.length ? (
+              <ul className="fit-reasons">
+                {fit.reasons.map((r) => (
+                  <li key={r.text} data-tone={r.tone}>
+                    <span aria-hidden="true">{r.tone === "caution" ? "!" : "✓"}</span>
+                    <span>
+                      <span className="sr-only">{r.tone === "caution" ? "Caution: " : ""}</span>
+                      {r.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>{fit.reason}</p>
+            )}
             {profile && (
-              <>
-                <p>
-                  {SKIN_TYPE_LABEL[profile.skinType]} skin:{" "}
-                  {product.skinTypes[profile.skinType] === "avoid"
-                    ? "this texture is not a suggested match"
-                    : product.skinTypes[profile.skinType] === "suitable"
-                      ? "a compatible texture in this sample routine"
-                      : "a neutral texture match"}
-                  .
-                </p>
-                <ul>
-                  {profile.goals
-                    .filter(({ goal }) =>
-                      product.targets.some((t) =>
-                        GOAL_DEFS[goal].concerns.includes(t.concern),
-                      ),
-                    )
-                    .map((g) => (
-                      <li key={g.goal}>
-                        {GOAL_DEFS[g.goal].title}: {BAND_LABEL[g.band]} ·{" "}
-                        {Math.round(g.severity)}/100
-                      </li>
-                    ))}
-                </ul>
-              </>
+              <ul>
+                {profile.goals
+                  .slice(0, 3)
+                  .filter(({ goal }) =>
+                    product.targets.some((t) => GOAL_DEFS[goal].concerns.includes(t.concern)),
+                  )
+                  .map((g) => (
+                    <li key={g.goal}>
+                      Your focus · {GOAL_DEFS[g.goal].title}: {BAND_LABEL[g.band]} ·{" "}
+                      {Math.round(g.severity)}/100
+                    </li>
+                  ))}
+              </ul>
             )}
             <p>
               {STEP_LABEL[product.step]} step · {product.usage.frequency}{" "}
@@ -64,8 +66,8 @@ export function ProductDetails({
               How we recommend
             </Link>
             <p className="type-small text-text-muted">
-              Demo fit guidance from a recorded sample. A match is not a
-              guarantee of results.
+              Fit guidance from your skin scan. A match is not a guarantee of
+              results.
             </p>
           </div>
         </details>
