@@ -1,3 +1,5 @@
+import type { SkinProfile } from "./skin";
+
 export type ScanSource = "camera" | "upload" | "sample";
 
 export const SAMPLE_FACES = ["oily", "dry", "mature"] as const;
@@ -26,3 +28,45 @@ export type ScanErrorCode =
 
 /** Why live scanning is off right now (shown as a warm message + sample faces). */
 export type ScanUnavailableReason = "daily_cap" | "reserve_reached" | "provider_out_of_credits";
+
+/** Typed error body of every /api/scan* route; never carries upstream text. */
+export type ScanApiError =
+  | { kind: "scan_error"; code: ScanErrorCode }
+  | { kind: "scan_unavailable"; reason: ScanUnavailableReason };
+
+export interface ScanErrorBody {
+  error: ScanApiError;
+}
+
+/** POST /api/scan/upload */
+export interface ScanUploadRequest {
+  contentType: "image/jpeg";
+  fileSize: number;
+  /** Lowercase hex sha256 of the exact bytes the browser will upload. */
+  sha256: string;
+}
+
+export type ScanUploadResponse =
+  | { cached: true; profile: SkinProfile }
+  | {
+      cached: false;
+      fileId: string;
+      upload: { url: string; method: "PUT"; headers: Record<string, string> };
+    };
+
+/** POST /api/scan */
+export interface ScanStartRequest {
+  fileId: string;
+  sha256: string;
+  source: "camera" | "upload";
+}
+
+export interface ScanStartResponse {
+  scanId: string;
+}
+
+/** GET /api/scan/[scanId] */
+export type ScanStatusResponse =
+  | { status: "pending" }
+  | { status: "done"; profile: SkinProfile }
+  | { status: "error"; error: ScanApiError };
