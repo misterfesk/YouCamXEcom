@@ -1,0 +1,183 @@
+{
+  "status": 200,
+  "data": {
+    "error": null,
+    "results": {
+      "output": [
+        {
+          "ui_score": 54,
+          "mask_urls": [
+            "/samples/mature/masks/eye_bag.png"
+          ],
+          "raw_score": 20.191994309425354,
+          "type": "eye_bag",
+          "url": null
+        },
+        {
+          "ui_score": 70,
+          "mask_urls": [
+            "/samples/mature/masks/droopy_lower_eyelid.png"
+          ],
+          "raw_score": 56.197839975357056,
+          "type": "droopy_lower_eyelid",
+          "url": null
+        },
+        {
+          "ui_score": 82,
+          "mask_urls": [
+            "/samples/mature/masks/droopy_upper_eyelid.png"
+          ],
+          "raw_score": 84.1799795627594,
+          "type": "droopy_upper_eyelid",
+          "url": null
+        },
+        {
+          "ui_score": 93,
+          "mask_urls": [
+            "/samples/mature/masks/redness.png"
+          ],
+          "raw_score": 95.4716567993164,
+          "type": "redness",
+          "url": null
+        },
+        {
+          "ui_score": 67,
+          "mask_urls": [
+            "/samples/mature/masks/tear_trough.png"
+          ],
+          "raw_score": 48.03312420845032,
+          "type": "tear_trough",
+          "url": null
+        },
+        {
+          "ui_score": 63,
+          "mask_urls": [
+            "/samples/mature/masks/firmness.png"
+          ],
+          "raw_score": 38.965630531311035,
+          "type": "firmness",
+          "url": null
+        },
+        {
+          "ui_score": 68,
+          "mask_urls": [
+            "/samples/mature/masks/pore.png"
+          ],
+          "raw_score": 50.93218731880188,
+          "type": "pore",
+          "url": null
+        },
+        {
+          "ui_score": 65,
+          "mask_urls": [
+            "/samples/mature/masks/oiliness.png"
+          ],
+          "raw_score": 44.399105072021484,
+          "type": "oiliness",
+          "url": null
+        },
+        {
+          "ui_score": 71,
+          "mask_urls": [
+            "/samples/mature/masks/age_spot.png"
+          ],
+          "raw_score": 72.93286895751953,
+          "type": "age_spot",
+          "url": null
+        },
+        {
+          "ui_score": 63,
+          "mask_urls": [
+            "/samples/mature/masks/texture.png"
+          ],
+          "raw_score": 39.68707621097565,
+          "type": "texture",
+          "url": null
+        },
+        {
+          "ui_score": 76,
+          "mask_urls": [
+            "/samples/mature/masks/radiance.png"
+          ],
+          "raw_score": 70.55564522743225,
+          "type": "radiance",
+          "url": null
+        },
+        {
+          "ui_score": 83,
+          "mask_urls": [
+            "/samples/mature/masks/acne.png"
+          ],
+          "raw_score": 85.82064,
+          "type": "acne",
+          "url": null
+        },
+        {
+          "ui_score": 73,
+          "mask_urls": [
+            "/samples/mature/masks/dark_circle_v2.png"
+          ],
+          "raw_score": 72.56551682949066,
+          "type": "dark_circle_v2",
+          "url": null
+        },
+        {
+          "ui_score": 70,
+          "mask_urls": [
+            "/samples/mature/masks/wrinkle.png"
+          ],
+          "raw_score": 62.67991662025452,
+          "type": "wrinkle",
+          "url": null
+        },
+        {
+          "ui_score": 65,
+          "mask_urls": [
+            "/samples/mature/masks/moisture.png"
+          ],
+          "raw_score": 37.311941385269165,
+          "type": "moisture",
+          "url": null
+        },
+        {
+          "mask_urls": [
+            "/samples/mature/masks/skin_type-whole.png"
+          ],
+          "type": "skin_type",
+          "region": "whole",
+          "skin_type": "Oily",
+          "url": null
+        },
+        {
+          "mask_urls": [
+            "/samples/mature/masks/skin_type-t_zone.png"
+          ],
+          "type": "skin_type",
+          "region": "t_zone",
+          "skin_type": "Oily",
+          "url": null
+        },
+        {
+          "mask_urls": [
+            "/samples/mature/masks/skin_type-u_zone.png"
+          ],
+          "type": "skin_type",
+          "region": "u_zone",
+          "skin_type": "Oily",
+          "url": null
+        },
+        {
+          "score": 70.86666666666666,
+          "type": "all",
+          "url": null
+        },
+        {
+          "score": 61,
+          "type": "skin_age",
+          "url": null
+        }
+      ]
+    },
+    "task_status": "success"
+  }
+}

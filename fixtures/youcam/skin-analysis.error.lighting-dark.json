@@ -1,0 +1,9 @@
+{
+  "status": 200,
+  "data": {
+    "error": "error_lighting_dark",
+    "error_message": "The input image is too dark for accurate analysis.",
+    "results": null,
+    "task_status": "error"
+  }
+}
