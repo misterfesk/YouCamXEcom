@@ -2,24 +2,31 @@
 import {
   createContext,
   useContext,
+  startTransition,
   useEffect,
   useRef,
   useState,
   type ReactNode,
 } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { ScanModal } from "@/components/scan/scan-flow";
 import { SearchOverlay } from "@/components/search/search-overlay";
 import { products } from "@/fixtures/ui/products";
 import { sampleFits } from "@/fixtures/ui/product-fits";
 import { sampleProfiles } from "@/fixtures/ui/profiles";
 import { searchProducts } from "./preview-search";
 import { GOALS, GOAL_DEFS, type GoalScore } from "@/types/goal";
+import { SKIN_TYPE_LABEL } from "@/types/skin";
 import type { SampleFaceId, ScanStep, ScanErrorCode } from "@/types/scan";
 import type { ProfileSummary, ScanSource } from "@/types/storefront";
 import type { DemoOrder } from "@/types/commerce-view";
+// The scan flow is the heaviest client module; load it off the critical path.
+const loadScanFlow = () => import("@/components/scan/scan-flow");
+const ScanModal = dynamic(() => loadScanFlow().then((m) => m.ScanModal), {
+  ssr: false,
+});
 export const sampleOptions = [
   {
     id: "oily" as const,
@@ -39,17 +46,23 @@ export const sampleOptions = [
 ];
 export function summarizeProfile(id: SampleFaceId): ProfileSummary {
   const profile = sampleProfiles[id];
-  const goals: GoalScore[] = GOALS.map((goal) => {
+  const goals: GoalScore[] = GOALS.flatMap((goal) => {
     const scores = profile.concerns.filter((item) =>
       GOAL_DEFS[goal].concerns.includes(item.concern),
     );
+    if (!scores.length) return [];
     const highest = scores.reduce((a, b) => (a.severity > b.severity ? a : b));
-    return { goal, severity: highest.severity, band: highest.band };
+    return [{ goal, severity: highest.severity, band: highest.band }];
   }).sort((a, b) => b.severity - a.severity);
   return {
     skinType: profile.skinType.whole.type,
     goals,
-    label: `Oily · ${GOAL_DEFS[goals[0].goal].title}`,
+    label: [
+      SKIN_TYPE_LABEL[profile.skinType.whole.type],
+      goals[0] && GOAL_DEFS[goals[0].goal].title,
+    ]
+      .filter(Boolean)
+      .join(" · "),
   };
 }
 type PreviewState = {
@@ -78,13 +91,19 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
   const [order, setOrder] = useState<DemoOrder>();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [notice, setNotice] = useState("");
+  const [notice, setNoticeState] = useState<{ text: string }>();
+  const setNotice = (text: string) => setNoticeState({ text });
   useEffect(() => {
     if (!notice) return;
-    const timer = setTimeout(() => setNotice(""), 4000);
+    const timer = setTimeout(() => setNoticeState(undefined), 4000);
     return () => clearTimeout(timer);
   }, [notice]);
   const [scanOpen, setScanOpen] = useState(false);
+  const [scanMounted, setScanMounted] = useState(false);
+  useEffect(() => {
+    const idle = window.requestIdleCallback ?? ((fn) => setTimeout(fn, 1500));
+    idle(() => void loadScanFlow());
+  }, []);
   const [step, setStep] = useState<ScanStep>("intro");
   const [consent, setConsent] = useState(false);
   const [pendingSample, setPendingSample] = useState<SampleFaceId>();
@@ -131,6 +150,7 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
     const results = source === "results" && !!profile;
     setRevisiting(results);
     setStep(results ? "reveal" : "intro");
+    setScanMounted(true);
     setScanOpen(true);
   };
   const onAddToBag = (id: string) => {
@@ -204,16 +224,20 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
             .filter((p) => bag[p.id] > 0)
             .map((product) => ({ product, quantity: bag[product.id] }));
           if (!items.length) return;
-          setOrder({
+          const placed: DemoOrder = {
             reference: "DEMO-" + String(Date.now()).slice(-6),
             items,
             total: items.reduce(
               (sum, item) => sum + item.quantity * item.product.price,
               0,
             ),
+          };
+          setOrder(placed);
+          // One transition, so checkout never flashes an empty bag before leaving.
+          startTransition(() => {
+            setBag({});
+            router.push("/order-confirmation");
           });
-          setBag({});
-          router.push("/order-confirmation");
         },
       }}
     >
@@ -237,16 +261,18 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
         onOpenChange={setSearchOpen}
         query={query}
         onQueryChange={setQuery}
-        results={searchProducts(products, query).map((product) => ({
+        results={(searchOpen ? searchProducts(products, query) : []).map(
+          (product) => ({
           product,
           fit:
             sampleId && recommendations
               ? sampleFits[sampleId][product.id]
               : undefined,
-        }))}
+          }),
+        )}
         onNavigate={() => setSearchOpen(false)}
       />
-      <ScanModal
+      {scanMounted && <ScanModal
         open={scanOpen}
         onOpenChange={(open) => {
           if (!open) closeScan();
@@ -306,16 +332,22 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
           if (pendingSample) setSampleId(pendingSample);
           setRecommendations(enabled);
           closeScan();
-          if (enabled && !returnPath.current.startsWith("/products/"))
+          // A first scan from a landing page leads to For you; otherwise stay put.
+          const from = returnPath.current;
+          if (
+            enabled &&
+            !revisiting &&
+            (from === "/" || from.startsWith("/shop") || from.startsWith("/concerns"))
+          )
             router.push("/shop");
         }}
         onClose={closeScan}
-      />
+      />}
       <div
         role="status"
         className={notice ? "store-notice type-small" : "sr-only"}
       >
-        {notice}
+        {notice?.text}
       </div>
     </PreviewContext.Provider>
   );

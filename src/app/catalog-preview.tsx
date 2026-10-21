@@ -31,7 +31,17 @@ export function CatalogPreview({ step, goal }: { step?: Step; goal?: GoalId }) {
   const [sortChoice, setSortChoice] = useState<CatalogSort>();
   const [hideUnsuitable, setHideUnsuitable] = useState(false);
   const [view, setView] = useState<"all" | "for-you">("for-you");
-  const [focusOverride, setFocusOverride] = useState<GoalId[]>();
+  // A chosen focus belongs to the profile it was chosen for; a new scan resets it.
+  const [focusChoice, setFocusChoice] = useState<{
+    sampleId?: string;
+    goals: GoalId[];
+  }>();
+  const focusOverride =
+    focusChoice && focusChoice.sampleId === sampleId
+      ? focusChoice.goals
+      : undefined;
+  const setFocusOverride = (goals: GoalId[]) =>
+    setFocusChoice({ sampleId, goals });
   const showFits = !!profile && recommendations;
   const focus =
     focusOverride ?? profile?.goals.slice(0, 3).map((item) => item.goal) ?? [];
