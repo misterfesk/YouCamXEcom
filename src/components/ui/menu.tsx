@@ -2,7 +2,13 @@
 import * as Dropdown from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 import type { ReactNode } from "react";
-export type MenuItem = { id: string; label: string; disabled?: boolean } & (
+import { ScanButton } from "./scan-button";
+export type MenuItem = {
+  id: string;
+  label: string;
+  disabled?: boolean;
+  scan?: boolean;
+} & (
   { href: string; onSelect?: never } | { href?: never; onSelect: () => void }
 );
 export type MenuProps = {
@@ -33,6 +39,10 @@ export function Menu({ trigger, label, items, align = "start" }: MenuProps) {
                 <Link href={item.href} className="menu-item type-body">
                   {item.label}
                 </Link>
+              ) : item.scan ? (
+                <ScanButton fullWidth disabled={item.disabled}>
+                  ✦ {item.label}
+                </ScanButton>
               ) : (
                 <button
                   type="button"

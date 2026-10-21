@@ -1,10 +1,10 @@
 "use client";
 import { motion, useReducedMotion } from "motion/react";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import type { ProductListing, ScanSource } from "@/types/storefront";
 import { ProductCard } from "./product-card";
 import { InlineScanCard } from "./scan-card";
-import { resortTransition } from "@/styles/motion";
+import { uiTransition, resortTransition } from "@/styles/motion";
 export type ProductGridProps = {
   items: ProductListing[];
   onAddToBag?: (id: string) => void;
@@ -28,7 +28,17 @@ export function ProductGrid({
       node: <InlineScanCard onStartScan={onStartScan} />,
     });
   return (
-    <ul className="product-grid">
+    <ul className="product-grid" data-count={entries.length}>
+      {animate && (
+        <motion.li
+          key={`highlight-${items.map((item) => item.product.id).join("-")}`}
+          aria-hidden="true"
+          className="reduced-grid-highlight"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: reduced ? [0.3, 0] : 0 }}
+          transition={uiTransition(false)}
+        />
+      )}
       {entries.map((entry, index) => (
         <motion.li
           key={entry.id}
@@ -46,8 +56,13 @@ export function ProductRail({
   onAddToBag,
   label,
 }: Omit<ProductGridProps, "onStartScan" | "animate"> & { label: string }) {
+  const rail = useRef<HTMLUListElement>(null);
+  const order = items.map((item) => item.product.id).join("|");
+  useEffect(() => {
+    if (rail.current) rail.current.scrollLeft = 0;
+  }, [order]);
   return (
-    <ul className="product-rail" aria-label={label} tabIndex={0}>
+    <ul ref={rail} className="product-rail" aria-label={label} tabIndex={0}>
       {items.map((item) => (
         <li key={item.product.id}>
           <ProductCard {...item} onAddToBag={onAddToBag} />

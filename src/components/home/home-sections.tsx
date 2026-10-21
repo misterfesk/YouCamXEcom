@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { editorialImageSizes } from "@/styles/image-sizes";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Accent } from "@/components/ui/accent";
@@ -44,7 +45,7 @@ export function HomeHero({
             alt="Two women, one with deep brown skin and one with fair freckled skin, photographed in natural daylight with visible skin texture"
             width={1536}
             height={1024}
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes={editorialImageSizes.campaign}
             preload
           />
           <p className="hero-image-caption type-small">
@@ -93,7 +94,7 @@ export function ConcernTiles({
                 alt={tile.alt}
                 width={1536}
                 height={1024}
-                sizes="(min-width: 768px) 33vw, 100vw"
+                sizes={editorialImageSizes.concern}
               />
             </div>
             <div className="concern-copy">
@@ -135,7 +136,7 @@ export function SampleResultCard({
           alt="AI-generated sample face used for recorded under-eye, hydration and firmness analysis"
           width={600}
           height={600}
-          sizes="(min-width: 768px) 280px, 100vw"
+          sizes={editorialImageSizes.sample}
         />
         <span className="sample-photo-label type-label">Sample face</span>
       </div>

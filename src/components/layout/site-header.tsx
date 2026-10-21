@@ -78,6 +78,7 @@ export function SiteHeader({
     },
     {
       id: "rescan",
+      scan: true,
       label: "Rescan my skin",
       onSelect: () => onStartScan("header"),
     },
@@ -226,21 +227,22 @@ export function SiteHeader({
         description="Your results, your choice. Switch recommendations on or off whenever you like."
       >
         <div className="flex flex-col gap-3">
-          {profileItems.map(
-            (item) =>
-              item.href === undefined && (
-                <Button
-                  variant="secondary"
-                  key={item.id}
-                  onClick={() => {
-                    setProfileOpen(false);
-                    item.onSelect();
-                  }}
-                >
-                  {item.label}
-                </Button>
-              ),
-          )}
+          {profileItems.map((item) => {
+            if (item.href !== undefined) return null;
+            const select = () => {
+              setProfileOpen(false);
+              item.onSelect();
+            };
+            return item.scan ? (
+              <ScanButton fullWidth key={item.id} onClick={select}>
+                ✦ {item.label}
+              </ScanButton>
+            ) : (
+              <Button variant="secondary" key={item.id} onClick={select}>
+                {item.label}
+              </Button>
+            );
+          })}
         </div>
       </BottomSheet>
     </>

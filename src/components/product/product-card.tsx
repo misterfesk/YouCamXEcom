@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { uiTransition } from "@/styles/motion";
 import { motion } from "motion/react";
 import { STEPS, STEP_LABEL, type Product } from "@/types/catalog";
 import type { Fit } from "@/types/fit";
@@ -22,6 +23,7 @@ export function ProductCard({ product, fit, onAddToBag }: ProductCardProps) {
               key={fit.level}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              transition={uiTransition(false)}
             >
               <FitBadge fit={fit} />
             </motion.div>
