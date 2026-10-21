@@ -622,3 +622,11 @@
     object-position: center 35%;
   }
 }
+@media (max-width: 1023px) {
+  .home-hero { background: transparent; padding: 0; gap: 0; }
+  .hero-copy { background: var(--color-brand); padding: var(--spacing-7); border-radius: var(--radius-hero) var(--radius-hero) 0 0; }
+  .hero-portrait { background: var(--color-brand); padding: 0 var(--spacing-7) var(--spacing-7); border-radius: 0 0 var(--radius-hero) var(--radius-hero); }
+  .hero-portrait img { border-radius: var(--radius-panel) var(--radius-panel) 0 0; }
+  .hero-image-caption { border-radius: 0 0 var(--radius-panel) var(--radius-panel); }
+  .hero-scan { margin: 0; padding-top: var(--spacing-6); background: transparent; }
+}
