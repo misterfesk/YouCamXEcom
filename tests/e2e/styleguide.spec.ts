@@ -1,10 +1,17 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
 async function tabTo(page: Page, target: Locator) {
-  for (let index = 0; index < 140; index++) {
+  for (let index = 0; index < 600; index++) {
     if (await target.evaluate((element) => element === document.activeElement))
       return;
-    await page.keyboard.press("Tab");
+    const backwards = await target.evaluate(
+      (element) =>
+        !!(
+          element.compareDocumentPosition(document.activeElement!) &
+          Node.DOCUMENT_POSITION_FOLLOWING
+        ),
+    );
+    await page.keyboard.press(backwards ? "Shift+Tab" : "Tab");
   }
   throw new Error(
     `Control not reachable by Tab: ${await target.textContent()}`,
@@ -25,7 +32,7 @@ test("styleguide overlays and menus work entirely from the keyboard", async ({
     await page.goto("/styleguide", { waitUntil: "networkidle" });
     await page.keyboard.press("Tab");
     await expect(
-      page.getByRole("link", { name: "Skip to specimens" }),
+      page.getByRole("link", { name: "Skip to content" }),
     ).toBeFocused();
     await expect(page.locator("html")).toHaveJSProperty("scrollWidth", width);
 
@@ -89,6 +96,7 @@ test("styleguide overlays and menus work entirely from the keyboard", async ({
     await expect(menuTrigger).toBeFocused();
 
     const scanTrigger = page
+      .locator("main")
       .getByRole("button", { name: "✦ Scan my skin", exact: true })
       .first();
     await tabTo(page, scanTrigger);

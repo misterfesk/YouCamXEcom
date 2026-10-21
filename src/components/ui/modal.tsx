@@ -43,8 +43,13 @@ export function DialogSurface({
                 ? document.activeElement
                 : null;
             if (initialFocus === "search") {
-              const search = content.current?.querySelector<HTMLInputElement>('input[type="search"]');
-              if (search) {event.preventDefault(); search.focus();}
+              const search = content.current?.querySelector<HTMLInputElement>(
+                'input[type="search"]',
+              );
+              if (search) {
+                event.preventDefault();
+                search.focus();
+              }
             }
           }}
           onCloseAutoFocus={(event) => {

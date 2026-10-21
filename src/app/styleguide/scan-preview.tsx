@@ -65,6 +65,7 @@ export function ScanPreview() {
                     {title}
                   </option>
                 ))}
+              <option value="preview:camera">Camera preview & retake</option>
               {Object.entries(SCAN_ERRORS).map(([key, { title }]) => (
                 <option key={key} value={`error:${key}`}>
                   Error · {title}
@@ -87,6 +88,7 @@ export function ScanPreview() {
               samples={sampleOptions}
               photo={step === "reveal" ? undefined : `/samples/${sample}.jpg`}
               photoAlt="AI-generated face used for this component specimen"
+              photoSource={code === "camera" ? "camera" : "upload"}
               result={sampleProfiles[sample]}
               summary={summarizeProfile(sample)}
               checks={{

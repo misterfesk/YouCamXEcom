@@ -48,7 +48,10 @@ export function ScanReveal({
             ))}
           </>
         ) : (
-          <FaceMap goal={activeGoal} />
+          <FaceMap
+            goal={activeGoal}
+            label="Illustrated face map; your photo is no longer kept"
+          />
         )}
         <span className="photo-caption type-small">
           {photo

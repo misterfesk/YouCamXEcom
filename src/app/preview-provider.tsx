@@ -80,6 +80,11 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [notice, setNotice] = useState("");
+  useEffect(() => {
+    if (!notice) return;
+    const timer = setTimeout(() => setNotice(""), 4000);
+    return () => clearTimeout(timer);
+  }, [notice]);
   const [scanOpen, setScanOpen] = useState(false);
   const [step, setStep] = useState<ScanStep>("intro");
   const [consent, setConsent] = useState(false);
@@ -251,6 +256,7 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
         consent={consent}
         samples={sampleOptions}
         photo={photo}
+        photoSource={pendingSample ? "sample" : "upload"}
         photoAlt={
           pendingSample
             ? `AI-generated sample face: ${sampleOptions.find((s) => s.id === pendingSample)?.label}`
@@ -306,7 +312,10 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
         }}
         onClose={closeScan}
       />
-      <div role="status" className="sr-only">
+      <div
+        role="status"
+        className={notice ? "store-notice type-small" : "sr-only"}
+      >
         {notice}
       </div>
     </PreviewContext.Provider>

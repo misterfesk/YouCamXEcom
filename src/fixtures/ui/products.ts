@@ -10,6 +10,7 @@ import type { Concern } from "@/types/skin";
 type Seed = {
   name: string;
   tagline: string;
+  description: string;
   subtype: Subtype;
   price: number;
   size: string;
@@ -34,6 +35,8 @@ const seeds: Seed[] = [
   {
     name: "Soft Start Gel Cleanser",
     tagline: "A fresh start, without the tight feeling.",
+    description:
+      "A gel cleanser with glycerin and panthenol for your daily wash. One pump, a gentle massage and a lukewarm rinse make a simple first step before your leave-on layers.",
     subtype: "gel-foam-cleanser",
     price: 18,
     size: "150 ml",
@@ -48,6 +51,8 @@ const seeds: Seed[] = [
   {
     name: "Cloud Milk Cleanser",
     tagline: "A soft, creamy cleanse for quieter mornings.",
+    description:
+      "A milk-textured cleanser with glycerin and panthenol. Choose this creamy starting point when a foaming wash is not the texture you want, then follow with the rest of your routine.",
     subtype: "cream-milk-cleanser",
     price: 20,
     size: "150 ml",
@@ -61,6 +66,8 @@ const seeds: Seed[] = [
   {
     name: "Melt Away Cleansing Balm",
     tagline: "The first step to taking the day off.",
+    description:
+      "A scoopable evening cleanser with squalane. Start on dry skin, add water to turn the balm milky, then rinse. Its richer texture is worth considering alongside your skin-type match.",
     subtype: "oil-balm-cleanser",
     price: 24,
     size: "80 g",
@@ -76,6 +83,8 @@ const seeds: Seed[] = [
   {
     name: "Fresh Slate Micellar Water",
     tagline: "A light first cleanse, made simple.",
+    description:
+      "A water-light first cleanse with glycerin and panthenol. Sweep it over skin with a soft pad and rinse afterwards. A straightforward option when you prefer a liquid cleanser to a balm.",
     subtype: "micellar-water",
     price: 16,
     size: "200 ml",
@@ -89,6 +98,8 @@ const seeds: Seed[] = [
   {
     name: "Clear Step BHA Wash",
     tagline: "A targeted cleanse for congested days.",
+    description:
+      "A rinse-off cleanser with 2% salicylic acid for a targeted evening wash. Give this step its own place in your routine and introduce it gradually rather than adding several actives at once.",
     subtype: "medicated-cleanser",
     price: 22,
     size: "120 ml",
@@ -106,6 +117,8 @@ const seeds: Seed[] = [
   {
     name: "Water Notes Toner",
     tagline: "An easy layer of lightweight hydration.",
+    description:
+      "A watery layer with beta-glucan, glycerin and panthenol. Press a few drops into skin after cleansing, then continue with serum or moisturizer. No cotton pad needed.",
     subtype: "hydrating-toner",
     price: 20,
     size: "150 ml",
@@ -119,6 +132,8 @@ const seeds: Seed[] = [
   {
     name: "Slow Polish PHA Toner",
     tagline: "A measured approach to smoother texture.",
+    description:
+      "A leave-on toner with 5% gluconolactone. This is an occasional evening treatment, not a second cleanser. Start with one night a week and keep the rest of that routine simple.",
     subtype: "exfoliating-toner",
     price: 25,
     size: "100 ml",
@@ -136,6 +151,8 @@ const seeds: Seed[] = [
   {
     name: "Balance Notes Serum",
     tagline: "A light layer for oil balance and visible pores.",
+    description:
+      "A water-based serum with 5% niacinamide and zinc PCA, focused on oil balance and visible pores. Apply a few drops between cleansing and moisturizer rather than building a complicated routine around it.",
     subtype: "serum",
     price: 26,
     size: "30 ml",
@@ -151,6 +168,8 @@ const seeds: Seed[] = [
   {
     name: "Water Reserve Serum",
     tagline: "Hydration that slips into any routine.",
+    description:
+      "A water-based layer with sodium hyaluronate, glycerin and panthenol. Press it into slightly damp skin before moisturizer. A simple choice when hydration is the focus of your routine.",
     subtype: "serum",
     price: 24,
     size: "30 ml",
@@ -165,6 +184,8 @@ const seeds: Seed[] = [
   {
     name: "Even Day Azelaic Serum",
     tagline: "A considered step for uneven-looking tone.",
+    description:
+      "A 10% azelaic-acid formula for an evening routine focused on uneven-looking tone and visible redness. Use a thin layer before moisturizer and adjust the frequency to how your skin feels.",
     subtype: "serum",
     price: 28,
     size: "30 ml",
@@ -181,6 +202,8 @@ const seeds: Seed[] = [
   {
     name: "Quiet Spot Patches",
     tagline: "A simple cover for a single spot.",
+    description:
+      "Hydrocolloid patches for covering an individual spot. Apply to clean, dry skin before the rest of your routine, keeping creams and serums away from the patch so it can sit in place.",
     subtype: "spot-treatment",
     price: 9,
     size: "24 patches",
@@ -196,6 +219,8 @@ const seeds: Seed[] = [
   {
     name: "Sunday Clay Mask",
     tagline: "A rinse-off reset for an oily T-zone.",
+    description:
+      "A kaolin and bentonite mask for an occasional rinse-off step. Apply a thin layer to the areas you want to focus on, then rinse before it dries completely. Follow with moisturizer.",
     subtype: "mask",
     price: 22,
     size: "60 g",
@@ -211,6 +236,8 @@ const seeds: Seed[] = [
   {
     name: "Soft Focus Eye Gel",
     tagline: "A cooling layer for the under-eye routine.",
+    description:
+      "A lightweight under-eye layer with 1% caffeine, glycerin and panthenol. Tap a small amount around the orbital bone. Keep the gel away from the lash line and the eye itself.",
     subtype: "eye-care",
     price: 24,
     size: "15 ml",
@@ -225,6 +252,8 @@ const seeds: Seed[] = [
   {
     name: "Night Shift Retinal Serum",
     tagline: "A gradual evening step for fine lines.",
+    description:
+      "An evening serum with 0.05% retinal, squalane and glycerin. Begin with one night a week and follow with moisturizer. Keep it separate from exfoliating acids and read the safety notes before use.",
     subtype: "serum",
     price: 34,
     size: "30 ml",
@@ -250,6 +279,8 @@ const seeds: Seed[] = [
   {
     name: "Daily Air Gel Cream",
     tagline: "Light moisture. A comfortable finish.",
+    description:
+      "A gel-cream moisturizer with glycerin and panthenol. A lightweight finishing texture for your water-based layers, morning or evening. In the morning, follow with your sun-protection step.",
     subtype: "gel-moisturizer",
     price: 25,
     size: "50 ml",
@@ -264,6 +295,8 @@ const seeds: Seed[] = [
   {
     name: "Soft Landing Moisturizer",
     tagline: "A cream for the everyday in-between.",
+    description:
+      "A cream with ceramide NP, cholesterol and glycerin. Smooth it over face and neck after water-based layers. An everyday cream texture for the space between a light gel and a richer balm.",
     subtype: "cream-moisturizer",
     price: 28,
     size: "50 ml",
@@ -277,6 +310,8 @@ const seeds: Seed[] = [
   {
     name: "Comfort Zone Barrier Balm",
     tagline: "A richer last layer for dry-feeling patches.",
+    description:
+      "A richer finishing layer with 5% panthenol, petrolatum and shea butter. Press a small amount over moisturizer on dry-feeling patches, rather than treating it as another all-over serum.",
     subtype: "barrier-balm",
     price: 26,
     size: "40 ml",
@@ -292,6 +327,8 @@ const seeds: Seed[] = [
   {
     name: "After Hours Night Cream",
     tagline: "A soft finish to your evening ritual.",
+    description:
+      "An evening cream with squalane, panthenol and a peptide. Massage a small amount over face and neck as your final layer, keeping your nighttime routine as simple as you like.",
     subtype: "night-cream",
     price: 32,
     size: "50 ml",
@@ -306,6 +343,8 @@ const seeds: Seed[] = [
   {
     name: "Still Life Face Oil",
     tagline: "A fragrant, rich finish for dry-feeling skin.",
+    description:
+      "A fragrant blend of rosehip oil, sweet almond oil and squalane. Press one or two drops over moisturizer in the evening. Its fragrance and rich texture may not suit every skin profile.",
     subtype: "face-oil",
     price: 30,
     size: "30 ml",
@@ -322,6 +361,8 @@ const seeds: Seed[] = [
   {
     name: "Everyday Shade SPF 50",
     tagline: "Make sun protection your last morning step.",
+    description:
+      "A fluid sunscreen for the last step of your morning routine. Use a generous layer after moisturizer and keep reapplication in mind when outdoors. This demo formula is illustrative, not a tested retail sunscreen.",
     subtype: "sunscreen",
     price: 28,
     size: "50 ml",
@@ -338,6 +379,8 @@ const seeds: Seed[] = [
   {
     name: "Sheer Veil Tinted SPF 50",
     tagline: "A sheer tint for your daily sun step.",
+    description:
+      "A tinted sunscreen concept with zinc oxide and iron oxides. The tint is not a universal shade and may not suit every skin tone. This demo formula is illustrative, not a tested retail sunscreen.",
     subtype: "tinted-spf",
     price: 32,
     size: "50 ml",
@@ -354,6 +397,8 @@ const seeds: Seed[] = [
   {
     name: "Pocket Shade SPF 50 Stick",
     tagline: "A portable companion to your morning SPF.",
+    description:
+      "A portable sunscreen-stick concept to accompany your usual generous morning layer. Apply overlapping passes and blend when reapplying. This demo formula is illustrative, not a tested retail sunscreen.",
     subtype: "sunscreen",
     price: 20,
     size: "18 g",
@@ -369,6 +414,8 @@ const seeds: Seed[] = [
   {
     name: "Quiet Hours Recovery Mask",
     tagline: "A soft overnight layer for thirsty skin.",
+    description:
+      "A leave-on evening mask with beta-glucan, squalane and panthenol. Spread a thin layer over moisturizer on the nights you want an extra finishing step, then rinse in the morning.",
     subtype: "mask",
     price: 27,
     size: "60 ml",
@@ -384,6 +431,8 @@ const seeds: Seed[] = [
   {
     name: "Bright Notes Vitamin C Serum",
     tagline: "A morning layer for a more even-looking tone.",
+    description:
+      "A water-based morning serum with 10% ascorbyl glucoside, a vitamin C derivative. Apply two drops before moisturizer and finish with sunscreen. An uncomplicated addition to a routine focused on even-looking tone.",
     subtype: "serum",
     price: 30,
     size: "30 ml",
@@ -429,7 +478,7 @@ export const products: Product[] = seeds.map((seed, index) => ({
     .replace(/-$/, ""),
   name: seed.name,
   tagline: seed.tagline,
-  description: `${seed.tagline} ${seed.rich ? "A richer texture for skin that prefers a little more comfort." : "A considered formula that fits comfortably into a simple routine."} ${seed.strong ? "Introduce slowly and pay attention to how your skin feels." : "Use as part of your usual cleanse, treat, moisturize and protect steps."}`,
+  description: seed.description,
   step: stepFor(seed.subtype),
   subtype: seed.subtype,
   price: seed.price,

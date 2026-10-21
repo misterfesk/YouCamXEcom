@@ -79,7 +79,9 @@ export function CameraFrame({
         {cameraSlot ?? (
           <div className="camera-placeholder">
             <FaceMap />
-            <p className="type-small">Live camera preview connects here.</p>
+            <p className="type-small">
+              Camera preview is not available in this demo.
+            </p>
           </div>
         )}
         <div className="camera-guide" aria-hidden="true" />
@@ -107,7 +109,7 @@ export function CameraFrame({
       <p role="status" className="type-small text-text-muted">
         {cameraReady
           ? "Hold still for the countdown, or capture when you are ready."
-          : "The camera is not connected in this frontend preview. Try a sample face to explore the complete result."}
+          : "The camera is not available in this demo. Try a sample face to explore the complete result."}
       </p>
       <ScanButton fullWidth disabled={!cameraReady} onClick={onCapture}>
         ✦ Capture photo
@@ -122,6 +124,7 @@ export function ScanFlow(props: ScanFlowProps) {
     samples,
     photo,
     photoAlt,
+    photoSource,
     result,
     summary,
     analysisStage,
@@ -276,8 +279,13 @@ export function ScanFlow(props: ScanFlowProps) {
           <ScanButton fullWidth onClick={onUsePhoto}>
             ✦ Use this photo
           </ScanButton>
-          <Button variant="secondary" onClick={() => onStepChange("upload")}>
-            Choose another photo
+          <Button
+            variant="secondary"
+            onClick={() =>
+              onStepChange(photoSource === "camera" ? "camera" : "upload")
+            }
+          >
+            {photoSource === "camera" ? "Retake photo" : "Choose another photo"}
           </Button>
         </>
       )}
@@ -301,7 +309,7 @@ export function ScanFlow(props: ScanFlowProps) {
               initial={{ opacity: 0 }}
               animate={
                 reduced
-                  ? { opacity: [0.3, 0.8, 0.3] }
+                  ? { opacity: [0.3, 0.8, 0.3], y: 0 }
                   : { opacity: 1, y: ["0%", "8000%", "0%"] }
               }
               transition={{

@@ -1,6 +1,10 @@
 "use client";
 import { ProductDetails } from "@/components/views/product-view";
-import { BagLine, OrderSummary, EmptyBag } from "@/components/commerce/bag-parts";
+import {
+  BagLine,
+  OrderSummary,
+  EmptyBag,
+} from "@/components/commerce/bag-parts";
 import { SearchResults } from "@/components/search/search-overlay";
 import { useState } from "react";
 import { CatalogSpecimens } from "@/components/views/catalog-specimens";
@@ -26,9 +30,45 @@ export function StorefrontPreview() {
         onStartScan={onStartScan}
         onAddToBag={onAddToBag}
       />
-      <section id="product-details" className="container section"><h2 className="type-h2 mb-6">Product details · Matches & safety</h2>{[products[0], products[13], products[2]].map(product => <ProductDetails key={product.id} product={product} fit={sampleFits.oily[product.id]} profile={summarizeProfile("oily")}/>)}</section>
-      <section id="commerce-parts" className="container section"><h2 className="type-h2 mb-6">Bag line, totals & empty bag</h2><BagLine product={products[0]} quantity={2} onQuantityChange={()=>{}} onRemove={()=>{}}/><OrderSummary subtotal={36}/><EmptyBag/></section>
-      <section id="search-results" className="container section"><h2 className="type-h2 mb-6">Search · Results, empty, loading & error</h2>{[{query:"cleanser",results:[{product:products[0]}]},{query:"nothing",results:[]},{query:"serum",results:[],loading:true},{query:"serum",results:[],error:"The collection could not be searched. Try again."}].map((props,i)=><SearchResults key={i} {...props} onNavigate={()=>{}}/>)}</section>
+      <section id="product-details" className="container section">
+        <h2 className="type-h2 mb-6">Product details · Matches & safety</h2>
+        {[products[0], products[13], products[2]].map((product) => (
+          <ProductDetails
+            key={product.id}
+            product={product}
+            fit={sampleFits.oily[product.id]}
+            profile={summarizeProfile("oily")}
+          />
+        ))}
+      </section>
+      <section id="commerce-parts" className="container section">
+        <h2 className="type-h2 mb-6">Bag line, totals & empty bag</h2>
+        <BagLine
+          product={products[0]}
+          quantity={2}
+          onQuantityChange={() => {}}
+          onRemove={() => {}}
+        />
+        <OrderSummary subtotal={36} />
+        <EmptyBag />
+      </section>
+      <section id="search-results" className="container section">
+        <h2 className="type-h2 mb-6">
+          Search · Results, empty, loading & error
+        </h2>
+        {[
+          { query: "cleanser", results: [{ product: products[0] }] },
+          { query: "nothing", results: [] },
+          { query: "serum", results: [], loading: true },
+          {
+            query: "serum",
+            results: [],
+            error: "The collection could not be searched. Try again.",
+          },
+        ].map((props, i) => (
+          <SearchResults key={i} {...props} onNavigate={() => {}} />
+        ))}
+      </section>
       <CatalogSpecimens
         filters={{
           values: filters,

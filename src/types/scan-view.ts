@@ -20,6 +20,7 @@ export type ScanFlowProps = {
   samples: ScanSample[];
   photo?: string;
   photoAlt?: string;
+  photoSource?: "camera" | "upload" | "sample";
   result?: SkinProfile;
   summary?: ProfileSummary;
   checks: CameraChecks;

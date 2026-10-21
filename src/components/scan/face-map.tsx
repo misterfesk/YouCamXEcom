@@ -1,11 +1,17 @@
 import type { GoalId } from "@/types/goal";
-export function FaceMap({ goal }: { goal?: GoalId }) {
+export function FaceMap({
+  goal,
+  label = "Illustrated face guide",
+}: {
+  goal?: GoalId;
+  label?: string;
+}) {
   return (
     <svg
       className="face-map"
       viewBox="0 0 240 280"
       role="img"
-      aria-label="Illustrated face map; your photo is no longer kept"
+      aria-label={label}
     >
       <ellipse cx="120" cy="133" rx="74" ry="102" className="face-outline" />
       <path
