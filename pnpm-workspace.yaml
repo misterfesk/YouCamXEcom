@@ -1,3 +1,9 @@
 allowBuilds:
   sharp: false
   unrs-resolver: false
+# Codex runs under Linux (WSL), Claude under Windows: install native
+# binaries for both so the shared node_modules works in either.
+supportedArchitectures:
+  os: [current, win32, linux]
+  cpu: [x64]
+  libc: [glibc]
