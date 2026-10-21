@@ -501,7 +501,7 @@ export function StyleguideView({
               </Example>
               <p className="type-small text-text-muted">
                 Each level has a text label and a leading dot. Product cards at
-                the final level also dim to 60%.
+                the final level dim the packshot to 60%, keeping text readable.
               </p>
             </div>
             <div className="spec-row">

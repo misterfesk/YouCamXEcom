@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   clientIp,
   createScanLimits,
@@ -132,6 +132,33 @@ describe("credit reserve", () => {
     expect(await limits.checkCaps("ip-a")).toBeNull();
   });
 
+  it("never repeats a partial cap rollback after a lost response", async () => {
+    const base = createMemoryStore();
+    const store = { ...base, decrBy: async (key: string, amount: number) => {
+      const next = await base.decrBy(key, amount);
+      if (key.startsWith("scan:global:")) throw new Error("lost response");
+      return next;
+    } };
+    const clock = () => Date.UTC(2026, 9, 21);
+    const limits = createScanLimits(store, { ...config, ...caps }, clock);
+    await limits.reserveSlot("same-ip", async () => 126);
+    await expect(limits.reserveSlot("same-ip", async () => 126)).rejects.toThrow("lost response");
+    const day = new Date(clock()).toISOString().slice(0, 10);
+    expect(await base.get(`scan:ip:same-ip:${day}`)).toBe(1);
+  });
+
+  it("returns a slot only once", async () => {
+    const { limits } = setup(caps);
+    const balance = async () => 152;
+    const slot = await limits.reserveSlot("a", balance);
+    await limits.reserveSlot("b", balance);
+    if (!slot.ok) throw new Error("expected slot");
+    await slot.release();
+    await slot.release();
+    expect((await limits.reserveSlot("c", balance)).ok).toBe(true);
+    expect((await limits.reserveSlot("d", balance)).ok).toBe(false);
+  });
+
   it("gives caps back when the balance lookup fails", async () => {
     const { limits } = setup({ capPerIp: 1 });
     await expect(
@@ -142,7 +169,7 @@ describe("credit reserve", () => {
     expect(await limits.checkCaps("ip-a")).toBeNull();
   });
 
-  it("caches the balance for five minutes, then starts a fresh spent counter", async () => {
+  it("keeps a durable budget and spent ledger across cache windows and UTC days", async () => {
     const { limits, advance } = setup(caps);
     let calls = 0;
     const balance = async () => {
@@ -153,8 +180,40 @@ describe("credit reserve", () => {
     expect((await limits.reserveSlot("ip-b", balance)).ok).toBe(false);
     expect(calls).toBe(1);
     advance(5 * 60 * 1000 + 1000);
-    expect((await limits.reserveSlot("ip-c", balance)).ok).toBe(true);
-    expect(calls).toBe(2);
+    expect((await limits.reserveSlot("ip-c", balance)).ok).toBe(false);
+    advance(24 * 60 * 60 * 1000);
+    expect((await limits.reserveSlot("ip-d", balance)).ok).toBe(false);
+    expect(calls).toBe(1);
+  });
+
+  it("cannot split reservations across an expired balance snapshot", async () => {
+    let now = 0;
+    const base = createMemoryStore(() => now);
+    let pause = false;
+    let unblock!: () => void;
+    let reached!: () => void;
+    const waiting = new Promise<void>((resolve) => { reached = resolve; });
+    const resume = new Promise<void>((resolve) => { unblock = resolve; });
+    const store = { ...base, get: async <T>(key: string) => {
+      const value = await base.get<T>(key);
+      if (key === "scan:budget:v2" && pause) {
+        pause = false;
+        reached();
+        await resume;
+      }
+      return value;
+    } };
+    const limits = createScanLimits(store, { ...config, ...caps }, () => now);
+    const balance = async () => 126;
+    await limits.checkReserve(balance);
+    now = 299_999;
+    pause = true;
+    const old = limits.reserveSlot("old", balance);
+    await waiting;
+    now = 300_001;
+    const fresh = await limits.reserveSlot("fresh", balance);
+    unblock();
+    expect([fresh, await old].filter((slot) => slot.ok)).toHaveLength(1);
   });
 
   it("holds the floor before the release time", async () => {
@@ -214,6 +273,15 @@ describe("photo hash cache", () => {
 });
 
 describe("store", () => {
+  it("does not replay ambiguous Redis mutations", async () => {
+    const fetch = vi.fn().mockRejectedValue(new Error("lost response"));
+    vi.stubGlobal("fetch", fetch);
+    try {
+      const store = createStoreFromEnv({ YOUCAM_MODE: "live", UPSTASH_REDIS_REST_URL: "https://example.upstash.io", UPSTASH_REDIS_REST_TOKEN: "test-only" });
+      await expect(store.decrBy("scan:spent:v2", 26)).rejects.toThrow();
+      expect(fetch).toHaveBeenCalledTimes(1);
+    } finally { vi.unstubAllGlobals(); }
+  });
   it("prefixes keys so environments stay apart", async () => {
     const base = createMemoryStore();
     const prod = prefixStore(base, "live:production:");

@@ -6,9 +6,9 @@ export interface KeyValueStore {
   get<T>(key: string): Promise<T | null>;
   set(key: string, value: unknown, ttlSeconds: number): Promise<void>;
   /** Writes only if the key is absent; resolves to whether this call wrote it. */
-  setNx(key: string, value: unknown, ttlSeconds: number): Promise<boolean>;
+  setNx(key: string, value: unknown, ttlSeconds?: number): Promise<boolean>;
   /** Atomic increment; the TTL is applied when the key is created. */
-  incrBy(key: string, amount: number, ttlSeconds: number): Promise<number>;
+  incrBy(key: string, amount: number, ttlSeconds?: number): Promise<number>;
   /** Atomic decrement, floored at zero where the backend allows it. */
   decrBy(key: string, amount: number): Promise<number>;
 }
@@ -46,13 +46,13 @@ export function createMemoryStore(now: () => number = Date.now): KeyValueStore {
     },
     async setNx(key, value, ttlSeconds) {
       if (live(key)) return false;
-      entries.set(key, { value: structuredClone(value), expiresAt: now() + ttlSeconds * 1000 });
+      entries.set(key, { value: structuredClone(value), expiresAt: ttlSeconds === undefined ? Infinity : now() + ttlSeconds * 1000 });
       return true;
     },
     async incrBy(key, amount, ttlSeconds) {
       const entry = live(key);
       const next = (typeof entry?.value === "number" ? entry.value : 0) + amount;
-      entries.set(key, { value: next, expiresAt: entry?.expiresAt ?? now() + ttlSeconds * 1000 });
+      entries.set(key, { value: next, expiresAt: entry?.expiresAt ?? (ttlSeconds === undefined ? Infinity : now() + ttlSeconds * 1000) });
       return next;
     },
     async decrBy(key, amount) {
@@ -74,11 +74,11 @@ export function createUpstashStore(redis: Redis): KeyValueStore {
       await redis.set(key, value, { ex: ttlSeconds });
     },
     async setNx(key, value, ttlSeconds) {
-      return (await redis.set(key, value, { nx: true, ex: ttlSeconds })) !== null;
+      return (await redis.set(key, value, ttlSeconds === undefined ? { nx: true } : { nx: true, ex: ttlSeconds })) !== null;
     },
     async incrBy(key, amount, ttlSeconds) {
       const next = await redis.incrby(key, amount);
-      if (next === amount) await redis.expire(key, ttlSeconds);
+      if (next === amount && ttlSeconds !== undefined) await redis.expire(key, ttlSeconds);
       return next;
     },
     async decrBy(key, amount) {
@@ -107,7 +107,8 @@ const globalForStore = globalThis as typeof globalThis & { __scanMemoryStore?: K
 export function createStoreFromEnv(env: Record<string, string | undefined> = process.env): KeyValueStore {
   const url = env.UPSTASH_REDIS_REST_URL;
   const token = env.UPSTASH_REDIS_REST_TOKEN;
-  if (url && token) return createUpstashStore(new Redis({ url, token }));
+  // Replaying an ambiguous decrement could undercount reservations.
+  if (url && token) return createUpstashStore(new Redis({ url, token, retry: { retries: 0 } }));
   if (getYouCamMode(env) === "live" && env.SCAN_STORE !== "memory") throw new ScanStoreConfigError();
   return (globalForStore.__scanMemoryStore ??= createMemoryStore());
 }

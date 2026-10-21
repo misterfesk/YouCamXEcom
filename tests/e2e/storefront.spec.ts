@@ -301,7 +301,7 @@ test("unknown catalog URLs render the branded not-found page", async ({
     "/concerns/not-a-goal",
   ]) {
     const response = await page.goto(route);
-    expect([200, 404]).toContain(response?.status());
+    expect(response?.status()).toBe(404);
     await expect(
       page.getByText("404 / A small detour", { exact: true }),
     ).toBeVisible();

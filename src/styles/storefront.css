@@ -221,7 +221,7 @@
   box-shadow: var(--shadow-card);
   overflow: hidden;
 }
-.product-card[data-unsuitable="true"] {
+.product-card[data-unsuitable="true"] .packshot {
   opacity: var(--opacity-avoid);
 }
 .product-card-link {

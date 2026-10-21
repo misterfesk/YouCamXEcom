@@ -40,7 +40,7 @@ export function ScanController({ demoMode }: { demoMode: boolean }) {
     idle(() => void loadScanFlow());
   }, []);
   // Every openScan() bumps the key: a fresh session, with state starting at its entry step.
-  if (!scan.key) return null;
+  if (!scan.open) return null;
   return <ScanSession key={scan.key} demoMode={demoMode} />;
 }
 
@@ -76,6 +76,7 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
   const job = useRef<AbortController | undefined>(undefined);
   const camera = useRef<CameraSession | undefined>(undefined);
   const blobUrl = useRef<string | undefined>(undefined);
+  const imageOperation = useRef(0);
 
   const stopCamera = useCallback(() => {
     camera.current?.close();
@@ -86,6 +87,7 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
 
   /** Cancels running work and forgets the photo (object URLs are revoked right away). */
   const reset = useCallback(() => {
+    imageOperation.current++;
     job.current?.abort();
     job.current = undefined;
     stopCamera();
@@ -97,6 +99,7 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
 
   useEffect(
     () => () => {
+      imageOperation.current++;
       job.current?.abort();
       camera.current?.close();
       if (blobUrl.current) URL.revokeObjectURL(blobUrl.current);
@@ -121,13 +124,16 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
   };
 
   const acceptImage = async (input: Blob, source: "camera" | "upload") => {
+    const operation = ++imageOperation.current;
     const { prepareImage, ImageCheckError } = await import("@/lib/scan/prepare-image");
     try {
       const image = await prepareImage(input, source);
+      if (operation !== imageOperation.current) return;
       setPrepared(image);
       showPhoto(image.blob, source);
       setStep("preview");
     } catch (failure) {
+      if (operation !== imageOperation.current) return;
       fail({
         kind: "scan_error",
         code: failure instanceof ImageCheckError ? failure.code : "unknown",
@@ -135,7 +141,7 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
     }
   };
 
-  const startCamera = async (live: { current: boolean }) => {
+  const startCamera = async (signal: AbortSignal) => {
     camera.current?.close();
     const mount = document.getElementById(CAMERA_KIT_MOUNT_ID);
     if (!mount) return;
@@ -143,38 +149,42 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
     try {
       const frame = mount.parentElement ?? mount;
       const session = await openCameraSession({
+        signal,
         width: frame.clientWidth,
         height: frame.clientHeight || frame.clientWidth,
-        onChecks: setChecks,
-        onReady: () => setCameraReady(true),
+        onChecks: (value) => { if (!signal.aborted) setChecks(value); },
+        onReady: () => { if (!signal.aborted) setCameraReady(true); },
         onCaptured: async (image) => {
+          if (signal.aborted) return;
           const { toBlob } = await import("@/lib/scan/prepare-image");
           const blob = await toBlob(image);
+          if (signal.aborted) return;
           stopCamera();
           await acceptImage(blob, "camera");
         },
         onError: (code) => {
+          if (signal.aborted) return;
           stopCamera();
           fail({ kind: "scan_error", code });
         },
       });
       // The step may have changed while the kit was loading.
-      if (live.current) camera.current = session;
+      if (!signal.aborted) camera.current = session;
       else session.close();
     } catch {
-      if (live.current) fail({ kind: "scan_error", code: "camera_unavailable" });
+      if (!signal.aborted) fail({ kind: "scan_error", code: "camera_unavailable" });
     }
   };
 
   // The Camera Kit mounts into the camera step's slot once it is on screen.
   useEffect(() => {
     if (!scan.open || step !== "camera") return;
-    const live = { current: true };
+    const controller = new AbortController();
     // Subscribes to an external system (the Camera Kit); state only changes in its callbacks.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    void startCamera(live);
+    void startCamera(controller.signal);
     return () => {
-      live.current = false;
+      controller.abort();
       camera.current?.close();
       camera.current = undefined;
     };
@@ -280,7 +290,9 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
       onSelectSample={(id) => void analyzeSample(id)}
       onUpload={(file) => void acceptImage(file, "upload")}
       onCapture={async () => {
+        const operation = imageOperation.current;
         const blob = await camera.current?.capture();
+        if (operation !== imageOperation.current) return;
         if (!blob) return fail({ kind: "scan_error", code: "camera_unavailable" });
         stopCamera();
         await acceptImage(blob, "camera");

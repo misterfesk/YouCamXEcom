@@ -89,7 +89,7 @@ async function guarded(run: () => Promise<Response>): Promise<Response> {
     return await run();
   } catch (error) {
     if (error instanceof YouCamError) {
-      console.error(`scan: provider failure (${error.failure.kind}): ${error.message}`);
+      console.error("scan: provider failure", error.failure.kind);
       return errorResponse(toApiError(error.failure));
     }
     console.error("scan: unexpected failure", error instanceof Error ? error.name : "unknown");

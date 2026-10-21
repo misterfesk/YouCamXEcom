@@ -14,7 +14,6 @@ export interface LimitsConfig {
 }
 
 const DAY_SECONDS = 25 * 60 * 60;
-const BALANCE_TTL_SECONDS = 5 * 60;
 const RESULT_TTL_SECONDS = 24 * 60 * 60;
 
 /** Submission deadline: the judging reserve is spendable from here on. */
@@ -83,12 +82,6 @@ export function stripMasks(profile: SkinProfile): SkinProfile {
 
 type SlotResult = { ok: true; release: () => Promise<void> } | { ok: false; reason: ScanUnavailableReason };
 
-interface CachedBalance {
-  value: number;
-  /** Doubles as the epoch that scopes the spent-units counter. */
-  at: number;
-}
-
 export interface ScanLimits {
   /** Read-only check, used before an upload is created. */
   checkCaps(ipHash: string): Promise<ScanUnavailableReason | null>;
@@ -112,20 +105,23 @@ export function createScanLimits(
   const day = () => new Date(now()).toISOString().slice(0, 10);
   const ipKey = (ipHash: string) => `scan:ip:${ipHash}:${day()}`;
   const globalKey = () => `scan:global:${day()}`;
-  const balanceKey = "scan:balance";
-  const spentKey = (epoch: number) => `scan:spent:${epoch}`;
+  const balanceKey = "scan:budget:v2";
+  const spentKey = "scan:spent:v2";
   const resultKey = (ipHash: string, sha256: string) => `scan:result:${ipHash}:${sha256}`;
 
   const floor = () => (now() >= config.reserveReleaseAt ? 0 : config.reserveFloor);
   const count = async (key: string) => (await store.get<number>(key)) ?? 0;
 
-  /** One shared balance snapshot per window; concurrent refreshes settle on the first writer. */
-  async function balance(getBalance: () => Promise<number>): Promise<CachedBalance> {
-    const cached = await store.get<CachedBalance>(balanceKey);
-    if (cached) return cached;
-    const fresh: CachedBalance = { value: await getBalance(), at: now() };
-    if (await store.setNx(balanceKey, fresh, BALANCE_TTL_SECONDS)) return fresh;
-    return (await store.get<CachedBalance>(balanceKey)) ?? fresh;
+  /** A durable budget: task holds never disappear during refreshes or between UTC days. */
+  async function balance(getBalance: () => Promise<number>): Promise<number> {
+    const cached = await store.get<number>(balanceKey);
+    if (cached !== null) return cached;
+    const fresh = await getBalance();
+    if (!Number.isFinite(fresh) || fresh < 0) throw new Error("Invalid balance");
+    if (await store.setNx(balanceKey, fresh)) return fresh;
+    const winner = await store.get<number>(balanceKey);
+    if (winner === null) throw new Error("Budget unavailable");
+    return winner;
   }
 
   return {
@@ -136,8 +132,8 @@ export function createScanLimits(
     },
 
     async checkReserve(getBalance) {
-      const { value, at } = await balance(getBalance);
-      const spent = await count(spentKey(at));
+      const value = await balance(getBalance);
+      const spent = await count(spentKey);
       return value - spent - SCAN_COST_UNITS < floor() ? "reserve_reached" : null;
     },
 
@@ -153,24 +149,29 @@ export function createScanLimits(
         await store.decrBy(gKey, 1);
         return { ok: false, reason: "daily_cap" };
       }
+      let capsReturned = false;
       const giveBackCaps = async () => {
+        if (capsReturned) return;
+        capsReturned = true;
         await store.decrBy(iKey, 1);
         await store.decrBy(gKey, 1);
       };
 
       try {
-        const { value, at } = await balance(getBalance);
-        const units = spentKey(at);
-        const spent = await store.incrBy(units, SCAN_COST_UNITS, BALANCE_TTL_SECONDS * 2);
+        const value = await balance(getBalance);
+        const spent = await store.incrBy(spentKey, SCAN_COST_UNITS);
         if (value - spent < floor()) {
-          await store.decrBy(units, SCAN_COST_UNITS);
+          await store.decrBy(spentKey, SCAN_COST_UNITS);
           await giveBackCaps();
           return { ok: false, reason: "reserve_reached" };
         }
+        let released = false;
         return {
           ok: true,
           release: async () => {
-            await store.decrBy(units, SCAN_COST_UNITS);
+            if (released) return;
+            released = true;
+            await store.decrBy(spentKey, SCAN_COST_UNITS);
             await giveBackCaps();
           },
         };

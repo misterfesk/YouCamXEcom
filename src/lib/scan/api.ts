@@ -44,11 +44,16 @@ const json = (body: unknown, signal: AbortSignal): RequestInit => ({
 
 const sleep = (ms: number, signal: AbortSignal) =>
   new Promise<void>((resolve, reject) => {
-    const timer = setTimeout(resolve, ms);
-    signal.addEventListener("abort", () => {
+    signal.throwIfAborted();
+    const abort = () => {
       clearTimeout(timer);
       reject(signal.reason);
-    });
+    };
+    const timer = setTimeout(() => {
+      signal.removeEventListener("abort", abort);
+      resolve();
+    }, ms);
+    signal.addEventListener("abort", abort, { once: true });
   });
 
 /**
@@ -56,6 +61,32 @@ const sleep = (ms: number, signal: AbortSignal) =>
  * straight to YouCam, start both analyses, then poll until done. Stages: 0 upload, 1 analysing.
  */
 export async function runLiveScan(
+  image: PreparedImage,
+  source: "camera" | "upload",
+  { signal, onStage }: { signal: AbortSignal; onStage: (stage: number) => void },
+): Promise<SkinProfile> {
+  const controller = new AbortController();
+  const external = signal;
+  const abort = () => controller.abort(external.reason);
+  external.throwIfAborted();
+  external.addEventListener("abort", abort, { once: true });
+  let timedOut = false;
+  const timer = setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, CLIENT_TIMEOUT_MS);
+  try {
+    return await executeScan(image, source, { signal: controller.signal, onStage });
+  } catch (error) {
+    if (timedOut) throw new ScanFailure({ kind: "scan_error", code: "timeout" });
+    throw error;
+  } finally {
+    clearTimeout(timer);
+    external.removeEventListener("abort", abort);
+  }
+}
+
+async function executeScan(
   image: PreparedImage,
   source: "camera" | "upload",
   { signal, onStage }: { signal: AbortSignal; onStage: (stage: number) => void },

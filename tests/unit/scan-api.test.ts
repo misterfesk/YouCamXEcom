@@ -59,6 +59,17 @@ async function startScan(api: ReturnType<typeof setup>["api"], sha256 = SHA, ip?
 }
 
 describe("scan flow in mock mode", () => {
+  it("never logs or returns arbitrary upstream error text", async () => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { api } = setup({ client: (base) => ({ ...base,
+      createFile: async () => { throw new YouCamError({ kind: "scan_error", code: "unknown" }, "PRIVATE_UPSTREAM_SENTINEL"); },
+    }) });
+    try {
+      const response = await api.upload(post(uploadBody()));
+      expect(await response.text()).not.toContain("PRIVATE_UPSTREAM_SENTINEL");
+      expect(JSON.stringify(log.mock.calls)).not.toContain("PRIVATE_UPSTREAM_SENTINEL");
+    } finally { log.mockRestore(); }
+  });
   it("uploads, starts, polls and returns a normalized profile", async () => {
     const { api } = setup();
     const { upload, response } = await startScan(api);

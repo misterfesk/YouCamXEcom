@@ -73,6 +73,7 @@ export interface CameraSession {
  * onCaptured after the kit's own countdown; checks stream into onChecks.
  */
 export async function openCameraSession(handlers: {
+  signal: AbortSignal;
   width: number;
   height: number;
   onChecks: (checks: CameraChecks) => void;
@@ -81,6 +82,8 @@ export async function openCameraSession(handlers: {
   onError: (code: ScanErrorCode) => void;
 }): Promise<CameraSession> {
   const ymk = await loadCameraKit();
+  handlers.signal.throwIfAborted();
+  let closed = false;
   const ids = [
     ymk.addEventListener("faceQualityChanged", (q: Quality) => handlers.onChecks(toChecks(q))),
     ymk.addEventListener("loaded", () => handlers.onReady()),
@@ -93,7 +96,16 @@ export async function openCameraSession(handlers: {
     ),
     ymk.addEventListener("unsupportedResolution", () => handlers.onError("camera_unavailable")),
   ];
-  ymk.init({
+  const close = () => {
+    if (closed) return;
+    closed = true;
+    ids.forEach((id) => ymk.removeEventListener(id));
+    ymk.close();
+    handlers.signal.removeEventListener("abort", close);
+  };
+  handlers.signal.addEventListener("abort", close, { once: true });
+  try {
+    ymk.init({
     faceDetectionMode: "skincare",
     imageFormat: "blob",
     language: "enu",
@@ -103,17 +115,19 @@ export async function openCameraSession(handlers: {
     width: Math.round(Math.min(1920, Math.max(300, handlers.width))),
     height: Math.round(Math.min(1920, Math.max(300, handlers.height))),
   });
-  ymk.openCameraKit();
+    ymk.openCameraKit();
+  } catch (error) {
+    close();
+    throw error;
+  }
   return {
     capture: () =>
       new Promise((resolve) => {
+        if (closed) return resolve(undefined);
         const canvas = document.querySelector<HTMLCanvasElement>(`#${CAMERA_KIT_MOUNT_ID} canvas`);
         if (!canvas) return resolve(undefined);
         canvas.toBlob((blob) => resolve(blob ?? undefined), "image/jpeg", 0.92);
       }),
-    close: () => {
-      ids.forEach((id) => ymk.removeEventListener(id));
-      ymk.close();
-    },
+    close,
   };
 }
