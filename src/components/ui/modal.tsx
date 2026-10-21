@@ -12,6 +12,7 @@ export type ModalProps = {
   trigger?: ReactNode;
   footer?: ReactNode;
   onBack?: () => void;
+  initialFocus?: "search";
 };
 export function DialogSurface({
   open,
@@ -23,21 +24,28 @@ export function DialogSurface({
   footer,
   onBack,
   sheet = false,
+  initialFocus,
 }: ModalProps & { sheet?: boolean }) {
   const opener = useRef<HTMLElement | null>(null);
+  const content = useRef<HTMLDivElement | null>(null);
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       {trigger && <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>}
       <Dialog.Portal>
         <Dialog.Overlay className="dialog-overlay" />
         <Dialog.Content
+          ref={content}
           className="dialog-panel"
           data-sheet={sheet}
-          onOpenAutoFocus={() => {
+          onOpenAutoFocus={(event) => {
             opener.current =
               document.activeElement instanceof HTMLElement
                 ? document.activeElement
                 : null;
+            if (initialFocus === "search") {
+              const search = content.current?.querySelector<HTMLInputElement>('input[type="search"]');
+              if (search) {event.preventDefault(); search.focus();}
+            }
           }}
           onCloseAutoFocus={(event) => {
             if (!trigger && opener.current?.isConnected) {

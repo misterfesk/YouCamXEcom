@@ -6,6 +6,7 @@
 @import "../styles/styleguide.css";
 @import "../styles/storefront.css";
 @import "../styles/details.css";
+@import "../styles/commerce.css";
 
 :root {
   color-scheme: light;

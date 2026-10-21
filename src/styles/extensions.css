@@ -47,3 +47,4 @@
   --size-packshot: 240px;
   --size-scan-orbit: 144px;
 }
+@theme static { --size-bag-art: 80px; }

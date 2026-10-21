@@ -1,11 +1,16 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { products } from "@/fixtures/ui/products";
+import { sampleFits } from "@/fixtures/ui/product-fits";
+import { searchProducts } from "./preview-search";
+import { SearchOverlay } from "@/components/search/search-overlay";
+import type { DemoOrder } from "@/types/commerce-view";
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SkinSummary } from "@/components/scan/skin-summary";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SamplePicker } from "@/components/scan/sample-picker";
 import { Modal } from "@/components/ui/modal";
-import { Button } from "@/components/ui/button";
 import { sampleProfiles } from "@/fixtures/ui/profiles";
 import { GOALS, GOAL_DEFS, type GoalScore } from "@/types/goal";
 import type { SampleFaceId } from "@/types/scan";
@@ -47,6 +52,10 @@ type PreviewState = {
   profile?: ProfileSummary;
   recommendations: boolean;
   bag: Record<string, number>;
+  order?: DemoOrder;
+  onQuantityChange: (id:string, quantity:number)=>void;
+  onRemove: (id:string)=>void;
+  onPlaceOrder: ()=>void;
   onStartScan: (source: ScanSource) => void;
   onAddToBag: (id: string) => void;
 };
@@ -57,6 +66,9 @@ export function usePreview() {
   return value;
 }
 export function PreviewProvider({ children }: { children: ReactNode }) {
+  const router=useRouter();
+  const [order,setOrder]=useState<DemoOrder>();
+  const [query,setQuery]=useState("");
   const [sampleId, setSampleId] = useState<SampleFaceId>();
   const [recommendations, setRecommendations] = useState(true);
   const [bag, setBag] = useState<Record<string, number>>({});
@@ -78,6 +90,10 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
         profile,
         recommendations,
         bag,
+        order,
+        onQuantityChange:(id,quantity)=>setBag(current=>({...current,[id]:Math.max(1,Math.floor(quantity))})),
+        onRemove:(id)=>{setBag(current=>{const next={...current};delete next[id];return next;});setNotice("Removed from your bag");},
+        onPlaceOrder:()=>{const items=products.filter(p=>bag[p.id]>0).map(product=>({product,quantity:bag[product.id]}));if(!items.length)return;setOrder({reference:"DEMO-"+String(Date.now()).slice(-6),items,total:items.reduce((sum,item)=>sum+item.quantity*item.product.price,0)});setBag({});router.push("/order-confirmation");},
         onStartScan,
         onAddToBag,
       }}
@@ -108,16 +124,7 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
           setNotice("Recommendations are on. Explore products for your skin.");
         }}
       />
-      <Modal
-        open={searchOpen}
-        onOpenChange={setSearchOpen}
-        title="Find your next step"
-        description="Browse the collection by routine step or skin concern."
-      >
-        <Button href="/shop" onClick={() => setSearchOpen(false)}>
-          Explore all products
-        </Button>
-      </Modal>
+      <SearchOverlay open={searchOpen} onOpenChange={setSearchOpen} query={query} onQueryChange={setQuery} results={searchProducts(products,query).map(product=>({product,fit:sampleId&&recommendations?sampleFits[sampleId][product.id]:undefined}))} onNavigate={()=>setSearchOpen(false)}/>
       <Modal
         open={resultsOpen}
         onOpenChange={setResultsOpen}
