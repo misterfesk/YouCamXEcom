@@ -14,6 +14,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "playwright-report/**",
     "test-results/**",
+    // Local tool folders (caches, editor and agent settings).
+    ".*/**",
+    "output/**",
   ]),
 ]);
 
