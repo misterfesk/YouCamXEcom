@@ -1,3 +1,4 @@
+import { ScanPreview } from "./scan-preview";
 import { StorefrontPreview } from "./storefront-preview";
 import type { Metadata } from "next";
 import { StyleguideView } from "@/components/views/styleguide-view";
@@ -25,6 +26,7 @@ export default function StyleguidePage() {
         fits={fitExamples}
       />
       <StorefrontPreview />
+      <ScanPreview />
     </>
   );
 }
