@@ -1,0 +1,3381 @@
+[
+  {
+    "id": "soft-start-gel-cleanser",
+    "slug": "soft-start-gel-cleanser",
+    "name": "Soft Start Gel Cleanser",
+    "tagline": "A fresh start, without the squeaky feel.",
+    "description": "A clear gel cleanser with glycerin and a little niacinamide for the daily wash. It lathers lightly and rinses clean, a simple first step before your leave-on layers.",
+    "step": "cleanse",
+    "subtype": "gel-foam-cleanser",
+    "price": 18,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "pump",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "oiliness",
+        "strength": 1
+      },
+      {
+        "concern": "pore",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "glycerin"
+      },
+      {
+        "id": "niacinamide",
+        "percent": 2
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Massage one pump onto damp skin for 30 seconds, then rinse with lukewarm water.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Cocamidopropyl Betaine, Decyl Glucoside, Niacinamide, Sodium Cocoyl Glutamate, Citric Acid, Sodium Benzoate.",
+    "bestseller": true
+  },
+  {
+    "id": "citrus-rinse-foam",
+    "slug": "citrus-rinse-foam",
+    "name": "Citrus Rinse Foam",
+    "tagline": "A lively foam for a quick wash.",
+    "description": "A light foaming cleanser scented with citrus fragrance, with zinc PCA and glycerin. It suits people who like a lively lather in the morning shower.",
+    "step": "cleanse",
+    "subtype": "gel-foam-cleanser",
+    "price": 16,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "oiliness",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "zinc-pca"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Pump into wet hands, lather, spread over the face and rinse. Avoid the eye area.",
+      "frequency": "Once or twice daily"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Sodium Lauroyl Sarcosinate, Cocamidopropyl Betaine, Zinc PCA, Parfum, Limonene, Citric Acid, Phenoxyethanol."
+  },
+  {
+    "id": "mellow-amino-wash",
+    "slug": "mellow-amino-wash",
+    "name": "Mellow Amino Wash",
+    "tagline": "A quiet, low-lather daily cleanser.",
+    "description": "A gentle gel cleanser built on amino acid surfactants, with centella and panthenol. The texture is soft and the rinse is easy, and it is fragrance-free.",
+    "step": "cleanse",
+    "subtype": "gel-foam-cleanser",
+    "price": 19,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "pump",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "redness",
+        "strength": 1
+      },
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "centella"
+      },
+      {
+        "id": "panthenol"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Work a small amount into damp skin using fingertips, then rinse well.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Sodium Cocoyl Glycinate, Cocamidopropyl Betaine, Panthenol, Centella Asiatica Extract, Sodium Lauroyl Glutamate, Citric Acid, Sodium Benzoate."
+  },
+  {
+    "id": "pore-reset-gel-cleanser",
+    "slug": "pore-reset-gel-cleanser",
+    "name": "Pore Reset Gel Cleanser",
+    "tagline": "A clear gel with niacinamide and zinc.",
+    "description": "A transparent gel cleanser with 4% niacinamide and zinc PCA. It is made for oilier skin that likes a clean, matte-feeling finish after rinsing.",
+    "step": "cleanse",
+    "subtype": "gel-foam-cleanser",
+    "price": 20,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "pore",
+        "strength": 2
+      },
+      {
+        "concern": "oiliness",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "niacinamide",
+        "percent": 4
+      },
+      {
+        "id": "zinc-pca"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Massage over damp skin for about 30 seconds, then rinse.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Niacinamide, Sodium Cocoyl Isethionate, Cocamidopropyl Betaine, Zinc PCA, Decyl Glucoside, Citric Acid, Sodium Benzoate."
+  },
+  {
+    "id": "cloud-milk-cleanser",
+    "slug": "cloud-milk-cleanser",
+    "name": "Cloud Milk Cleanser",
+    "tagline": "A creamy cleanse for slower mornings.",
+    "description": "A milk-textured cleanser with ceramides, glycerin and panthenol. Choose it when a foaming wash is not the feel you want, then follow with the rest of your routine.",
+    "step": "cleanse",
+    "subtype": "cream-milk-cleanser",
+    "price": 20,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 1
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "ceramides"
+      },
+      {
+        "id": "glycerin"
+      },
+      {
+        "id": "panthenol"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Smooth onto dry or damp skin, massage gently, then wipe away with a damp cloth or rinse.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Caprylic/Capric Triglyceride, Cetearyl Alcohol, Panthenol, Ceramide NP, Glyceryl Stearate, Xanthan Gum, Phenoxyethanol."
+  },
+  {
+    "id": "oat-cream-wash",
+    "slug": "oat-cream-wash",
+    "name": "Oat Cream Wash",
+    "tagline": "A soft cream wash with colloidal oatmeal.",
+    "description": "A cream cleanser with colloidal oatmeal and glycerin that rinses off without leaving a film. Fragrance-free and simple, it fits easily into a short routine.",
+    "step": "cleanse",
+    "subtype": "cream-milk-cleanser",
+    "price": 22,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "redness",
+        "strength": 1
+      },
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "colloidal-oatmeal"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Massage a coin-sized amount onto damp skin and rinse with lukewarm water.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Avena Sativa (Oat) Kernel Flour, Cetyl Alcohol, Glyceryl Stearate, Coco-Glucoside, Xanthan Gum, Sodium Benzoate."
+  },
+  {
+    "id": "rosewater-milk-cleanser",
+    "slug": "rosewater-milk-cleanser",
+    "name": "Rosewater Milk Cleanser",
+    "tagline": "A scented milk with a soft rose note.",
+    "description": "A lotion-style cleanser with squalane and glycerin, lightly fragranced with rose. It spreads easily and removes light daily wear.",
+    "step": "cleanse",
+    "subtype": "cream-milk-cleanser",
+    "price": 21,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "squalane"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply to dry skin, massage, then remove with a damp cloth or rinse.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Squalane, Cetearyl Alcohol, Rosa Damascena Flower Water, Glyceryl Stearate, Parfum, Geraniol, Phenoxyethanol."
+  },
+  {
+    "id": "velvet-melt-cleansing-balm",
+    "slug": "velvet-melt-cleansing-balm",
+    "name": "Velvet Melt Cleansing Balm",
+    "tagline": "A balm that melts into an oil.",
+    "description": "A solid balm cleanser with squalane and shea butter that turns to oil on contact with skin and rinses to a milk. It is a rich, evening-time step for removing sunscreen.",
+    "step": "cleanse",
+    "subtype": "oil-balm-cleanser",
+    "price": 26,
+    "currency": "USD",
+    "size": "80 g",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "avoid",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "squalane"
+      },
+      {
+        "id": "shea-butter"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": false,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Massage a scoop over dry skin, add a little water to emulsify, then rinse thoroughly.",
+      "frequency": "Evening, or as a first cleanse"
+    },
+    "ingredientsInci": "Caprylic/Capric Triglyceride, Polyglyceryl-4 Isostearate, Squalane, Butyrospermum Parkii (Shea) Butter, Cetyl Ethylhexanoate, Tocopherol, Helianthus Annuus Seed Oil."
+  },
+  {
+    "id": "quiet-hours-cleansing-oil",
+    "slug": "quiet-hours-cleansing-oil",
+    "name": "Quiet Hours Cleansing Oil",
+    "tagline": "A rosehip-based oil for the evening wash.",
+    "description": "A pourable cleansing oil with rosehip oil and squalane. Massage it in dry, emulsify with water and rinse; a second cleanse is optional.",
+    "step": "cleanse",
+    "subtype": "oil-balm-cleanser",
+    "price": 28,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "avoid",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 1
+      },
+      {
+        "concern": "texture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "rosehip-oil"
+      },
+      {
+        "id": "squalane"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": false,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Massage 2 to 3 pumps over dry skin, wet your hands to emulsify, then rinse.",
+      "frequency": "Evening"
+    },
+    "ingredientsInci": "Caprylic/Capric Triglyceride, Rosa Canina Fruit Oil, Squalane, Polysorbate 80, PEG-20 Glyceryl Triisostearate, Tocopherol, Helianthus Annuus Seed Oil."
+  },
+  {
+    "id": "dew-break-cleansing-oil",
+    "slug": "dew-break-cleansing-oil",
+    "name": "Dew Break Cleansing Oil",
+    "tagline": "A lighter oil that rinses clean.",
+    "description": "A lightweight cleansing oil with squalane in a quick-rinse base. It melts away sunscreen and light makeup without a heavy afterfeel.",
+    "step": "cleanse",
+    "subtype": "oil-balm-cleanser",
+    "price": 24,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "pump",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "squalane"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Massage onto dry skin, emulsify with water and rinse away.",
+      "frequency": "Evening"
+    },
+    "ingredientsInci": "Caprylic/Capric Triglyceride, Squalane, Polyglyceryl-4 Laurate, Glycerin, Polysorbate 20, Tocopherol, Aqua."
+  },
+  {
+    "id": "clear-water-micellar",
+    "slug": "clear-water-micellar",
+    "name": "Clear Water Micellar",
+    "tagline": "A no-rinse cleanse, fragrance-free.",
+    "description": "A micellar water with glycerin and panthenol for a quick first cleanse or a morning refresh. Sweep over skin with a cotton pad; no rinsing needed.",
+    "step": "cleanse",
+    "subtype": "micellar-water",
+    "price": 14,
+    "currency": "USD",
+    "size": "200 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "glycerin"
+      },
+      {
+        "id": "panthenol"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Soak a cotton pad and sweep over the face and eyes; follow with a water rinse if you like.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Poloxamer 184, Panthenol, Disodium EDTA, Citric Acid, Sodium Benzoate, Phenoxyethanol.",
+    "bestseller": true
+  },
+  {
+    "id": "petal-micellar-water",
+    "slug": "petal-micellar-water",
+    "name": "Petal Micellar Water",
+    "tagline": "A lightly scented micellar water.",
+    "description": "A micellar water with a soft floral fragrance, plus glycerin for slip. Use it as a fast makeup and daily wear remover.",
+    "step": "cleanse",
+    "subtype": "micellar-water",
+    "price": 15,
+    "currency": "USD",
+    "size": "200 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Press a soaked cotton pad over closed eyes for a few seconds, then sweep outward.",
+      "frequency": "Evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Poloxamer 184, Rosa Damascena Flower Water, Parfum, Linalool, Disodium EDTA, Citric Acid, Phenoxyethanol."
+  },
+  {
+    "id": "clarify-daily-bha-wash",
+    "slug": "clarify-daily-bha-wash",
+    "name": "Clarify Daily BHA Wash",
+    "tagline": "A salicylic wash for rinse-off use.",
+    "description": "A gel wash with 2% salicylic acid that stays on skin only for the length of a cleanse. Suited to oilier, bumpier-feeling skin, and best followed with moisturizer.",
+    "step": "cleanse",
+    "subtype": "medicated-cleanser",
+    "price": 19,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "avoid",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "acne",
+        "strength": 2
+      },
+      {
+        "concern": "pore",
+        "strength": 1
+      },
+      {
+        "concern": "oiliness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "salicylic-acid",
+        "percent": 2
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Lather onto damp skin, leave for up to 30 seconds, then rinse. Avoid the eye area.",
+      "frequency": "Once daily to start"
+    },
+    "ingredientsInci": "Aqua, Cocamidopropyl Betaine, Sodium Lauroyl Methyl Isethionate, Glycerin, Salicylic Acid, Decyl Glucoside, Sodium Hydroxide, Sodium Benzoate."
+  },
+  {
+    "id": "spot-check-benzoyl-wash",
+    "slug": "spot-check-benzoyl-wash",
+    "name": "Spot Check Benzoyl Wash",
+    "tagline": "A 4% benzoyl peroxide face wash.",
+    "description": "A rinse-off wash with 4% benzoyl peroxide in a clear gel base. It can be drying and may bleach towels, so start slowly and moisturize afterwards.",
+    "step": "cleanse",
+    "subtype": "medicated-cleanser",
+    "price": 17,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "avoid",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "acne",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "benzoyl-peroxide",
+        "percent": 4
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Wet skin, massage in a thin layer, leave 20 seconds and rinse well. Use white towels.",
+      "frequency": "Every other evening to start"
+    },
+    "ingredientsInci": "Aqua, Benzoyl Peroxide, Sodium C14-16 Olefin Sulfonate, Cocamidopropyl Betaine, Glycerin, Carbomer, Sodium Hydroxide, Phenoxyethanol."
+  },
+  {
+    "id": "dew-layer-hydrating-toner",
+    "slug": "dew-layer-hydrating-toner",
+    "name": "Dew Layer Hydrating Toner",
+    "tagline": "A watery layer for bare, clean skin.",
+    "description": "A fragrance-free toner with hyaluronic acid, glycerin and beta-glucan. Press it into skin with your hands after cleansing, before serums and moisturizer.",
+    "step": "treat",
+    "subtype": "hydrating-toner",
+    "price": 22,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      },
+      {
+        "concern": "tear_trough",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "hyaluronic-acid"
+      },
+      {
+        "id": "glycerin"
+      },
+      {
+        "id": "beta-glucan"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Pour a little into clean palms and press over face and neck. Layer more than once if you like.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Butylene Glycol, Beta-Glucan, Sodium Hyaluronate, Panthenol, Sodium PCA, Citric Acid, Phenoxyethanol.",
+    "bestseller": true
+  },
+  {
+    "id": "soft-focus-essence-toner",
+    "slug": "soft-focus-essence-toner",
+    "name": "Soft Focus Essence Toner",
+    "tagline": "A silky toner with centella.",
+    "description": "A lightly viscous toner with centella, hyaluronic acid and panthenol. It sits between a toner and an essence and works on its own on low-effort days.",
+    "step": "treat",
+    "subtype": "hydrating-toner",
+    "price": 24,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "pump",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "hyaluronic-acid"
+      },
+      {
+        "id": "centella"
+      },
+      {
+        "id": "panthenol"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Dispense a pump into your palm and press over clean skin before your moisturizer.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Propanediol, Centella Asiatica Extract, Sodium Hyaluronate, Panthenol, Allantoin, Xanthan Gum, Phenoxyethanol."
+  },
+  {
+    "id": "slow-rinse-toner",
+    "slug": "slow-rinse-toner",
+    "name": "Slow Rinse Toner",
+    "tagline": "A gentle toner with oat and allantoin.",
+    "description": "A fragrance-free toner with colloidal oatmeal, allantoin and panthenol. Apply it with a cotton pad or your hands for a soft, comfortable layer.",
+    "step": "treat",
+    "subtype": "hydrating-toner",
+    "price": 20,
+    "currency": "USD",
+    "size": "200 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "redness",
+        "strength": 2
+      },
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "colloidal-oatmeal"
+      },
+      {
+        "id": "allantoin"
+      },
+      {
+        "id": "panthenol"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Soak a cotton pad or use clean hands, and smooth over face and neck after cleansing.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Avena Sativa (Oat) Kernel Extract, Allantoin, Panthenol, Sodium PCA, Citric Acid, Sodium Benzoate."
+  },
+  {
+    "id": "level-up-glycolic-toner",
+    "slug": "level-up-glycolic-toner",
+    "name": "Level Up Glycolic Toner",
+    "tagline": "A 7% glycolic acid toner for evenings.",
+    "description": "A leave-on toner with 7% glycolic acid in a water-light base. A strong exfoliant: patch test first, start once or twice a week and use sunscreen the next day.",
+    "step": "treat",
+    "subtype": "exfoliating-toner",
+    "price": 29,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "texture",
+        "strength": 2
+      },
+      {
+        "concern": "radiance",
+        "strength": 2
+      },
+      {
+        "concern": "age_spot",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "glycolic-acid",
+        "percent": 7
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [
+      "strongActives"
+    ],
+    "usage": {
+      "when": "pm",
+      "howTo": "After cleansing, swipe one cotton pad over the face, avoiding the eye area. Do not rinse.",
+      "frequency": "Once or twice a week to start"
+    },
+    "ingredientsInci": "Aqua, Glycolic Acid, Glycerin, Sodium Hydroxide, Propanediol, Panthenol, Sodium Hyaluronate, Phenoxyethanol.",
+    "new": true
+  },
+  {
+    "id": "pore-polish-bha-liquid",
+    "slug": "pore-polish-bha-liquid",
+    "name": "Pore Polish BHA Liquid",
+    "tagline": "A 2% salicylic acid leave-on liquid.",
+    "description": "A clear leave-on liquid with 2% salicylic acid and niacinamide, made for oily, congested-feeling areas. A strong exfoliant: patch test, start slowly and wear sunscreen daily.",
+    "step": "treat",
+    "subtype": "exfoliating-toner",
+    "price": 28,
+    "currency": "USD",
+    "size": "118 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "avoid",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "pore",
+        "strength": 3
+      },
+      {
+        "concern": "acne",
+        "strength": 2
+      },
+      {
+        "concern": "oiliness",
+        "strength": 2
+      },
+      {
+        "concern": "texture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "salicylic-acid",
+        "percent": 2
+      },
+      {
+        "id": "niacinamide",
+        "percent": 2
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": false
+    },
+    "safety": [
+      "strongActives",
+      "pregnancy"
+    ],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply a thin layer with a cotton pad to oily zones after cleansing. Do not rinse.",
+      "frequency": "Every other evening to start"
+    },
+    "ingredientsInci": "Aqua, Alcohol Denat., Butylene Glycol, Salicylic Acid, Niacinamide, Sodium Hydroxide, Panthenol, Polysorbate 20, Phenoxyethanol.",
+    "bestseller": true
+  },
+  {
+    "id": "gentle-peel-toner-10",
+    "slug": "gentle-peel-toner-10",
+    "name": "Gentle Peel Toner 10",
+    "tagline": "A mandelic acid toner with a slower pace.",
+    "description": "A leave-on toner with 10% mandelic acid, a larger-molecule AHA. A strong exfoliant: patch test, begin once a week and follow with moisturizer and sunscreen.",
+    "step": "treat",
+    "subtype": "exfoliating-toner",
+    "price": 32,
+    "currency": "USD",
+    "size": "120 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "texture",
+        "strength": 2
+      },
+      {
+        "concern": "acne",
+        "strength": 2
+      },
+      {
+        "concern": "age_spot",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "mandelic-acid",
+        "percent": 10
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [
+      "strongActives"
+    ],
+    "usage": {
+      "when": "pm",
+      "howTo": "After cleansing, apply to the face with a cotton pad, avoiding eyes and lips. Do not rinse.",
+      "frequency": "Once a week to start"
+    },
+    "ingredientsInci": "Aqua, Mandelic Acid, Glycerin, Propanediol, Sodium Hydroxide, Allantoin, Sodium Hyaluronate, Phenoxyethanol."
+  },
+  {
+    "id": "soft-polish-pha-toner",
+    "slug": "soft-polish-pha-toner",
+    "name": "Soft Polish PHA Toner",
+    "tagline": "A gentler exfoliating toner.",
+    "description": "A leave-on toner with gluconolactone and lactic acid at low levels, in a humectant-rich base. It is a gentler place to start with exfoliating acids.",
+    "step": "treat",
+    "subtype": "exfoliating-toner",
+    "price": 26,
+    "currency": "USD",
+    "size": "150 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "texture",
+        "strength": 2
+      },
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "gluconolactone",
+        "percent": 4
+      },
+      {
+        "id": "lactic-acid",
+        "percent": 2
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply with clean hands or a cotton pad after cleansing. Do not rinse.",
+      "frequency": "Two or three evenings a week"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Gluconolactone, Lactic Acid, Sodium Lactate, Propanediol, Panthenol, Sodium Hydroxide, Phenoxyethanol."
+  },
+  {
+    "id": "even-ground-niacinamide-serum",
+    "slug": "even-ground-niacinamide-serum",
+    "name": "Even Ground Niacinamide Serum",
+    "tagline": "A 5% niacinamide serum with zinc.",
+    "description": "A light, fragrance-free serum with 5% niacinamide and zinc PCA. It layers well under moisturizer and sunscreen and suits morning and evening use.",
+    "step": "treat",
+    "subtype": "serum",
+    "price": 24,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "pore",
+        "strength": 3
+      },
+      {
+        "concern": "oiliness",
+        "strength": 2
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "niacinamide",
+        "percent": 5
+      },
+      {
+        "id": "zinc-pca",
+        "percent": 1
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply 3 to 4 drops over clean skin, then follow with moisturizer.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Niacinamide, Propanediol, Zinc PCA, Glycerin, Pentylene Glycol, Xanthan Gum, Sodium Hyaluronate, Phenoxyethanol.",
+    "bestseller": true
+  },
+  {
+    "id": "tone-study-tranexamic-serum",
+    "slug": "tone-study-tranexamic-serum",
+    "name": "Tone Study Tranexamic Serum",
+    "tagline": "A 3% tranexamic acid serum.",
+    "description": "A lightweight serum with 3% tranexamic acid and 4% niacinamide, made for daily use under sunscreen. Fragrance-free and simple to layer.",
+    "step": "treat",
+    "subtype": "serum",
+    "price": 34,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "age_spot",
+        "strength": 3
+      },
+      {
+        "concern": "radiance",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "tranexamic-acid",
+        "percent": 3
+      },
+      {
+        "id": "niacinamide",
+        "percent": 4
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply 3 to 4 drops to clean skin before moisturizer. Wear sunscreen in the morning.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Tranexamic Acid, Niacinamide, Glycerin, Propanediol, Sodium Hyaluronate, Xanthan Gum, Phenoxyethanol.",
+    "new": true
+  },
+  {
+    "id": "daybreak-c-15-serum",
+    "slug": "daybreak-c-15-serum",
+    "name": "Daybreak C 15 Serum",
+    "tagline": "A 15% vitamin C serum for mornings.",
+    "description": "A water-based serum with 15% L-ascorbic acid. It is made to go on in the morning under sunscreen; keep the cap tight and store it away from light.",
+    "step": "treat",
+    "subtype": "serum",
+    "price": 38,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "radiance",
+        "strength": 3
+      },
+      {
+        "concern": "age_spot",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "ascorbic-acid",
+        "percent": 15
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "am",
+      "howTo": "Apply 4 drops to clean, dry skin in the morning, wait a minute, then moisturizer and sunscreen.",
+      "frequency": "Mornings"
+    },
+    "ingredientsInci": "Aqua, Ascorbic Acid, Propanediol, Glycerin, Ethylhexylglycerin, Tocopherol, Ferulic Acid, Sodium Hydroxide, Phenoxyethanol."
+  },
+  {
+    "id": "night-retinol-0-3-serum",
+    "slug": "night-retinol-0-3-serum",
+    "name": "Night Retinol 0.3 Serum",
+    "tagline": "A 0.3% retinol serum with squalane.",
+    "description": "A silky evening serum with 0.3% retinol suspended in squalane. A strong active: patch test, start twice a week, use sunscreen daily and ask your doctor first if pregnant or breastfeeding.",
+    "step": "treat",
+    "subtype": "serum",
+    "price": 36,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "wrinkle",
+        "strength": 3
+      },
+      {
+        "concern": "firmness",
+        "strength": 2
+      },
+      {
+        "concern": "texture",
+        "strength": 2
+      },
+      {
+        "concern": "age_spot",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "retinol",
+        "percent": 0.3
+      },
+      {
+        "id": "squalane"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [
+      "strongActives",
+      "pregnancy"
+    ],
+    "usage": {
+      "when": "pm",
+      "howTo": "On dry skin, apply 3 drops to the face, avoiding eyes and lips. Moisturize after.",
+      "frequency": "Two evenings a week to start"
+    },
+    "ingredientsInci": "Squalane, Caprylic/Capric Triglyceride, Retinol, Tocopherol, Bisabolol, Helianthus Annuus Seed Oil, Silica.",
+    "bestseller": true
+  },
+  {
+    "id": "plump-peptide-serum",
+    "slug": "plump-peptide-serum",
+    "name": "Plump Peptide Serum",
+    "tagline": "A bouncy serum with peptides and hyaluronic acid.",
+    "description": "A fragrance-free gel serum with peptides, hyaluronic acid and glycerin. Its cushiony texture sits well under a cream, morning or evening.",
+    "step": "treat",
+    "subtype": "serum",
+    "price": 40,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "firmness",
+        "strength": 3
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 2
+      },
+      {
+        "concern": "moisture",
+        "strength": 1
+      },
+      {
+        "concern": "tear_trough",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "peptides"
+      },
+      {
+        "id": "hyaluronic-acid"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Smooth 3 to 4 drops over face and neck, then moisturize.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Propanediol, Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7, Sodium Hyaluronate, Panthenol, Xanthan Gum, Phenoxyethanol."
+  },
+  {
+    "id": "clear-patch-spot-dots",
+    "slug": "clear-patch-spot-dots",
+    "name": "Clear Patch Spot Dots",
+    "tagline": "Hydrocolloid patches for individual spots.",
+    "description": "Thin, translucent hydrocolloid dots that sit over a single spot. Apply to clean, dry skin and leave on for several hours or overnight.",
+    "step": "treat",
+    "subtype": "spot-treatment",
+    "price": 12,
+    "currency": "USD",
+    "size": "36 patches",
+    "image": {
+      "kind": "svg",
+      "shape": "sachet",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "acne",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "hydrocolloid"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply one patch to a clean, dry spot. Leave on for 6 hours or overnight, then peel off gently.",
+      "frequency": "As needed"
+    },
+    "ingredientsInci": "Hydrocolloid, Polyisobutylene, Styrene Isoprene Styrene Block Copolymer, Polyurethane Film."
+  },
+  {
+    "id": "benzoyl-5-spot-gel",
+    "slug": "benzoyl-5-spot-gel",
+    "name": "Benzoyl 5 Spot Gel",
+    "tagline": "A 5% benzoyl peroxide spot gel.",
+    "description": "A clear gel with 5% benzoyl peroxide, applied only on spots. A strong active that can dry skin and bleach fabric: patch test, start every other day and use sunscreen.",
+    "step": "treat",
+    "subtype": "spot-treatment",
+    "price": 16,
+    "currency": "USD",
+    "size": "15 g",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "avoid",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "acne",
+        "strength": 3
+      }
+    ],
+    "actives": [
+      {
+        "id": "benzoyl-peroxide",
+        "percent": 5
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [
+      "strongActives"
+    ],
+    "usage": {
+      "when": "pm",
+      "howTo": "After cleansing, dab a thin layer on individual spots only. Avoid eyes and lips.",
+      "frequency": "Every other evening to start"
+    },
+    "ingredientsInci": "Aqua, Benzoyl Peroxide, Glycerin, Carbomer, Dimethicone, Sodium Hydroxide, Disodium EDTA, Phenoxyethanol."
+  },
+  {
+    "id": "sulfur-point-treatment",
+    "slug": "sulfur-point-treatment",
+    "name": "Sulfur Point Treatment",
+    "tagline": "A sulfur and niacinamide spot lotion.",
+    "description": "A spot lotion with 4% sulfur and niacinamide. Dab onto spots after cleansing; it has a faint sulfur scent and may feel drying on larger areas.",
+    "step": "treat",
+    "subtype": "spot-treatment",
+    "price": 14,
+    "currency": "USD",
+    "size": "15 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "acne",
+        "strength": 2
+      },
+      {
+        "concern": "oiliness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "sulfur",
+        "percent": 4
+      },
+      {
+        "id": "niacinamide",
+        "percent": 2
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Dab a small amount on spots only after cleansing. Rinse off after 20 minutes if skin feels dry.",
+      "frequency": "Every evening"
+    },
+    "ingredientsInci": "Aqua, Sulfur, Niacinamide, Glycerin, Zinc Oxide, Cetyl Alcohol, Xanthan Gum, Phenoxyethanol."
+  },
+  {
+    "id": "kaolin-reset-clay-mask",
+    "slug": "kaolin-reset-clay-mask",
+    "name": "Kaolin Reset Clay Mask",
+    "tagline": "A rinse-off clay mask for shiny zones.",
+    "description": "A creamy mask with kaolin clay and glycerin. Smooth it over oily zones and rinse before it is fully dry; it can feel drying on dry skin.",
+    "step": "treat",
+    "subtype": "mask",
+    "price": 26,
+    "currency": "USD",
+    "size": "75 g",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "avoid",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "oiliness",
+        "strength": 3
+      },
+      {
+        "concern": "pore",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "kaolin"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply a thin layer over clean skin, leave 8 to 10 minutes, and rinse with warm water.",
+      "frequency": "Once or twice a week"
+    },
+    "ingredientsInci": "Aqua, Kaolin, Glycerin, Bentonite, Cetearyl Alcohol, Glyceryl Stearate, Zinc PCA, Xanthan Gum, Phenoxyethanol."
+  },
+  {
+    "id": "overnight-cushion-sleeping-mask",
+    "slug": "overnight-cushion-sleeping-mask",
+    "name": "Overnight Cushion Sleeping Mask",
+    "tagline": "A rich leave-on cream mask for night.",
+    "description": "A scented sleeping mask with ceramides, shea butter and glycerin that stays on overnight. It is a plush, rich finish to an evening routine.",
+    "step": "treat",
+    "subtype": "mask",
+    "price": 34,
+    "currency": "USD",
+    "size": "60 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "avoid",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 3
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "ceramides"
+      },
+      {
+        "id": "shea-butter"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": false,
+      "nonComedogenic": false,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply a thin layer as the last evening step and rinse off in the morning.",
+      "frequency": "Two or three nights a week"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Butyrospermum Parkii (Shea) Butter, Squalane, Ceramide NP, Cetearyl Alcohol, Parfum, Linalool, Phenoxyethanol."
+  },
+  {
+    "id": "sunday-smoothing-peel-mask",
+    "slug": "sunday-smoothing-peel-mask",
+    "name": "Sunday Smoothing Peel Mask",
+    "tagline": "A 10% glycolic rinse-off peel.",
+    "description": "A creamy peel with 10% glycolic acid that stays on for a few minutes only. A strong exfoliant: patch test, use once a week and wear sunscreen the next day.",
+    "step": "treat",
+    "subtype": "mask",
+    "price": 30,
+    "currency": "USD",
+    "size": "60 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "texture",
+        "strength": 3
+      },
+      {
+        "concern": "radiance",
+        "strength": 2
+      },
+      {
+        "concern": "age_spot",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "glycolic-acid",
+        "percent": 10
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [
+      "strongActives"
+    ],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply a thin layer to clean, dry skin, leave up to 5 minutes, then rinse thoroughly.",
+      "frequency": "Once a week"
+    },
+    "ingredientsInci": "Aqua, Glycolic Acid, Glycerin, Cetearyl Alcohol, Propanediol, Sodium Hydroxide, Allantoin, Xanthan Gum, Phenoxyethanol."
+  },
+  {
+    "id": "eye-opener-caffeine-serum",
+    "slug": "eye-opener-caffeine-serum",
+    "name": "Eye Opener Caffeine Serum",
+    "tagline": "A cool-feeling serum for the eye area.",
+    "description": "A fragrance-free gel serum with 2% caffeine, made for the skin around the eyes. Tap it in with a ring finger morning or evening.",
+    "step": "treat",
+    "subtype": "eye-care",
+    "price": 28,
+    "currency": "USD",
+    "size": "15 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "eye_bag",
+        "strength": 3
+      },
+      {
+        "concern": "dark_circle_v2",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "caffeine",
+        "percent": 2
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Tap 1 to 2 drops around the orbital bone, avoiding the lash line.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Caffeine, Propanediol, Panthenol, Sodium Hyaluronate, Xanthan Gum, Phenoxyethanol."
+  },
+  {
+    "id": "under-light-eye-cream",
+    "slug": "under-light-eye-cream",
+    "name": "Under Light Eye Cream",
+    "tagline": "A soft cream for the under-eye area.",
+    "description": "A fragrance-free eye cream with vitamin K, peptides and hyaluronic acid in a light cream base. Use it as the last step of your evening routine.",
+    "step": "treat",
+    "subtype": "eye-care",
+    "price": 32,
+    "currency": "USD",
+    "size": "15 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "dark_circle_v2",
+        "strength": 3
+      },
+      {
+        "concern": "tear_trough",
+        "strength": 1
+      },
+      {
+        "concern": "firmness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "vitamin-k"
+      },
+      {
+        "id": "peptides"
+      },
+      {
+        "id": "hyaluronic-acid"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Dot a small amount under each eye and pat in gently.",
+      "frequency": "Evenings"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Caprylic/Capric Triglyceride, Phytonadione, Palmitoyl Tripeptide-1, Sodium Hyaluronate, Cetearyl Alcohol, Phenoxyethanol."
+  },
+  {
+    "id": "pillow-talk-eye-gel",
+    "slug": "pillow-talk-eye-gel",
+    "name": "Pillow Talk Eye Gel",
+    "tagline": "A fresh gel for the eye area.",
+    "description": "A weightless eye gel with hyaluronic acid, caffeine and panthenol. Keep it in the fridge for a cool application if you like.",
+    "step": "treat",
+    "subtype": "eye-care",
+    "price": 26,
+    "currency": "USD",
+    "size": "15 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "tear_trough",
+        "strength": 2
+      },
+      {
+        "concern": "eye_bag",
+        "strength": 2
+      },
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "hyaluronic-acid"
+      },
+      {
+        "id": "caffeine",
+        "percent": 1
+      },
+      {
+        "id": "panthenol"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Pat a rice-grain amount around each eye with a ring finger.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Caffeine, Sodium Hyaluronate, Panthenol, Carbomer, Allantoin, Sodium Hydroxide, Phenoxyethanol.",
+    "new": true
+  },
+  {
+    "id": "cool-splash-gel-moisturizer",
+    "slug": "cool-splash-gel-moisturizer",
+    "name": "Cool Splash Gel Moisturizer",
+    "tagline": "A water-gel with hyaluronic acid.",
+    "description": "A bouncy gel moisturizer with hyaluronic acid, glycerin and 2% niacinamide. Oil-free in feel and quick to sink in, it layers well under sunscreen.",
+    "step": "moisturize",
+    "subtype": "gel-moisturizer",
+    "price": 24,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      },
+      {
+        "concern": "oiliness",
+        "strength": 1
+      },
+      {
+        "concern": "tear_trough",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "hyaluronic-acid"
+      },
+      {
+        "id": "glycerin"
+      },
+      {
+        "id": "niacinamide",
+        "percent": 2
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Smooth over face and neck as the last step before sunscreen in the morning.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Niacinamide, Propanediol, Sodium Hyaluronate, Carbomer, Panthenol, Sodium Hydroxide, Phenoxyethanol.",
+    "bestseller": true
+  },
+  {
+    "id": "bouncy-gel-moisturizer",
+    "slug": "bouncy-gel-moisturizer",
+    "name": "Bouncy Gel Moisturizer",
+    "tagline": "A light gel with panthenol and beta-glucan.",
+    "description": "A cooling gel moisturizer with panthenol and beta-glucan, fragrance-free and quick to absorb. Choose it when you want a light, comfortable finish.",
+    "step": "moisturize",
+    "subtype": "gel-moisturizer",
+    "price": 22,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "pump",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "panthenol"
+      },
+      {
+        "id": "beta-glucan"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply one to two pumps to clean skin, morning and evening.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Beta-Glucan, Panthenol, Propanediol, Carbomer, Sodium PCA, Sodium Hydroxide, Phenoxyethanol."
+  },
+  {
+    "id": "matte-hour-gel-lotion",
+    "slug": "matte-hour-gel-lotion",
+    "name": "Matte Hour Gel Lotion",
+    "tagline": "A zinc and niacinamide gel lotion.",
+    "description": "An oil-free gel lotion with 4% niacinamide and zinc PCA, made for shine-prone skin. It dries to a soft, matte-feeling finish.",
+    "step": "moisturize",
+    "subtype": "gel-moisturizer",
+    "price": 23,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "neutral",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "oiliness",
+        "strength": 2
+      },
+      {
+        "concern": "pore",
+        "strength": 2
+      },
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "niacinamide",
+        "percent": 4
+      },
+      {
+        "id": "zinc-pca"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply a pea-sized amount to the face after serum.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Niacinamide, Zinc PCA, Silica, Propanediol, Carbomer, Sodium Hydroxide, Phenoxyethanol."
+  },
+  {
+    "id": "azelaic-cream-10",
+    "slug": "azelaic-cream-10",
+    "name": "Azelaic Cream 10",
+    "tagline": "A 10% azelaic acid cream.",
+    "description": "A smooth, fragrance-free cream with 10% azelaic acid and a touch of niacinamide. It replaces your moisturizer on the evenings you use it.",
+    "step": "moisturize",
+    "subtype": "cream-moisturizer",
+    "price": 30,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "acne",
+        "strength": 3
+      },
+      {
+        "concern": "redness",
+        "strength": 2
+      },
+      {
+        "concern": "age_spot",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "azelaic-acid",
+        "percent": 10
+      },
+      {
+        "id": "niacinamide",
+        "percent": 2
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply a pea-sized amount over clean skin, then moisturize.",
+      "frequency": "Once daily, increasing to twice"
+    },
+    "ingredientsInci": "Aqua, Azelaic Acid, Glycerin, Propanediol, Niacinamide, Cetearyl Alcohol, Xanthan Gum, Sodium Hydroxide, Phenoxyethanol."
+  },
+  {
+    "id": "cushion-daily-cream",
+    "slug": "cushion-daily-cream",
+    "name": "Cushion Daily Cream",
+    "tagline": "A plush cream with ceramides.",
+    "description": "A fragrance-free everyday cream with ceramides, squalane and panthenol. It has a soft, cushioned texture that works as a base under sunscreen.",
+    "step": "moisturize",
+    "subtype": "cream-moisturizer",
+    "price": 28,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 3
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "ceramides"
+      },
+      {
+        "id": "squalane"
+      },
+      {
+        "id": "panthenol"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Warm a small amount between fingertips and press over the face and neck.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Squalane, Caprylic/Capric Triglyceride, Ceramide NP, Panthenol, Cetearyl Alcohol, Glyceryl Stearate, Phenoxyethanol.",
+    "bestseller": true
+  },
+  {
+    "id": "calm-ground-oat-cream",
+    "slug": "calm-ground-oat-cream",
+    "name": "Calm Ground Oat Cream",
+    "tagline": "A fragrance-free cream with colloidal oatmeal.",
+    "description": "A simple cream with colloidal oatmeal, ceramides and allantoin. It is made for skin that prefers short ingredient lists and unscented formulas.",
+    "step": "moisturize",
+    "subtype": "cream-moisturizer",
+    "price": 26,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "redness",
+        "strength": 2
+      },
+      {
+        "concern": "moisture",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "colloidal-oatmeal"
+      },
+      {
+        "id": "ceramides"
+      },
+      {
+        "id": "allantoin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Smooth over clean skin after serum, morning and evening.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Avena Sativa (Oat) Kernel Flour, Ceramide NP, Allantoin, Cetearyl Alcohol, Caprylic/Capric Triglyceride, Phenoxyethanol."
+  },
+  {
+    "id": "rose-cloud-cream",
+    "slug": "rose-cloud-cream",
+    "name": "Rose Cloud Cream",
+    "tagline": "A scented cream with a soft rose note.",
+    "description": "A silky cream with shea butter, hyaluronic acid and glycerin, lightly fragranced with rose. It leaves a smooth, comfortable finish.",
+    "step": "moisturize",
+    "subtype": "cream-moisturizer",
+    "price": 30,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      },
+      {
+        "concern": "tear_trough",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "shea-butter"
+      },
+      {
+        "id": "hyaluronic-acid"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply a coin-sized amount to face and neck.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Butyrospermum Parkii (Shea) Butter, Sodium Hyaluronate, Cetearyl Alcohol, Rosa Damascena Flower Water, Parfum, Geraniol, Phenoxyethanol."
+  },
+  {
+    "id": "everyday-fluid-lotion",
+    "slug": "everyday-fluid-lotion",
+    "name": "Everyday Fluid Lotion",
+    "tagline": "A pump lotion for daily use.",
+    "description": "A light lotion with glycerin, niacinamide and ceramides in a fast-absorbing base. It is a straightforward daily moisturizer for most routines.",
+    "step": "moisturize",
+    "subtype": "cream-moisturizer",
+    "price": 22,
+    "currency": "USD",
+    "size": "75 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "pump",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      },
+      {
+        "concern": "oiliness",
+        "strength": 1
+      },
+      {
+        "concern": "texture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "glycerin"
+      },
+      {
+        "id": "niacinamide",
+        "percent": 3
+      },
+      {
+        "id": "ceramides"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply one to two pumps to face and neck.",
+      "frequency": "Morning and evening"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Niacinamide, Caprylic/Capric Triglyceride, Ceramide NP, Cetearyl Alcohol, Dimethicone, Phenoxyethanol."
+  },
+  {
+    "id": "barrier-butter-balm",
+    "slug": "barrier-butter-balm",
+    "name": "Barrier Butter Balm",
+    "tagline": "A rich balm with shea and ceramides.",
+    "description": "A dense, fragrance-free balm with shea butter, ceramides and squalane. Warm a little between fingers and press over areas that feel dry; it is rich, so a little goes far.",
+    "step": "moisturize",
+    "subtype": "barrier-balm",
+    "price": 24,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "avoid",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 3
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "shea-butter"
+      },
+      {
+        "id": "ceramides"
+      },
+      {
+        "id": "squalane"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": false,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Press a thin layer over dry areas or as the last step of your evening routine.",
+      "frequency": "Evenings or as needed"
+    },
+    "ingredientsInci": "Petrolatum, Butyrospermum Parkii (Shea) Butter, Squalane, Ceramide NP, Glycerin, Cetearyl Alcohol, Tocopherol, Helianthus Annuus Seed Oil."
+  },
+  {
+    "id": "heavy-weather-balm",
+    "slug": "heavy-weather-balm",
+    "name": "Heavy Weather Balm",
+    "tagline": "A thick oat and shea balm.",
+    "description": "A heavy, fragrance-free balm with colloidal oatmeal, shea butter and panthenol, made for cold, windy days. It is the richest texture in the range.",
+    "step": "moisturize",
+    "subtype": "barrier-balm",
+    "price": 28,
+    "currency": "USD",
+    "size": "60 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "avoid",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 3
+      },
+      {
+        "concern": "redness",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "shea-butter"
+      },
+      {
+        "id": "colloidal-oatmeal"
+      },
+      {
+        "id": "panthenol"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": false,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Warm a pea-sized amount and press over dry areas as the last step.",
+      "frequency": "Evenings or as needed"
+    },
+    "ingredientsInci": "Petrolatum, Butyrospermum Parkii (Shea) Butter, Avena Sativa (Oat) Kernel Flour, Panthenol, Glycerin, Cera Alba, Tocopherol."
+  },
+  {
+    "id": "winter-shield-balm",
+    "slug": "winter-shield-balm",
+    "name": "Winter Shield Balm",
+    "tagline": "A scented balm for exposed skin.",
+    "description": "A rich balm with shea butter and squalane, lightly fragranced. Use it over a moisturizer on cold days, or on its own for very dry patches.",
+    "step": "moisturize",
+    "subtype": "barrier-balm",
+    "price": 30,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "avoid",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 3
+      }
+    ],
+    "actives": [
+      {
+        "id": "shea-butter"
+      },
+      {
+        "id": "squalane"
+      }
+    ],
+    "flags": {
+      "fragranceFree": false,
+      "nonComedogenic": false,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Apply a thin layer over dry areas, avoiding the eye area.",
+      "frequency": "As needed"
+    },
+    "ingredientsInci": "Butyrospermum Parkii (Shea) Butter, Squalane, Petrolatum, Caprylic/Capric Triglyceride, Cera Alba, Parfum, Limonene, Tocopherol."
+  },
+  {
+    "id": "retinal-0-05-night-cream",
+    "slug": "retinal-0-05-night-cream",
+    "name": "Retinal 0.05 Night Cream",
+    "tagline": "A 0.05% retinaldehyde night cream.",
+    "description": "An evening cream with 0.05% retinaldehyde in a light emollient base. A strong active: patch test, start slowly, use sunscreen daily, and ask your doctor first if pregnant or breastfeeding.",
+    "step": "moisturize",
+    "subtype": "night-cream",
+    "price": 44,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "wrinkle",
+        "strength": 3
+      },
+      {
+        "concern": "firmness",
+        "strength": 2
+      },
+      {
+        "concern": "texture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "retinal",
+        "percent": 0.05
+      },
+      {
+        "id": "squalane"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [
+      "strongActives",
+      "pregnancy"
+    ],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply a pea-sized amount to dry skin in the evening, avoiding eyes.",
+      "frequency": "Two evenings a week to start"
+    },
+    "ingredientsInci": "Squalane, Caprylic/Capric Triglyceride, Retinal, Tocopherol, Bisabolol, Polyglyceryl-3 Diisostearate, Silica.",
+    "new": true
+  },
+  {
+    "id": "night-shift-retinol-cream",
+    "slug": "night-shift-retinol-cream",
+    "name": "Night Shift Retinol Cream",
+    "tagline": "A 0.1% retinol night cream.",
+    "description": "A cushiony evening cream with 0.1% retinol, ceramides and squalane. A strong active: patch test, start twice a week, use sunscreen daily, and ask your doctor first if pregnant or breastfeeding.",
+    "step": "moisturize",
+    "subtype": "night-cream",
+    "price": 38,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "wrinkle",
+        "strength": 2
+      },
+      {
+        "concern": "firmness",
+        "strength": 2
+      },
+      {
+        "concern": "texture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "retinol",
+        "percent": 0.1
+      },
+      {
+        "id": "ceramides"
+      },
+      {
+        "id": "squalane"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [
+      "strongActives",
+      "pregnancy"
+    ],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply a pea-sized amount to the face at night, avoiding eyes.",
+      "frequency": "Two evenings a week to start"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Squalane, Caprylic/Capric Triglyceride, Retinol, Ceramide NP, Cetearyl Alcohol, Tocopherol, Bisabolol, Phenoxyethanol."
+  },
+  {
+    "id": "peptide-night-cream",
+    "slug": "peptide-night-cream",
+    "name": "Peptide Night Cream",
+    "tagline": "A rich night cream with peptides.",
+    "description": "A fragrance-free night cream with peptides, ceramides and shea butter. The texture is dense and cushioning, made for the last step of an evening routine.",
+    "step": "moisturize",
+    "subtype": "night-cream",
+    "price": 42,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "avoid",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "firmness",
+        "strength": 3
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 2
+      },
+      {
+        "concern": "moisture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "peptides"
+      },
+      {
+        "id": "ceramides"
+      },
+      {
+        "id": "shea-butter"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": false,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Smooth over face and neck in the evening.",
+      "frequency": "Evenings"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Butyrospermum Parkii (Shea) Butter, Palmitoyl Tripeptide-1, Ceramide NP, Squalane, Cetearyl Alcohol, Phenoxyethanol."
+  },
+  {
+    "id": "lavender-hour-night-cream",
+    "slug": "lavender-hour-night-cream",
+    "name": "Lavender Hour Night Cream",
+    "tagline": "A scented cream for the end of the day.",
+    "description": "A soft night cream with ceramides, glycerin and hyaluronic acid, with a lavender fragrance. It is a fragranced evening ritual rather than a daytime essential.",
+    "step": "moisturize",
+    "subtype": "night-cream",
+    "price": 34,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "jar",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      },
+      {
+        "concern": "texture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "ceramides"
+      },
+      {
+        "id": "hyaluronic-acid"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Apply to face and neck in the evening.",
+      "frequency": "Evenings"
+    },
+    "ingredientsInci": "Aqua, Glycerin, Caprylic/Capric Triglyceride, Ceramide NP, Sodium Hyaluronate, Cetearyl Alcohol, Lavandula Angustifolia Oil, Parfum, Linalool, Phenoxyethanol."
+  },
+  {
+    "id": "evening-bakuchiol-oil",
+    "slug": "evening-bakuchiol-oil",
+    "name": "Evening Bakuchiol Oil",
+    "tagline": "A plant-derived oil for night.",
+    "description": "A light face oil with bakuchiol, a plant-derived retinol alternative, in a squalane base. It is a gentler option for evenings and carries no retinoid caution.",
+    "step": "moisturize",
+    "subtype": "face-oil",
+    "price": 36,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "wrinkle",
+        "strength": 2
+      },
+      {
+        "concern": "age_spot",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "bakuchiol"
+      },
+      {
+        "id": "squalane"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Press 3 drops over clean skin in the evening, after any serum.",
+      "frequency": "Evenings"
+    },
+    "ingredientsInci": "Squalane, Caprylic/Capric Triglyceride, Bakuchiol, Tocopherol, Bisabolol, Helianthus Annuus Seed Oil, Silica."
+  },
+  {
+    "id": "rosehip-evening-oil",
+    "slug": "rosehip-evening-oil",
+    "name": "Rosehip Evening Oil",
+    "tagline": "A pressed-oil blend for evenings.",
+    "description": "A face oil with rosehip oil and squalane. Press 2 to 3 drops over a moisturizer to seal in your routine; it is a rich finish.",
+    "step": "moisturize",
+    "subtype": "face-oil",
+    "price": 30,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "avoid",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      },
+      {
+        "concern": "texture",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "rosehip-oil"
+      },
+      {
+        "id": "squalane"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": false,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "pm",
+      "howTo": "Warm 2 to 3 drops in your palms and press over the face as the last step.",
+      "frequency": "Evenings"
+    },
+    "ingredientsInci": "Squalane, Rosa Canina Fruit Oil, Caprylic/Capric Triglyceride, Helianthus Annuus Seed Oil, Tocopherol."
+  },
+  {
+    "id": "squalane-drop-face-oil",
+    "slug": "squalane-drop-face-oil",
+    "name": "Squalane Drop Face Oil",
+    "tagline": "A weightless, squalane-only oil.",
+    "description": "A light face oil built around squalane. It absorbs quickly and can be used alone or mixed into your moisturizer.",
+    "step": "moisturize",
+    "subtype": "face-oil",
+    "price": 28,
+    "currency": "USD",
+    "size": "30 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "dropper",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 2
+      }
+    ],
+    "actives": [
+      {
+        "id": "squalane"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "safety": [],
+    "usage": {
+      "when": "both",
+      "howTo": "Press 2 drops over skin, or blend into your moisturizer.",
+      "frequency": "Morning or evening"
+    },
+    "ingredientsInci": "Squalane, Tocopherol."
+  },
+  {
+    "id": "sheer-day-fluid-spf-50",
+    "slug": "sheer-day-fluid-spf-50",
+    "name": "Sheer Day Fluid SPF 50",
+    "tagline": "A fast-absorbing daily fluid.",
+    "description": "A fluid chemical sunscreen with broad-spectrum UV filters and niacinamide. Illustrative demo formula, not a tested retail sunscreen. It is made to sit under makeup without a white cast.",
+    "step": "protect",
+    "subtype": "sunscreen",
+    "price": 28,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "age_spot",
+        "strength": 2
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "uv-filters"
+      },
+      {
+        "id": "niacinamide",
+        "percent": 3
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": false
+    },
+    "spf": 50,
+    "safety": [],
+    "usage": {
+      "when": "am",
+      "howTo": "Apply two finger-lengths to face and neck as the last morning step. Reapply every two hours outdoors.",
+      "frequency": "Every morning"
+    },
+    "ingredientsInci": "Aqua, Homosalate, Ethylhexyl Salicylate, Butyl Methoxydibenzoylmethane, Octocrylene, Alcohol Denat., Niacinamide, Glycerin, Dimethicone, Phenoxyethanol.",
+    "bestseller": true
+  },
+  {
+    "id": "moisture-veil-spf-30",
+    "slug": "moisture-veil-spf-30",
+    "name": "Moisture Veil SPF 30",
+    "tagline": "A dewy sunscreen with hyaluronic acid.",
+    "description": "A cream-gel chemical sunscreen with hyaluronic acid and glycerin for drier days. Illustrative demo formula, not a tested retail sunscreen. It leaves a light, dewy feel.",
+    "step": "protect",
+    "subtype": "sunscreen",
+    "price": 26,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "brand"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "moisture",
+        "strength": 1
+      },
+      {
+        "concern": "age_spot",
+        "strength": 1
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "uv-filters"
+      },
+      {
+        "id": "hyaluronic-acid"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true
+    },
+    "spf": 30,
+    "safety": [],
+    "usage": {
+      "when": "am",
+      "howTo": "Apply generously as the last morning step. Reapply every two hours outdoors.",
+      "frequency": "Every morning"
+    },
+    "ingredientsInci": "Aqua, Ethylhexyl Salicylate, Homosalate, Butyl Methoxydibenzoylmethane, Glycerin, Sodium Hyaluronate, Cetearyl Alcohol, Dimethicone, Phenoxyethanol."
+  },
+  {
+    "id": "mineral-shield-spf-50",
+    "slug": "mineral-shield-spf-50",
+    "name": "Mineral Shield SPF 50",
+    "tagline": "A zinc-based daily sunscreen.",
+    "description": "A mineral sunscreen with zinc oxide and titanium dioxide, fragrance-free and alcohol-free. Illustrative demo formula, not a tested retail sunscreen. It may leave a light cast on some skin tones.",
+    "step": "protect",
+    "subtype": "sunscreen",
+    "price": 30,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "surface"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "age_spot",
+        "strength": 2
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "zinc-oxide"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true,
+      "mineralSpf": true
+    },
+    "spf": 50,
+    "safety": [],
+    "usage": {
+      "when": "am",
+      "howTo": "Apply two finger-lengths to face and neck. Reapply every two hours outdoors.",
+      "frequency": "Every morning"
+    },
+    "ingredientsInci": "Zinc Oxide, Titanium Dioxide, Aqua, Caprylic/Capric Triglyceride, Glycerin, Cetearyl Alcohol, Polyhydroxystearic Acid, Tocopherol, Phenoxyethanol."
+  },
+  {
+    "id": "zinc-sensitive-lotion-spf-30",
+    "slug": "zinc-sensitive-lotion-spf-30",
+    "name": "Zinc Sensitive Lotion SPF 30",
+    "tagline": "A simple mineral lotion.",
+    "description": "A mineral lotion with zinc oxide, allantoin and panthenol, free of fragrance and alcohol. Illustrative demo formula, not a tested retail sunscreen. It is a short-ingredient option for skin that prefers physical filters.",
+    "step": "protect",
+    "subtype": "sunscreen",
+    "price": 28,
+    "currency": "USD",
+    "size": "60 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "bottle",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "suitable",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "age_spot",
+        "strength": 1
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 1
+      },
+      {
+        "concern": "redness",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "zinc-oxide"
+      },
+      {
+        "id": "allantoin"
+      },
+      {
+        "id": "panthenol"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true,
+      "mineralSpf": true
+    },
+    "spf": 30,
+    "safety": [],
+    "usage": {
+      "when": "am",
+      "howTo": "Shake, then apply generously to face and neck. Reapply every two hours outdoors.",
+      "frequency": "Every morning"
+    },
+    "ingredientsInci": "Aqua, Zinc Oxide, Caprylic/Capric Triglyceride, Glycerin, Allantoin, Panthenol, Cetearyl Alcohol, Polyhydroxystearic Acid, Phenoxyethanol."
+  },
+  {
+    "id": "sun-tint-light-spf-40",
+    "slug": "sun-tint-light-spf-40",
+    "name": "Sun Tint Light SPF 40",
+    "tagline": "A sheer tinted mineral sunscreen.",
+    "description": "A tinted mineral sunscreen with zinc oxide and iron oxides in a single light-medium shade. Illustrative demo formula, not a tested retail sunscreen. The tint may not suit every skin tone.",
+    "step": "protect",
+    "subtype": "tinted-spf",
+    "price": 32,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "tangerine"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "age_spot",
+        "strength": 2
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "zinc-oxide"
+      },
+      {
+        "id": "iron-oxides"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true,
+      "mineralSpf": true,
+      "tinted": true
+    },
+    "spf": 40,
+    "safety": [],
+    "usage": {
+      "when": "am",
+      "howTo": "Shake and apply two finger-lengths evenly. Blend well at the jaw. Reapply every two hours outdoors.",
+      "frequency": "Every morning"
+    },
+    "ingredientsInci": "Zinc Oxide, Aqua, Caprylic/Capric Triglyceride, Glycerin, Iron Oxides, Titanium Dioxide, Cetearyl Alcohol, Polyhydroxystearic Acid, Tocopherol, Phenoxyethanol.",
+    "new": true
+  },
+  {
+    "id": "terra-tint-mineral-spf-50",
+    "slug": "terra-tint-mineral-spf-50",
+    "name": "Terra Tint Mineral SPF 50",
+    "tagline": "A deeper-shade tinted mineral SPF.",
+    "description": "A tinted mineral sunscreen with zinc oxide, iron oxides and niacinamide in a deeper, warmer shade. Illustrative demo formula, not a tested retail sunscreen. The tint may not suit every skin tone.",
+    "step": "protect",
+    "subtype": "tinted-spf",
+    "price": 34,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "tube",
+      "color": "ink"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "suitable",
+      "dry": "neutral",
+      "combination": "suitable"
+    },
+    "targets": [
+      {
+        "concern": "age_spot",
+        "strength": 2
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "zinc-oxide"
+      },
+      {
+        "id": "iron-oxides"
+      },
+      {
+        "id": "niacinamide",
+        "percent": 3
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true,
+      "mineralSpf": true,
+      "tinted": true
+    },
+    "spf": 50,
+    "safety": [],
+    "usage": {
+      "when": "am",
+      "howTo": "Apply two finger-lengths evenly over the face and blend. Reapply every two hours outdoors.",
+      "frequency": "Every morning"
+    },
+    "ingredientsInci": "Zinc Oxide, Aqua, Caprylic/Capric Triglyceride, Iron Oxides, Niacinamide, Glycerin, Cetearyl Alcohol, Polyhydroxystearic Acid, Tocopherol, Phenoxyethanol."
+  },
+  {
+    "id": "veil-tint-hybrid-spf-35",
+    "slug": "veil-tint-hybrid-spf-35",
+    "name": "Veil Tint Hybrid SPF 35",
+    "tagline": "A light tinted hybrid sunscreen.",
+    "description": "A tinted hybrid sunscreen with chemical UV filters and iron oxides in a sheer, adaptable shade. Illustrative demo formula, not a tested retail sunscreen. The tint may not suit every skin tone.",
+    "step": "protect",
+    "subtype": "tinted-spf",
+    "price": 30,
+    "currency": "USD",
+    "size": "50 ml",
+    "image": {
+      "kind": "svg",
+      "shape": "pump",
+      "color": "lilac"
+    },
+    "skinTypes": {
+      "normal": "suitable",
+      "oily": "neutral",
+      "dry": "suitable",
+      "combination": "neutral"
+    },
+    "targets": [
+      {
+        "concern": "age_spot",
+        "strength": 2
+      },
+      {
+        "concern": "wrinkle",
+        "strength": 1
+      }
+    ],
+    "actives": [
+      {
+        "id": "uv-filters"
+      },
+      {
+        "id": "iron-oxides"
+      },
+      {
+        "id": "glycerin"
+      }
+    ],
+    "flags": {
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "alcoholFree": true,
+      "tinted": true
+    },
+    "spf": 35,
+    "safety": [],
+    "usage": {
+      "when": "am",
+      "howTo": "Pump twice into your palm and spread over the face. Reapply every two hours outdoors.",
+      "frequency": "Every morning"
+    },
+    "ingredientsInci": "Aqua, Ethylhexyl Salicylate, Homosalate, Butyl Methoxydibenzoylmethane, Glycerin, Iron Oxides, Cetearyl Alcohol, Dimethicone, Phenoxyethanol."
+  }
+]
