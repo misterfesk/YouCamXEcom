@@ -37,12 +37,14 @@ export const WEIGHTS = {
   /** Goal weight for products targeting one of the user's top three goals. */
   focusGoal: 1,
   otherGoal: 0.4,
-  /** Points per unit of severity(0–1) × strength(1–3) × goal weight. */
-  concernScale: 24,
+  /** Points per unit of relative severity (0–1) × strength (1–3) × goal weight. */
+  concernScale: 20,
+  /** Cap on all concern points together, so multi-target products don't flood the top. */
+  concernCap: 65,
   skinTypeSuitable: 10,
   /** Fitzpatrick I–II, SPF 50+ / below 50. */
   spfBurnProne: 30,
-  spfBurnProneLow: 18,
+  spfBurnProneLow: 10,
   /** Fitzpatrick III–VI: any SPF, plus tint (visible light), plus gentle tone actives. */
   spfDeeperTone: 26,
   tintDeeperTone: 8,
@@ -52,7 +54,7 @@ export const WEIGHTS = {
 } as const;
 
 /** Fit score bands for the badge, after caution gates. */
-export const FIT_BANDS = { great: 70, good: 40 } as const;
+export const FIT_BANDS = { great: 70, good: 45 } as const;
 
 export interface RuleContext {
   product: Product;

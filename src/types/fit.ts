@@ -11,8 +11,18 @@ export const FIT_LEVEL_LABEL: Record<FitLevel, string> = {
   avoid: "Not for your skin",
 };
 
+/** One explained contribution to a fit: a plus, or a caution that gated the badge. */
+export interface FitReason {
+  tone: "plus" | "caution";
+  text: string;
+}
+
 export interface Fit {
   level: FitLevel;
-  /** One-line reason from the top score contributor, e.g. "Targets your T-zone oil (Moderate)". */
+  /** One-line reason from the top score contributor, e.g. "Picked for your oil (Moderate)". */
   reason: string;
+  /** 0–100 fit score, absent in hand-made fixtures. */
+  score?: number;
+  /** Full reasoning for "Why this fits you", cautions first. */
+  reasons?: FitReason[];
 }

@@ -11,7 +11,7 @@ import {
   type ZoneSkinType,
 } from "@/types/skin";
 
-/** One entry of YouCam Skin Analysis `data.results.output` (concern, skin_type zone, all, skin_age…). */
+/** One entry of YouCam Skin Analysis `data.results.output` (concern, skin_type zone, all, skin_ageâ€¦). */
 export interface SkinAnalysisOutput {
   type: string;
   raw_score?: number;
