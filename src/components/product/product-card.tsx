@@ -1,0 +1,62 @@
+"use client";
+import Link from "next/link";
+import { motion } from "motion/react";
+import { STEPS, STEP_LABEL, type Product } from "@/types/catalog";
+import type { Fit } from "@/types/fit";
+import { FitBadge } from "@/components/ui/fit-badge";
+import { Button } from "@/components/ui/button";
+import { Packshot } from "./packshot";
+export type ProductCardProps = {
+  product: Product;
+  fit?: Fit;
+  onAddToBag?: (productId: string) => void;
+};
+export function ProductCard({ product, fit, onAddToBag }: ProductCardProps) {
+  return (
+    <article className="product-card" data-unsuitable={fit?.level === "avoid"}>
+      <Link href={`/products/${product.slug}`} className="product-card-link">
+        <div className={`product-well well-${product.step}`}>
+          {fit && (
+            <motion.div
+              className="product-badge"
+              key={fit.level}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <FitBadge fit={fit} />
+            </motion.div>
+          )}
+          <Packshot
+            {...product.image}
+            label={STEP_LABEL[product.step].toUpperCase()}
+            step={`0${STEPS.indexOf(product.step) + 1}`}
+          />
+          {product.new && <span className="product-new type-label">New</span>}
+        </div>
+        <div className="product-body">
+          <p className="type-label text-text-muted">
+            {STEP_LABEL[product.step]} · {product.size}
+          </p>
+          <h3 className="font-bold mt-2">{product.name}</h3>
+          <p className="type-small text-text-muted mt-2">{product.tagline}</p>
+          <p className="type-price mt-3">${product.price.toFixed(2)}</p>
+          {fit && (
+            <p className="type-small text-text-muted mt-3">{fit.reason}</p>
+          )}
+        </div>
+      </Link>
+      {onAddToBag && (
+        <div className="product-action">
+          <Button
+            variant="secondary"
+            className="w-full"
+            aria-label={`Add ${product.name} to bag`}
+            onClick={() => onAddToBag(product.id)}
+          >
+            Add to bag <span aria-hidden="true">+</span>
+          </Button>
+        </div>
+      )}
+    </article>
+  );
+}

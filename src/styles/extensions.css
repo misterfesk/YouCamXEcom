@@ -40,3 +40,10 @@
 @utility control-outline {
   border-width: var(--border-width-strong);
 }
+
+/* Storefront artwork geometry, separate from component styling. */
+@theme static {
+  --size-product-rail: 280px;
+  --size-packshot: 240px;
+  --size-scan-orbit: 144px;
+}

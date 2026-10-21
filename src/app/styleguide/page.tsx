@@ -1,4 +1,4 @@
-import { FrontendSpecimens } from "@/components/views/frontend-specimens";
+import { StorefrontPreview } from "./storefront-preview";
 import type { Metadata } from "next";
 import { StyleguideView } from "@/components/views/styleguide-view";
 import {
@@ -16,15 +16,15 @@ export const metadata: Metadata = {
 export default function StyleguidePage() {
   return (
     <>
-    <StyleguideView
-      colors={colorSpecimens}
-      spaces={spaceSpecimens}
-      radii={radiusSpecimens}
-      products={productSpecimens}
-      samples={sampleSpecimens}
-      fits={fitExamples}
-    />
-    <FrontendSpecimens />
+      <StyleguideView
+        colors={colorSpecimens}
+        spaces={spaceSpecimens}
+        radii={radiusSpecimens}
+        products={productSpecimens}
+        samples={sampleSpecimens}
+        fits={fitExamples}
+      />
+      <StorefrontPreview />
     </>
   );
 }

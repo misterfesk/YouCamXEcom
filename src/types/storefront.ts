@@ -7,3 +7,8 @@ export type ProfileSummary = {
   label: string;
 };
 export type ScanSource = "header" | "mobile" | "hero" | "grid" | "results";
+
+export type ProductListing = {
+  product: import("./catalog").Product;
+  fit?: import("./fit").Fit;
+};
