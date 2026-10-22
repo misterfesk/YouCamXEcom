@@ -315,9 +315,9 @@ describe("store", () => {
 describe("helpers", () => {
   it("reads defaults and overrides from env", () => {
     expect(limitsFromEnv({})).toEqual({
-      capPerIp: 3,
-      capGlobal: 20,
-      reserveFloor: 425,
+      capPerIp: 1,
+      capGlobal: 1,
+      reserveFloor: 494,
       reserveReleaseAt: Date.parse("2026-11-02T16:45:00Z"),
     });
     expect(
@@ -327,7 +327,7 @@ describe("helpers", () => {
         CREDIT_RESERVE_FLOOR: "0",
         RESERVE_RELEASE_AT: "2026-12-01T00:00:00Z",
       }),
-    ).toEqual({ capPerIp: 5, capGlobal: 20, reserveFloor: 0, reserveReleaseAt: Date.parse("2026-12-01T00:00:00Z") });
+    ).toEqual({ capPerIp: 5, capGlobal: 1, reserveFloor: 0, reserveReleaseAt: Date.parse("2026-12-01T00:00:00Z") });
     expect(limitsFromEnv({ RESERVE_RELEASE_AT: "garbage" }).reserveReleaseAt).toBe(Date.parse("2026-11-02T16:45:00Z"));
   });
 

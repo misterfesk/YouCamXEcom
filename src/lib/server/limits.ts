@@ -31,9 +31,9 @@ function timeFromEnv(value: string | undefined): number {
 
 export function limitsFromEnv(env: Record<string, string | undefined> = process.env): LimitsConfig {
   return {
-    capPerIp: intFromEnv(env.SCAN_CAP_PER_IP, 3),
-    capGlobal: intFromEnv(env.SCAN_CAP_GLOBAL, 20),
-    reserveFloor: intFromEnv(env.CREDIT_RESERVE_FLOOR, 425),
+    capPerIp: intFromEnv(env.SCAN_CAP_PER_IP, 1),
+    capGlobal: intFromEnv(env.SCAN_CAP_GLOBAL, 1),
+    reserveFloor: intFromEnv(env.CREDIT_RESERVE_FLOOR, 494),
     reserveReleaseAt: timeFromEnv(env.RESERVE_RELEASE_AT),
   };
 }
