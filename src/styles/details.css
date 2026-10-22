@@ -15,6 +15,24 @@
   display: grid;
   gap: var(--spacing-8);
 }
+.detail-content .fit-reasons {
+  display: grid;
+  gap: var(--spacing-3);
+  list-style: none;
+  padding-left: 0;
+}
+.fit-reasons li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+.fit-reasons li > span:first-child {
+  flex-shrink: 0;
+  color: var(--color-brand);
+}
+.fit-reasons li[data-tone="caution"] > span:first-child {
+  color: var(--color-warning);
+}
 .pdp-art {
   background: var(--color-lilac-tint);
   border-radius: var(--radius-hero);
