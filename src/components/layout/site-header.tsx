@@ -152,7 +152,7 @@ export function SiteHeader({
             >
               <Icon name="bag" />
               {bagCount > 0 && (
-                <span className="bag-count type-badge">{bagCount}</span>
+                <span key={bagCount} className="bag-count type-badge">{bagCount}</span>
               )}
             </Link>
           </div>

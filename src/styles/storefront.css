@@ -42,6 +42,7 @@
   position: relative;
 }
 .bag-count {
+  animation: fade-in var(--motion-duration-ui) var(--motion-easing);
   position: absolute;
   top: calc(-1 * var(--spacing-1));
   right: calc(-1 * var(--spacing-1));
