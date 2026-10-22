@@ -129,3 +129,10 @@ body:has(.product-page) .mobile-fab {
   align-items: center;
   width: fit-content;
 }
+.flagged-note {
+  padding: var(--spacing-4);
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  display: grid;
+  gap: var(--spacing-2);
+}

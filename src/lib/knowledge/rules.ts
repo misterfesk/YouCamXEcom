@@ -69,6 +69,8 @@ export interface CautionRule {
   level: "avoid" | "care";
   applies: (ctx: RuleContext) => boolean;
   reason: (ctx: RuleContext) => string;
+  /** Short badge text for this caution. */
+  tag: string;
   source: SourceId[];
 }
 
@@ -82,6 +84,7 @@ const atLeast = (band: Band, min: Band) =>
 export const CAUTION_RULES: CautionRule[] = [
   {
     id: "sensitive-strong-actives",
+    tag: "Not for your skin",
     level: "avoid",
     applies: ({ product, profile, tags }) =>
       profile.sensitive &&
@@ -92,6 +95,7 @@ export const CAUTION_RULES: CautionRule[] = [
   },
   {
     id: "skin-type-avoid",
+    tag: "Not for your skin",
     level: "avoid",
     applies: ({ product, profile }) => product.skinTypes[profile.skinType.whole.type] === "avoid",
     reason: ({ profile }) =>
@@ -102,6 +106,7 @@ export const CAUTION_RULES: CautionRule[] = [
   },
   {
     id: "fragrance-sensitive",
+    tag: "Has fragrance",
     level: "care",
     applies: ({ product, profile }) => profile.sensitive && !product.flags.fragranceFree,
     reason: () => "Contains fragrance; patch test first on skin that shows redness",
@@ -109,6 +114,7 @@ export const CAUTION_RULES: CautionRule[] = [
   },
   {
     id: "deeper-tone-strong-exfoliant",
+    tag: "Start slowly",
     level: "care",
     applies: ({ product, profile, tags }) =>
       DEEPER_TONES.includes(profile.fitzpatrick) &&
@@ -119,6 +125,7 @@ export const CAUTION_RULES: CautionRule[] = [
   },
   {
     id: "comedogenic-acne",
+    tag: "May clog pores",
     level: "care",
     applies: ({ product, bandOf }) =>
       !product.flags.nonComedogenic && atLeast(bandOf("acne"), "moderate"),
@@ -127,6 +134,7 @@ export const CAUTION_RULES: CautionRule[] = [
   },
   {
     id: "drying-dehydrated",
+    tag: "Can be drying",
     level: "care",
     applies: ({ tags, bandOf }) => tags.has("drying") && bandOf("moisture") === "noticeable",
     reason: () => "Can feel drying; follow with a moisturizer",

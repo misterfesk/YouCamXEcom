@@ -63,6 +63,17 @@ describe("fit for each sample face", () => {
     }
   });
 
+  it("tags every fit with a short reason, and flagged ones by their caution", () => {
+    for (const face of SAMPLE_FACES) {
+      for (const fit of Object.values(setup(face).fits)) {
+        expect(fit.tag).toBeTruthy();
+        expect(fit.tag!.split(" ").length).toBeLessThanOrEqual(4);
+        if (fit.level === "avoid") expect(fit.tag).toBe("Not for your skin");
+      }
+    }
+    expect(setup("oily").fits[byName("Level Up Glycolic Toner").id].tag).toBe("Start slowly");
+  });
+
   it("matches the skin-type line on the PDP to the same rule as the badge", () => {
     const { profile } = setup("mature");
     const balm = byName("Barrier Butter Balm");

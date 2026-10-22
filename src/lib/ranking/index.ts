@@ -10,27 +10,46 @@ import {
 } from "@/lib/knowledge/rules";
 import { bandFor } from "@/lib/skin/normalize";
 import type { ActiveTag, Product, Step, Subtype } from "@/types/catalog";
-import { FIT_LEVELS, type Fit, type FitLevel, type FitReason } from "@/types/fit";
+import { FIT_LEVELS, FIT_LEVEL_LABEL, type Fit, type FitLevel, type FitReason } from "@/types/fit";
 import { GOALS, GOAL_DEFS, type GoalId } from "@/types/goal";
-import { BAND_LABEL, SKIN_TYPE_LABEL, type Band, type Concern, type SkinProfile } from "@/types/skin";
+import { SKIN_TYPE_LABEL, type Band, type Concern, type SkinProfile } from "@/types/skin";
 
-/** How a concern reads in a fit reason: "Picked for your {phrase} (Band)". */
+/** How a concern reads in a fit reason: "Picked for the {phrase} in your scan". */
 const CONCERN_PHRASE: Record<Concern, string> = {
   acne: "breakouts",
-  oiliness: "oil",
-  pore: "pores",
+  oiliness: "shine",
+  pore: "visible pores",
   redness: "redness",
-  moisture: "hydration",
-  texture: "texture",
+  moisture: "dryness",
+  texture: "uneven texture",
   age_spot: "dark spots",
-  radiance: "dull-looking tone",
+  radiance: "dullness",
   dark_circle_v2: "dark circles",
   eye_bag: "under-eye puffiness",
   tear_trough: "under-eye hollows",
   wrinkle: "fine lines",
-  firmness: "firmness",
+  firmness: "loss of firmness",
   droopy_upper_eyelid: "eye area",
   droopy_lower_eyelid: "eye area",
+};
+
+/** What a product does for a concern, as card badge text. */
+const CONCERN_TAG: Record<Concern, string> = {
+  acne: "Targets breakouts",
+  oiliness: "Controls shine",
+  pore: "Refines pores",
+  redness: "Calms redness",
+  moisture: "Hydrates",
+  texture: "Smooths texture",
+  age_spot: "For dark spots",
+  radiance: "Boosts glow",
+  dark_circle_v2: "For dark circles",
+  eye_bag: "For puffy eyes",
+  tear_trough: "For under-eyes",
+  wrinkle: "For fine lines",
+  firmness: "For firmness",
+  droopy_upper_eyelid: "For the eye area",
+  droopy_lower_eyelid: "For the eye area",
 };
 
 const GOAL_OF = Object.fromEntries(
@@ -46,7 +65,7 @@ export function activeTags(product: Product): Set<ActiveTag> {
   return new Set(product.actives.flatMap((a) => ACTIVE_BY_ID[a.id]?.tags ?? []));
 }
 
-type Contribution = { points: number; text: string };
+type Contribution = { points: number; text: string; tag: string };
 
 /**
  * Severity read through the concern's own bands so concerns compare fairly:
@@ -75,8 +94,9 @@ export function fitProduct(product: Product, profile: SkinProfile, focus: GoalId
     if (!score || score.band === "mild") continue;
     const weight = focus.includes(goalOf(target.concern)) ? WEIGHTS.focusGoal : WEIGHTS.otherGoal;
     const points = relativeSeverity(score) * target.strength * weight * WEIGHTS.concernScale;
-    const text = `Picked for your ${CONCERN_PHRASE[target.concern]} (${BAND_LABEL[score.band]})`;
-    byText.set(text, { text, points: (byText.get(text)?.points ?? 0) + points });
+    const text = `Picked for the ${CONCERN_PHRASE[target.concern]} in your scan`;
+    const tag = CONCERN_TAG[target.concern];
+    byText.set(text, { text, tag, points: (byText.get(text)?.points ?? 0) + points });
   }
   // Scale the concern reasons down together when they pass the cap; order is kept.
   const concernTotal = [...byText.values()].reduce((sum, c) => sum + c.points, 0);
@@ -88,6 +108,7 @@ export function fitProduct(product: Product, profile: SkinProfile, focus: GoalId
     contributions.push({
       points: WEIGHTS.skinTypeSuitable,
       text: `Suits ${SKIN_TYPE_LABEL[skinType].toLowerCase()} skin`,
+      tag: `Suits ${SKIN_TYPE_LABEL[skinType].toLowerCase()} skin`,
     });
 
   if (product.step === "protect") {
@@ -98,16 +119,19 @@ export function fitProduct(product: Product, profile: SkinProfile, focus: GoalId
         text: high
           ? "High SPF for skin that burns easily"
           : "Daily SPF; skin that burns easily does best with SPF 50",
+        tag: high ? "High SPF for you" : "Daily SPF",
       });
     } else {
       contributions.push({
         points: WEIGHTS.spfDeeperTone,
         text: "Daily SPF helps prevent lingering dark marks",
+        tag: "Daily SPF",
       });
       if (product.flags.tinted || tags.has("visible-light"))
         contributions.push({
           points: WEIGHTS.tintDeeperTone,
           text: "Tint adds visible-light protection for dark marks",
+          tag: "Tinted SPF",
         });
     }
   }
@@ -117,12 +141,14 @@ export function fitProduct(product: Product, profile: SkinProfile, focus: GoalId
     contributions.push({
       points: WEIGHTS.toneActiveDeeperTone,
       text: "A gentle tone-evening active suited to deeper skin tones",
+      tag: "Evens tone gently",
     });
 
   if (profile.sensitive && (tags.has("soothing") || tags.has("barrier")))
     contributions.push({
       points: WEIGHTS.soothingSensitive,
       text: "Soothing, barrier-friendly ingredients for skin that shows redness",
+      tag: "Soothing",
     });
 
   contributions.sort((a, b) => b.points - a.points);
@@ -145,7 +171,8 @@ export function fitProduct(product: Product, profile: SkinProfile, focus: GoalId
   const reason = gate
     ? gate.reason(ctx)
     : (contributions[0]?.text ?? "An everyday option for your routine");
-  return { level, reason, score, reasons };
+  const tag = gate ? gate.tag : (contributions[0]?.tag ?? FIT_LEVEL_LABEL.everyday);
+  return { level, reason, tag, score, reasons };
 }
 
 export type FitMap = Record<string, Fit>;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { uiTransition } from "@/styles/motion";
 import { motion } from "motion/react";
 import { STEPS, STEP_LABEL, type Product } from "@/types/catalog";
-import type { Fit } from "@/types/fit";
+import { FIT_LEVEL_LABEL, type Fit } from "@/types/fit";
 import { FitBadge } from "@/components/ui/fit-badge";
 import { Button } from "@/components/ui/button";
 import { Packshot } from "./packshot";
@@ -13,6 +13,12 @@ export type ProductCardProps = {
   onAddToBag?: (productId: string) => void;
 };
 export function ProductCard({ product, fit, onAddToBag }: ProductCardProps) {
+  // The badge names the reason; the card line names the match level, or the caution in full.
+  const note =
+    fit &&
+    (fit.level === "care" || fit.level === "avoid"
+      ? fit.reason
+      : FIT_LEVEL_LABEL[fit.level]);
   return (
     <article className="product-card" data-unsuitable={fit?.level === "avoid"}>
       <Link href={`/products/${product.slug}`} className="product-card-link">
@@ -42,8 +48,8 @@ export function ProductCard({ product, fit, onAddToBag }: ProductCardProps) {
           <h3 className="font-bold mt-2">{product.name}</h3>
           <p className="type-small text-text-muted mt-2">{product.tagline}</p>
           <p className="type-price mt-3">${product.price.toFixed(2)}</p>
-          {fit && (
-            <p className="type-small text-text-muted mt-3">{fit.reason}</p>
+          {note && note !== fit?.tag && (
+            <p className="type-small text-text-muted mt-3">{note}</p>
           )}
         </div>
       </Link>

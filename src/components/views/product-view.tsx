@@ -11,6 +11,7 @@ import { FitBadge } from "@/components/ui/fit-badge";
 import { Packshot } from "@/components/product/packshot";
 import { ProductRail } from "@/components/product/product-grid";
 import { GOAL_DEFS } from "@/types/goal";
+import { GOAL_FINDING } from "@/components/scan/scan-copy";
 export type ProductViewProps = ProductListing & {
   profile?: ProfileSummary;
   pairs: ProductListing[];
@@ -18,6 +19,26 @@ export type ProductViewProps = ProductListing & {
   onAddToBag: (id: string) => void;
   onStartScan: () => void;
 };
+/** One general note for flagged products: why we flag, and why buying one can still be right. */
+function FlaggedNote({ level }: { level: "care" | "avoid" }) {
+  return (
+    <div className="flagged-note">
+      <p className="font-bold">
+        {level === "avoid"
+          ? "Why we flag some products"
+          : "Why we suggest care"}
+      </p>
+      <p>
+        Your scan suggests this formula may be too rich, too drying or too
+        strong for your skin right now, so it could lead to breakouts or
+        irritation. It can still be the right buy: a gift, a product your
+        dermatologist recommended, or one you already use happily. If so,
+        follow their advice, and patch test before using anything new on your
+        face.
+      </p>
+    </div>
+  );
+}
 export function ProductDetails({
   product,
   fit,
@@ -27,7 +48,11 @@ export function ProductDetails({
     <div className="detail-stack">
       {fit && (
         <details open={fit.level === "avoid" || fit.level === "care"}>
-          <summary>Why this fits you</summary>
+          <summary>
+            {fit.level === "avoid" || fit.level === "care"
+              ? "Why it’s flagged for you"
+              : "Why it suits you"}
+          </summary>
           <div className="detail-content">
             {fit.reasons?.length ? (
               <ul className="fit-reasons">
@@ -44,6 +69,9 @@ export function ProductDetails({
             ) : (
               <p>{fit.reason}</p>
             )}
+            {(fit.level === "avoid" || fit.level === "care") && (
+              <FlaggedNote level={fit.level} />
+            )}
             {profile && (
               <ul>
                 {profile.goals
@@ -53,8 +81,8 @@ export function ProductDetails({
                   )
                   .map((g) => (
                     <li key={g.goal}>
-                      Your focus · {GOAL_DEFS[g.goal].title}: {BAND_LABEL[g.band]} ·{" "}
-                      {Math.round(g.severity)}/100
+                      In your scan: {GOAL_FINDING[g.goal].name.toLowerCase()} ·{" "}
+                      {BAND_LABEL[g.band].toLowerCase()}
                     </li>
                   ))}
               </ul>
@@ -67,15 +95,15 @@ export function ProductDetails({
               How we recommend
             </Link>
             <p className="type-small text-text-muted">
-              Fit guidance from your skin scan. A match is not a guarantee of
-              results.
+              Based on your skin scan. A match is a good starting point, not a
+              promise of results.
             </p>
           </div>
         </details>
       )}
       {product.safety.length > 0 && (
         <aside className="safety-note">
-          <h2 className="type-h3">A little care first</h2>
+          <h2 className="type-h3">Before you start</h2>
           {product.safety.includes("strongActives") && (
             <p>
               Patch test first and introduce this active slowly. Keep daily sun
@@ -192,8 +220,8 @@ export function ProductView({
                 <p>Does this suit my skin?</p>
                 {profile ? (
                   <p className="type-small">
-                    Recommendations are off. Turn them on in your skin menu to
-                    see your match.
+                    Your matches are switched off. Turn them back on from Skin
+                    in the menu to see how this fits you.
                   </p>
                 ) : (
                   <ScanButton onClick={onStartScan}>
@@ -208,7 +236,7 @@ export function ProductView({
             <p role="status" className="type-small text-text-muted">
               {quantity > 0
                 ? `${quantity} in your bag`
-                : "Demo collection. No payment will be taken."}
+                : "Demo store: nothing is charged or shipped."}
             </p>
             <p>{product.description}</p>
             <ProductDetails product={product} fit={fit} profile={profile} />
@@ -216,12 +244,12 @@ export function ProductView({
         </div>
         <section className="section">
           <h2 className="type-h2 mb-3">
-            {fit ? "Pairs well for your skin" : "Build around this step"}
+            {fit ? "Pairs well for your skin" : "Pairs well with this"}
           </h2>
           <p className="mb-6 text-text-muted">
             {fit
-              ? "Complementary steps with your sample skin profile in mind."
-              : "A few other steps to explore at your own pace."}
+              ? "Other routine steps that suit your scan."
+              : "Other routine steps that go with it."}
           </p>
           <ProductRail
             items={pairs}
