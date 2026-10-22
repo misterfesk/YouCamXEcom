@@ -265,3 +265,15 @@
   border-radius: var(--radius-panel);
   max-width: var(--container-modal);
 }
+.scan-policy-link {
+  position: relative;
+  display: inline-block;
+}
+.scan-policy-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: var(--size-icon-button);
+  transform: translateY(-50%);
+}

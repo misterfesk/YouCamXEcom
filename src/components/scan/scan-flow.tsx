@@ -191,7 +191,7 @@ export function ScanFlow(props: ScanFlowProps) {
           <p className="type-small text-text-muted">
             Powered by YouCam AI Skin Analysis from Perfect Corp. Your photo is
             analyzed under their{" "}
-            <a href={YOUCAM_PRIVACY_POLICY_URL} target="_blank" rel="noopener noreferrer" className="underline">
+            <a href={YOUCAM_PRIVACY_POLICY_URL} target="_blank" rel="noopener noreferrer" className="scan-policy-link underline">
               privacy policy
             </a>{" "}
             for this scan only. We never save it. Results are skincare guidance,
