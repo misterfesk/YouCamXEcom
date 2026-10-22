@@ -13,8 +13,8 @@ Live demo: [LIVE_URL]
 1. Open the scan dialog and choose **Try with a sample face**. No account, personal photo or live credits are needed.
 2. Choose **Breakouts & oil**, inspect the reveal and tap a different goal to change its concern overlay.
 3. Continue to **For you**. Watch the catalog reorder, inspect fit badges and open a product.
-4. Expand **Why this fits you**, add it to the bag and continue to demo checkout.
-5. Enter a first name/email, acknowledge the demo and place a demo order. No payment is collected.
+4. Expand **Why it suits you**, add it to the bag and continue to demo checkout.
+5. Optionally enter a first name/email, acknowledge the demo and place a demo order. No payment is collected.
 6. Use the profile menu to turn recommendations off, reopen the results or delete browser results.
 
 Sample faces replay recorded YouCam results. They remain available when live scanning is paused, so repeated judging and testing should use samples. A real camera check still needs a supported device; camera access requires HTTPS or localhost.
