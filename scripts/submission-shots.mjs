@@ -12,6 +12,14 @@ const browser = await chromium.launch();
 async function settle(page) {
   await page.evaluate(async () => {
     await document.fonts.ready;
+    // Lazy images scrolled into view may still be loading.
+    const visible = Array.from(document.images).filter((image) => {
+      const box = image.getBoundingClientRect();
+      return box.bottom > 0 && box.top < window.innerHeight && box.width > 0;
+    });
+    await Promise.all(visible.map((image) => image.complete
+      ? image.decode().catch(() => {})
+      : new Promise((resolve) => { image.addEventListener("load", resolve, { once: true }); image.addEventListener("error", resolve, { once: true }); })));
     await Promise.all(document.getAnimations().filter((animation) =>
       animation.effect?.getComputedTiming().iterations !== Infinity,
     ).map((animation) => animation.finished.catch(() => {})));
@@ -43,7 +51,7 @@ try {
     await capture("scan-reveal");
     await page.locator(".goal-results").evaluate((element) => element.scrollIntoView({ block: "center" }));
     await capture("scan-goals");
-    await page.getByRole("button", { name: "✦ Continue with recommendations", exact: true }).click();
+    await page.getByRole("button", { name: "✦ See my matches", exact: true }).click();
     await page.waitForURL("**/shop");
     const forYou = page.getByRole("button", { name: "For you", exact: true });
     await forYou.waitFor();
@@ -57,12 +65,14 @@ try {
     await page.locator(".catalog-view-switch").evaluate((element) => element.scrollIntoView({ block: "start" }));
     await capture("catalog-for-you");
     await catalogCards.first().evaluate((element) => (element.closest("section") ?? element).scrollIntoView({ block: "start" }));
-    await page.evaluate(() => window.scrollBy(0, -16));
+    // Keep the section heading clear of the sticky header.
+    await page.evaluate(() => window.scrollBy(0, -(document.querySelector(".site-header")?.offsetHeight ?? 0) - 16));
+    await page.waitForTimeout(1000);
     await capture("catalog-matches");
     await catalogCards.first().click();
     await page.locator(".pdp-fit .fit-badge").waitFor();
     await capture("product");
-    const why = page.getByText("Why this fits you", { exact: true });
+    const why = page.getByText("Why it suits you", { exact: true });
     if (!(await why.evaluate((element) => element.parentElement.open))) await why.click();
     if (width === 1440) {
       await page.setViewportSize({ width, height: 1400 });
