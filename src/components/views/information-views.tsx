@@ -93,9 +93,9 @@ export function MethodView({ sources }: { sources: MethodSource[] }) {
             keyed by a salted visitor hash and photo hash, without the photo
             or mask URLs. Deleting browser results does not clear that temporary
             server cache.{" "}
-            <a href={YOUCAM_PRIVACY_POLICY_URL} target="_blank" rel="noopener noreferrer" className="text-brand underline">
-              YouCam processes the uploaded photo under its own terms
-            </a>.
+            <a href={YOUCAM_PRIVACY_POLICY_URL} target="_blank" rel="noopener noreferrer" className="text-brand underline inline-flex min-h-icon-button items-center">
+              YouCam processes the uploaded photo under its own terms.
+            </a>
           </p>
           <h2 className="type-h2">Research & sources</h2>
           <p>
