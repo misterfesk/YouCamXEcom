@@ -11,7 +11,7 @@ import {
 } from "@/fixtures/ui/styleguide";
 import { fitExamples } from "@/fixtures/ui/fit";
 export const metadata: Metadata = {
-  title: "Design system | [BRAND]",
+  title: "Design system",
   robots: { index: false, follow: false },
 };
 export default function StyleguidePage() {

@@ -47,7 +47,8 @@ export function HomeHero({
             width={1536}
             height={1024}
             sizes={editorialImageSizes.campaign}
-            preload
+            loading="eager"
+            fetchPriority="high"
           />
           <p className="hero-image-caption type-small">
             Different skin. The same care in getting to know it.

@@ -86,4 +86,12 @@ test("key routes and personalized cards pass axe WCAG AA checks", async ({ page 
   await expect(page.locator('.product-card[data-unsuitable="true"]:visible').first()).toBeVisible();
   const personalized = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
   expect(personalized.violations, JSON.stringify(personalized.violations, null, 2)).toEqual([]);
+  await page.locator(".product-card-link:visible").first().click();
+  await expect(page.locator(".pdp-fit .fit-badge")).toBeVisible();
+  const detail = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
+  expect(detail.violations, JSON.stringify(detail.violations, null, 2)).toEqual([]);
+  await page.getByRole("button", { name: /^Add to bag/ }).first().click();
+  await page.getByRole("link", { name: "Bag, 1 item", exact: true }).click();
+  const bag = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
+  expect(bag.violations, JSON.stringify(bag.violations, null, 2)).toEqual([]);
 });

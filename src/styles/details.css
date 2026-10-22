@@ -6,6 +6,7 @@
 }
 .breadcrumbs a {
   min-height: var(--size-icon-button);
+  min-width: var(--size-icon-button);
   display: inline-flex;
   align-items: center;
   text-decoration: underline;

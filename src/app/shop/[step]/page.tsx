@@ -3,12 +3,13 @@ import { notFound } from "next/navigation";
 import { CatalogPage } from "@/app/_store/catalog-page";
 import { RouteFallback } from "@/app/route-fallback";
 import { STEPS, STEP_LABEL, type Step } from "@/types/catalog";
+import { pageMetadata } from "@/lib/site-metadata";
 export function generateStaticParams() {
   return STEPS.map((step) => ({ step }));
 }
 export async function generateMetadata({ params }: PageProps<"/shop/[step]">) {
   const { step } = await params;
-  return { title: `${STEP_LABEL[step as Step] ?? "Shop"} | [BRAND]` };
+  return pageMetadata(STEP_LABEL[step as Step] ?? "Shop", `/shop/${step}`);
 }
 export default function StepPage({ params }: PageProps<"/shop/[step]">) {
   return (

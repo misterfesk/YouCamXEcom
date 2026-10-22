@@ -1,4 +1,5 @@
 "use client";
+import { BRAND_NAME } from "@/config/site";
 import Link from "next/link";
 import { STEPS, STEP_LABEL } from "@/types/catalog";
 import { CONCERN_LABEL, BAND_LABEL } from "@/types/skin";
@@ -157,7 +158,7 @@ export function ProductView({
         <div className="pdp-layout">
           <figure className="pdp-art">
             <span className="type-label">
-              [BRAND] / {STEP_LABEL[product.step]}
+              {BRAND_NAME} / {STEP_LABEL[product.step]}
             </span>
             <Packshot
               shape={product.image.shape}

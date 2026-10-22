@@ -130,6 +130,18 @@
 .method-steps h3 {
   margin-bottom: var(--spacing-3);
 }
+.method-sources {
+  display: grid;
+  gap: var(--spacing-3);
+}
+.method-sources a {
+  display: flex;
+  align-items: center;
+  min-height: var(--size-icon-button);
+}
+.method-sources li > span {
+  display: block;
+}
 .search-results {
   margin-top: var(--spacing-6);
 }

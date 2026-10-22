@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BRAND_NAME } from "@/config/site";
 import { Container } from "@/components/ui/container";
 import { Accent } from "@/components/ui/accent";
 import { STEPS, STEP_LABEL } from "@/types/catalog";
@@ -9,7 +10,7 @@ export function SiteFooter() {
         <div className="footer-grid">
           <div>
             <Link className="type-wordmark wordmark" href="/">
-              [BRAND]
+              {BRAND_NAME}
             </Link>
             <h2 className="type-h2 mt-6">
               A little care.

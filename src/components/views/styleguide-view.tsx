@@ -1,4 +1,5 @@
 "use client";
+import { BRAND_NAME } from "@/config/site";
 import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -145,7 +146,7 @@ export function StyleguideView({
         <Container className="pb-12 pt-4 tablet:pb-16">
           <div className="spec-cover on-brand">
             <div className="flex min-w-0 flex-col items-start gap-6">
-              <Eyebrow>Swiss Cover / [BRAND]</Eyebrow>
+              <Eyebrow>Swiss Cover / {BRAND_NAME}</Eyebrow>
               <h1 className="type-display">
                 A system for
                 <br />
@@ -301,8 +302,8 @@ export function StyleguideView({
               <p className="type-label text-text-muted">
                 Price / 15 · 400 / PDP 700
               </p>
-              <p className="type-price">[PLACEHOLDER]</p>
-              <p className="type-price font-bold text-text">[PLACEHOLDER]</p>
+              <p className="type-price">Demo price · $24.00</p>
+              <p className="type-price font-bold text-text">Demo price · $24.00</p>
             </div>
           </div>
         </Section>
@@ -694,7 +695,7 @@ export function StyleguideView({
                     {product.category}
                   </Eyebrow>
                   <h3 className="type-body font-bold">{product.name}</h3>
-                  <p className="type-price mt-1">[PLACEHOLDER]</p>
+                  <p className="type-price mt-1">Demo price · $24.00</p>
                 </div>
               </motion.article>
             ))}

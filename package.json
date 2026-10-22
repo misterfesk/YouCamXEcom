@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "prebuild": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/validate-catalog.ts",
-    "start": "next start",
+    "start": "node --env-file-if-exists=.env scripts/start.mjs",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",

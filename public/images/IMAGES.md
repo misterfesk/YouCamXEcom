@@ -1,5 +1,9 @@
 # Image sources
 
+## Social image
+
+`/opengraph-image` is drawn in code with locked theme tokens and Archivo 800, with no photograph. Font downloaded from Google Fonts: `https://fonts.googleapis.com/css2?family=Archivo:wght@800&display=swap`; font and SIL Open Font License are in `src/styles/fonts/`. Brand text comes from `src/config/site.ts`.
+
 ## Sample faces
 
 Generated on 2026-10-20 using OpenAI's built-in GPT image generation tool (`image_gen`). The tool does not return a specific model version; no version is inferred. These are synthetic people for scan testing, not customers, testimonials, or treatment outcomes. Source: generated for this project; no third-party source photograph. Use subject to the applicable OpenAI output terms, not a stock-photo license.
@@ -16,7 +20,7 @@ Subject lines:
 - `public/samples/dry.jpg`: Woman, 31, East Asian, light skin (Fitzpatrick II–III). Dry, slightly flaky skin, diffuse redness on cheeks and around the nose, no shine.
 - `public/samples/mature.jpg`: Woman, 54, Latina, medium tan skin (Fitzpatrick IV). Dull, uneven tone, a few sun spots on cheekbones, fine lines at eyes and forehead, mild under-eye bags and dark circles, softer jawline.
 
-Review: all frontal, eyes open, mouths closed, even front light, forehead exposed, no glasses/jewelry/makeup, face fills frame. Oily: visible specular T-zone, pores, active cheek/chin spots and dark marks. Dry: matte textured cheeks, visible flaking and cheek/nose redness. Mature: uneven tone, cheekbone sun spots, forehead/eye lines, mild bags/dark circles and softer jawline. Fitzpatrick categories describe prompt intent; visual inspection cannot establish sun-response type. Actual API scores remain to be validated by the spike.
+Review: all frontal, eyes open, mouths closed, even front light, forehead exposed, no glasses/jewelry/makeup, face fills frame. Oily: visible specular T-zone, pores, active cheek/chin spots and dark marks. Dry: matte textured cheeks, visible flaking and cheek/nose redness. Mature: uneven tone, cheekbone sun spots, forehead/eye lines, mild bags/dark circles and softer jawline. Fitzpatrick categories in prompts describe intent; visual inspection cannot establish sun-response type. Recorded API classifications are IV, II and III respectively; responses are in `fixtures/youcam/`. Sample labels describe concerns because all three recorded analyses report Oily skin.
 
 ## Storefront campaign and concern studies · 2026-10-21
 

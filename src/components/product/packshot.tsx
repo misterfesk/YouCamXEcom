@@ -1,4 +1,5 @@
 import type { PackShape, PackColor } from "@/types/catalog";
+import { BRAND_NAME } from "@/config/site";
 const silhouettes: Record<PackShape, React.ReactNode> = {
   tube: (
     <>
@@ -78,7 +79,7 @@ export function Packshot({
       <g className="pack-body">{silhouettes[shape]}</g>
       <g className="pack-type" textAnchor="middle">
         <text x="120" y={isJar ? 210 : 166} className="pack-logo">
-          [BRAND]
+          {BRAND_NAME}
         </text>
         <text x="120" y={isJar ? 232 : 190} className="pack-label">
           {label}

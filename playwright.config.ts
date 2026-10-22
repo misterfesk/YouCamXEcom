@@ -12,7 +12,7 @@ export default defineConfig({
   webServer: process.env.BASE_URL
     ? undefined
     : {
-        command: "node node_modules/next/dist/bin/next start",
+        command: "node --env-file-if-exists=.env scripts/start.mjs",
         url: baseURL,
         reuseExistingServer: false,
         env: { YOUCAM_MODE: "mock", SCAN_CAP_PER_IP: "1000", SCAN_CAP_GLOBAL: "1000" },

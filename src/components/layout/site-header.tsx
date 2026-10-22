@@ -1,4 +1,5 @@
 "use client";
+import { BRAND_NAME } from "@/config/site";
 import { useState } from "react";
 import Link from "next/link";
 import { STEPS, STEP_LABEL } from "@/types/catalog";
@@ -99,9 +100,9 @@ export function SiteHeader({
           <Link
             href="/"
             className="type-wordmark wordmark"
-            aria-label="[BRAND] home"
+            aria-label={`${BRAND_NAME} home`}
           >
-            [BRAND]
+            {BRAND_NAME}
           </Link>
           <nav className="desktop-nav" aria-label="Main navigation">
             <Menu
@@ -179,7 +180,7 @@ export function SiteHeader({
       <BottomSheet
         open={menuOpen}
         onOpenChange={setMenuOpen}
-        title="Explore [BRAND]"
+        title={`Explore ${BRAND_NAME}`}
         description="Find your next skincare step."
       >
         <nav aria-label="Mobile navigation" className="mobile-menu">

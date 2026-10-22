@@ -5,10 +5,13 @@ import "./globals.css";
 import { StoreShell } from "./_store/store-shell";
 import { archivo, bodoni } from "@/styles/fonts";
 import { ScanController } from "./_store/scan-controller";
+import { BRAND_NAME, SITE_DESCRIPTION } from "@/config/site";
+import { siteOrigin } from "@/lib/site-metadata";
 
 export const metadata: Metadata = {
-  title: "[BRAND]",
-  description: "Skincare that knows your skin.",
+  metadataBase: siteOrigin(),
+  title: { default: `${BRAND_NAME} | Skincare with a reason`, template: `%s | ${BRAND_NAME}` },
+  description: SITE_DESCRIPTION,
 };
 
 async function RuntimeScanController() {

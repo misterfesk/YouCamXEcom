@@ -52,7 +52,7 @@ export function ProductCard({ product, fit, onAddToBag }: ProductCardProps) {
           <Button
             variant="secondary"
             className="w-full"
-            aria-label={`Add ${product.name} to bag`}
+            aria-label={`Add to bag: ${product.name}`}
             onClick={() => onAddToBag(product.id)}
           >
             Add to bag <span aria-hidden="true">+</span>

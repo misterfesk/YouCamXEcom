@@ -27,6 +27,10 @@ export function MethodView({ sources }: { sources: MethodSource[] }) {
                 We group those signals into everyday goals, such as hydration,
                 oil balance and under-eye care.
               </p>
+              <p>
+                Mild, Moderate and Noticeable are provisional demo bands based
+                on three recorded sample faces, not clinical cutoffs.
+              </p>
             </li>
             <li>
               <h3 className="type-h3">Bring your focus to the front</h3>
@@ -70,8 +74,13 @@ export function MethodView({ sources }: { sources: MethodSource[] }) {
           <h2 className="type-h2">A note on your photo</h2>
           <p>
             Your browser resizes the photo and sends it straight to YouCam for
-            this one analysis. We never store it. Only the derived scores are
-            kept, in this browser, until you delete them from the skin menu.
+            this one analysis. Our application never saves your photo; closing
+            the scan discards its browser preview. Derived scores stay in this
+            browser until you delete them from the skin menu. To avoid repeat
+            analysis, our server also caches derived scores for 24 hours,
+            keyed by a salted visitor hash and photo hash, without the photo
+            or mask URLs. Deleting browser results does not clear that temporary
+            server cache. YouCam processes the uploaded photo under its own terms.
           </p>
           <h2 className="type-h2">Research & sources</h2>
           <p>
