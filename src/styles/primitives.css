@@ -111,6 +111,13 @@
   background: transparent;
   border-radius: var(--radius-pill);
 }
+.search-field:has(input:focus-visible) {
+  outline: var(--border-width-focus) solid var(--color-brand);
+  outline-offset: var(--border-width-focus);
+}
+.search-field input:focus-visible {
+  outline: none;
+}
 .search-field input::placeholder {
   color: var(--color-text-muted);
   opacity: 1;
@@ -180,11 +187,13 @@
   background: var(--color-surface);
 }
 @media (min-width: 768px) {
-  .container {
-    padding-inline: var(--size-container-pad);
-  }
   .section {
     padding-block: var(--spacing-16) var(--spacing-20);
+  }
+}
+@media (min-width: 769px) {
+  .container {
+    padding-inline: var(--size-container-pad);
   }
 }
 .dialog-overlay {

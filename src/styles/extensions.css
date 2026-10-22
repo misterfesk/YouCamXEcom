@@ -31,8 +31,15 @@
   --opacity-disabled: 0.4;
   --opacity-avoid: 0.6;
   --z-menu: 40;
+  --z-header: 30;
+  --size-header-height: calc(var(--size-icon-button) + var(--spacing-8));
   --z-overlay: 50;
   --z-dialog: 51;
+}
+@media (min-width: 1024px) {
+  :root {
+    --size-header-height: calc(var(--size-icon-button) + var(--spacing-2) + 2 * var(--spacing-5));
+  }
 }
 @theme inline {
   --font-sans: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;

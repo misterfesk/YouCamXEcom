@@ -139,7 +139,7 @@ export function CheckoutView({
 }
 export function ConfirmationView({ order }: { order?: DemoOrder }) {
   return (
-    <main id="main-content" tabIndex={-1} className="section">
+    <main id="main-content" tabIndex={-1} className="pb-12">
       <Container>
         <div className="confirmation-hero on-brand">
           <p className="type-label">

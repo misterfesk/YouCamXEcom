@@ -11,6 +11,7 @@
 
 :root {
   color-scheme: light;
+  scroll-padding-top: calc(var(--size-header-height) + var(--spacing-4));
 }
 body {
   background: var(--color-bg);

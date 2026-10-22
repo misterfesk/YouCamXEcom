@@ -11,6 +11,10 @@
   transform: translateY(0);
 }
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  flex-shrink: 0;
   background: var(--color-bg);
 }
 .header-inner {
@@ -777,13 +781,13 @@
 .check-control {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: var(--spacing-3);
   min-height: var(--size-icon-button);
   width: fit-content;
   cursor: pointer;
 }
 .check-control input {
+  flex-shrink: 0;
   width: var(--spacing-5);
   height: var(--spacing-5);
   accent-color: var(--color-brand);

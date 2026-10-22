@@ -116,7 +116,7 @@ export function MethodView({ sources }: { sources: MethodSource[] }) {
 }
 export function NotFoundView() {
   return (
-    <main id="main-content" tabIndex={-1} className="section">
+    <main id="main-content" tabIndex={-1} className="pb-12">
       <Container>
         <div className="confirmation-hero on-brand">
           <p className="type-label">404 / Page not found</p>
