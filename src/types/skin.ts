@@ -61,9 +61,9 @@ export const BANDS = ["mild", "moderate", "noticeable"] as const;
 export type Band = (typeof BANDS)[number];
 
 export const BAND_LABEL: Record<Band, string> = {
-  mild: "Mild",
-  moderate: "Moderate",
-  noticeable: "Noticeable",
+  mild: "Slight",
+  moderate: "Visible",
+  noticeable: "Very visible",
 };
 
 export interface ConcernScore {

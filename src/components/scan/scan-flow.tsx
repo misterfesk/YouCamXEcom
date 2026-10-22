@@ -51,8 +51,8 @@ export function SampleFaces({
         </div>
       ))}
       <p className="type-small text-text-muted">
-        AI-generated faces with recorded YouCam results. They are not customers.
-        No personal photo or live scan credits are used.
+        AI-generated faces with their real, recorded YouCam results. No photo
+        of you is needed.
       </p>
     </div>
   );
@@ -163,14 +163,15 @@ export function ScanFlow(props: ScanFlowProps) {
         <>
           <div className="scan-intro-art">
             <FaceMap />
-            <span className="type-label">Your skin. Your starting point.</span>
+            <span className="type-label">One selfie · about 30 seconds</span>
           </div>
           <p className="type-body-lg">
-            A clearer picture of what your skin might need.
+            Find out your skin type and what stands out most, then see the
+            products that suit you first.
           </p>
           <p>
-            Use a front-facing photo in soft, even light. Keep your face relaxed
-            and remove anything covering it.
+            Face the camera in soft, even light, with your hair back and
+            nothing covering your face.
           </p>
           {livePreview && (
             <p className="demo-banner type-small">
@@ -184,11 +185,11 @@ export function ScanFlow(props: ScanFlowProps) {
               checked={consent}
               onChange={(e) => onConsentChange(e.target.checked)}
             />
-            <span>I consent to photo analysis for skincare guidance.</span>
+            <span>I agree to have my photo analyzed for skincare picks.</span>
           </label>
           <p className="type-small text-text-muted">
-            About 30 seconds for a live scan. Photos are held only during the
-            scan, never saved. Guidance, not a medical diagnosis.
+            Your photo is used for this scan only and never saved. Results are
+            skincare guidance, not a medical diagnosis.
           </p>
           <div className="scan-actions">
             <ScanButton
@@ -233,8 +234,8 @@ export function ScanFlow(props: ScanFlowProps) {
             <FaceMap />
           </div>
           <p>
-            Choose a clear photo of one face, straight on, without a beauty
-            filter. Even daylight helps.
+            Pick a clear, front-facing photo of just you, without a beauty
+            filter. Daylight works best.
           </p>
           <label className="upload-label">
             Choose a photo
@@ -249,8 +250,8 @@ export function ScanFlow(props: ScanFlowProps) {
             />
           </label>
           <p className="type-small text-text-muted">
-            JPEG, PNG or WebP · under 15 MB · at least 1080 × 1080. We send a
-            resized copy for analysis and never store it.
+            JPEG, PNG or WebP · under 15 MB · at least 1080 × 1080. Only a
+            resized copy is analyzed, and it is never stored.
           </p>
           <Button variant="secondary" onClick={() => onStepChange("samples")}>
             Use a sample face instead
@@ -276,13 +277,13 @@ export function ScanFlow(props: ScanFlowProps) {
             </div>
           )}
           <p>
-            Whole face in frame? Even light? This is the moment to choose
-            another photo if you need to.
+            Is your whole face in view, in even light? If not, choose another
+            photo for better results.
           </p>
           <p className="type-small text-text-muted">
             {livePreview
               ? "Demo mode: this photo stays in your browser and gets a recorded sample’s results."
-              : "Your photo goes to our analysis partner, YouCam, only for this scan. We keep the scores, never the photo."}
+              : "Your photo goes to our analysis partner, YouCam, for this scan only. We keep the results, never the photo."}
           </p>
           <ScanButton fullWidth onClick={onUsePhoto}>
             ✦ Use this photo
@@ -328,7 +329,7 @@ export function ScanFlow(props: ScanFlowProps) {
             />
           </div>
           <p className="type-label text-brand">
-            {photoSource === "sample" ? "Replaying a recorded sample" : "Analyzing your photo"}
+            {photoSource === "sample" ? "Showing a recorded sample" : "Analyzing your photo"}
           </p>
           <p role="status" aria-live="polite" className="type-h3">
             {ANALYSIS_STEPS[Math.min(analysisStage, 3)]}
@@ -345,8 +346,8 @@ export function ScanFlow(props: ScanFlowProps) {
           </ol>
           <p className="type-small text-text-muted">
             {photoSource === "sample"
-              ? "No live request is made. Your sample’s real YouCam results are already recorded."
-              : "This usually takes a few seconds. Keep this window open."}
+              ? "These are the sample’s real YouCam results, recorded earlier."
+              : "This takes a few seconds. Keep this window open."}
           </p>
         </>
       )}
@@ -365,10 +366,10 @@ export function ScanFlow(props: ScanFlowProps) {
             onNavigate={onClose}
           />
           <ScanButton fullWidth onClick={() => onContinue(true)}>
-            ✦ Continue with recommendations
+            ✦ See my matches
           </ScanButton>
           <Button variant="secondary" onClick={() => onContinue(false)}>
-            Continue without recommendations
+            Browse the full shop
           </Button>
           {revisiting && (
             <ScanButton fullWidth onClick={() => onStepChange("intro")}>
@@ -402,7 +403,7 @@ export function ScanFlow(props: ScanFlowProps) {
           <div className="scan-intro-art">
             <FaceMap />
           </div>
-          <h2 className="type-h2">Good care can start here.</h2>
+          <h2 className="type-h2">Try a sample in the meantime</h2>
           <p>
             {UNAVAILABLE_COPY[unavailableReason]}
           </p>
@@ -410,11 +411,11 @@ export function ScanFlow(props: ScanFlowProps) {
             ✦ Try a sample face
           </ScanButton>
           <Button variant="secondary" onClick={onClose}>
-            Come back later
+            Keep shopping
           </Button>
           <p className="type-small text-text-muted">
-            You can keep shopping without a scan. A sample uses no personal
-            photo.
+            A sample shows the full results and matches, with no photo of you
+            needed.
           </p>
         </>
       )}
@@ -439,8 +440,8 @@ export function ScanModal({
       title={SCAN_TITLES[props.step]}
       description={
         props.step === "reveal"
-          ? "Everyday skincare guidance. Your routine stays your choice."
-          : "A scan is optional. Close at any time to return to your page."
+          ? "Based on your photo. A guide for choosing skincare, not a diagnosis."
+          : "Close at any time to go back to your page."
       }
       onBack={back}
     >

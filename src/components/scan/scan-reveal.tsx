@@ -3,11 +3,11 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { SkinProfile } from "@/types/skin";
-import { SKIN_TYPE_LABEL, BAND_LABEL } from "@/types/skin";
+import { SKIN_TYPE_LABEL, BAND_LABEL, BANDS } from "@/types/skin";
 import type { ProfileSummary } from "@/types/storefront";
 import { GOAL_DEFS, type GoalId } from "@/types/goal";
 import { FaceMap } from "./face-map";
-import { SUN_NOTES } from "./scan-copy";
+import { GOAL_FINDING, SKIN_TYPE_NOTES, SUN_NOTES } from "./scan-copy";
 export function ScanReveal({
   result,
   summary,
@@ -25,9 +25,16 @@ export function ScanReveal({
   const masks = result.concerns.filter(
     (c) => GOAL_DEFS[activeGoal].concerns.includes(c.concern) && c.maskUrl,
   );
-  const balanced = summary.goals.slice(0, 3).every((g) => g.band === "mild");
+  const top = summary.goals.slice(0, 3);
+  const balanced = top.every((g) => g.band === "mild");
+  const skinType = result.skinType.whole.type;
   return (
     <div className="reveal-content">
+      <div>
+        <p className="type-label text-text-muted">Your skin type</p>
+        <h2 className="type-h2 mt-2">{SKIN_TYPE_LABEL[skinType]} skin</h2>
+        <p className="mt-2">{SKIN_TYPE_NOTES[skinType]}</p>
+      </div>
       <div className="scan-photo reveal-photo">
         {photo ? (
           <>
@@ -55,32 +62,24 @@ export function ScanReveal({
         )}
         <span className="photo-caption type-small">
           {photo
-            ? `Area guide · ${GOAL_DEFS[activeGoal].title}`
-            : "Illustrated guide · your photo is no longer kept"}
+            ? `Highlighted: ${GOAL_FINDING[activeGoal].name.toLowerCase()}`
+            : "General area · your photo is no longer kept"}
         </span>
       </div>
-      <p className="type-small text-text-muted">
-        {photo
-          ? "YouCam masks highlight the selected goal. Tap a goal below to change the area."
-          : "This illustration shows the general area for each goal, not a measured map of your face."}
-      </p>
       <div>
-        <p className="type-label text-brand">
-          {SKIN_TYPE_LABEL[result.skinType.whole.type]} skin
-        </p>
-        <h2 className="type-h2 mt-2">
+        <h3 className="type-h3">
+          {balanced ? "Nothing stood out strongly" : "What stood out"}
+        </h3>
+        <p className="type-small text-text-muted mt-1">
           {balanced
-            ? "Your skin looks balanced"
-            : "A little focus goes a long way."}
-        </h2>
-        <p className="type-small text-text-muted mt-3">
-          {balanced
-            ? "Keep it that way with a comfortable everyday routine."
-            : "Your three most pronounced goals lead the shelf. Higher scores mean a more visible concern."}
+            ? "Your skin looks balanced. These were the most visible, and only slightly."
+            : photo
+              ? "Most visible first. Tap one to see where it showed up."
+              : "Most visible first."}
         </p>
       </div>
-      <div className="goal-results" aria-label="Your top skin goals">
-        {summary.goals.slice(0, 3).map((g) => (
+      <div className="goal-results" aria-label="What stood out in your scan">
+        {top.map((g) => (
           <button
             type="button"
             className="goal-result"
@@ -88,41 +87,42 @@ export function ScanReveal({
             aria-pressed={g.goal === activeGoal}
             onClick={() => setActiveGoal(g.goal)}
           >
-            <span>
-              <strong>{GOAL_DEFS[g.goal].title}</strong>
-              <span className="type-small">
-                {BAND_LABEL[g.band]} · {Math.round(g.severity)}/100
+            <span className="goal-result-head">
+              <strong>{GOAL_FINDING[g.goal].name}</strong>
+              <span className="goal-result-level type-small">
+                <span className="level-dots" aria-hidden="true">
+                  {BANDS.map((band, i) => (
+                    <span
+                      key={band}
+                      data-on={i <= BANDS.indexOf(g.band)}
+                    />
+                  ))}
+                </span>
+                {BAND_LABEL[g.band]}
               </span>
             </span>
-            <span
-              className="severity-track"
-              data-band={g.band}
-              aria-hidden="true"
-            >
-              <span style={{ width: `${g.severity}%` }} />
+            <span className="type-small text-text-muted">
+              {GOAL_FINDING[g.goal].seen}
             </span>
           </button>
         ))}
       </div>
-      <aside className="sun-note">
-        <h3 className="type-h3">A note for sunny days</h3>
-        <p>
-          Fitzpatrick {result.fitzpatrick} · {SUN_NOTES[result.fitzpatrick]}
-        </p>
-        <p className="type-small">
-          An image-based estimate, not a test of how your skin responds to sun.
-          Shade and protective clothing matter too.
-        </p>
-      </aside>
+      <p className="reveal-next">
+        {balanced
+          ? "Your shop now opens with easy everyday basics, and flags anything that may not suit your skin."
+          : "Your shop now opens with products for these, and flags anything that may not suit your skin."}
+      </p>
+      <p className="type-small text-text-muted">
+        <strong>Sun tip:</strong> {SUN_NOTES[result.fitzpatrick]}
+      </p>
       {summary.dermatologist && (
-        <p className="safety-note">
-          If breakouts or redness persist or feel uncomfortable, a qualified
-          clinician can help you choose your next steps.
+        <p className="type-small text-text-muted">
+          If breakouts or redness keep coming back or feel sore, a
+          dermatologist can help alongside your routine.
         </p>
       )}
       <p className="type-small text-text-muted">
-        Everyday guidance, not a diagnosis. Product matches follow our
-        published method.
+        Based on one photo, so lighting and angle can shift results.
       </p>
       <Link
         className="scan-method-link text-brand underline"

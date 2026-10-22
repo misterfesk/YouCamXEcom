@@ -48,4 +48,4 @@
   --size-scan-orbit: 144px;
 }
 @theme static { --size-bag-art: 80px; }
-@theme static { --size-sample-thumb: 96px; --size-scan-photo: 320px; }
+@theme static { --size-sample-thumb: 96px; --size-scan-photo: 320px; --size-reveal-photo: 240px; --size-explainer-art: 360px; }
