@@ -21,6 +21,7 @@ import {
 import { FaceMap } from "./face-map";
 import { ScanReveal } from "./scan-reveal";
 import { uiTransition } from "@/styles/motion";
+import { YOUCAM_PRIVACY_POLICY_URL } from "@/config/site";
 export function SampleFaces({
   samples,
   onSelectSample,
@@ -188,8 +189,13 @@ export function ScanFlow(props: ScanFlowProps) {
             <span>I agree to have my photo analyzed for skincare picks.</span>
           </label>
           <p className="type-small text-text-muted">
-            Your photo is used for this scan only and never saved. Results are
-            skincare guidance, not a medical diagnosis.
+            Powered by YouCam AI Skin Analysis from Perfect Corp. Your photo is
+            analyzed under their{" "}
+            <a href={YOUCAM_PRIVACY_POLICY_URL} target="_blank" rel="noopener noreferrer" className="underline">
+              privacy policy
+            </a>{" "}
+            for this scan only. We never save it. Results are skincare guidance,
+            not a medical diagnosis.
           </p>
           <div className="scan-actions">
             <ScanButton

@@ -20,6 +20,9 @@ export function SiteFooter() {
             <p className="text-text-muted mt-4">
               Scan once to see what suits you, or shop the whole collection.
             </p>
+            <Link href="/how-we-recommend#your-photo" className="type-small text-text-muted inline-flex min-h-icon-button items-center mt-2">
+              Skin analysis powered by YouCam
+            </Link>
           </div>
           <nav aria-label="Footer shop">
             <h3 className="type-label mb-3">Shop</h3>

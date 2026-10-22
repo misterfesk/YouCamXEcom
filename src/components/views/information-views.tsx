@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Accent } from "@/components/ui/accent";
+import { YOUCAM_PRIVACY_POLICY_URL } from "@/config/site";
 export type MethodSource = { title: string; publisher: string; url: string };
 export function MethodView({ sources }: { sources: MethodSource[] }) {
   return (
@@ -82,7 +83,7 @@ export function MethodView({ sources }: { sources: MethodSource[] }) {
             results. The products, formulas and prices are a fictional house
             line made to show how matching works. Orders are never placed.
           </p>
-          <h2 className="type-h2">Your photo</h2>
+          <h2 id="your-photo" className="type-h2">Your photo</h2>
           <p>
             Your browser resizes the photo and sends it straight to YouCam for
             this one analysis. Our application never saves your photo; closing
@@ -91,7 +92,10 @@ export function MethodView({ sources }: { sources: MethodSource[] }) {
             analysis, our server also caches derived scores for 24 hours,
             keyed by a salted visitor hash and photo hash, without the photo
             or mask URLs. Deleting browser results does not clear that temporary
-            server cache. YouCam processes the uploaded photo under its own terms.
+            server cache.{" "}
+            <a href={YOUCAM_PRIVACY_POLICY_URL} target="_blank" rel="noopener noreferrer" className="text-brand underline">
+              YouCam processes the uploaded photo under its own terms
+            </a>.
           </p>
           <h2 className="type-h2">Research & sources</h2>
           <p>
