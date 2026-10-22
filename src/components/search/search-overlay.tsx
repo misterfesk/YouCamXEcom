@@ -62,7 +62,7 @@ export function SearchResults({
           </ul>
         ) : (
           <div className="empty-panel">
-            <h2 className="type-h3">A different word might help.</h2>
+            <h2 className="type-h3">No products found.</h2>
             <p>
               Try “hydration”, “serum” or an ingredient such as “niacinamide”.
             </p>
@@ -94,7 +94,7 @@ export function SearchOverlay({
       initialFocus="search"
       open={open}
       onOpenChange={onOpenChange}
-      title="Find your next step"
+      title="Search"
       description="Search by product, ingredient, routine step or concern."
     >
       <SearchInput

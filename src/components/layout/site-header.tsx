@@ -37,7 +37,7 @@ export function ProfileChip({
         data-on={recommendations}
         aria-hidden="true"
       />
-      <span>{recommendations ? profile.label : "Skin results · off"}</span>
+      <span>{recommendations ? profile.label : "Matches · off"}</span>
       <Icon name="chevron-down" />
     </button>
   );
@@ -69,7 +69,7 @@ export function SiteHeader({
   const profileItems: MenuItem[] = [
     {
       id: "toggle",
-      label: `Turn recommendations ${recommendations ? "off" : "on"}`,
+      label: recommendations ? "Hide my matches" : "Show my matches",
       onSelect: onToggleRecommendations,
     },
     {
@@ -181,7 +181,7 @@ export function SiteHeader({
         open={menuOpen}
         onOpenChange={setMenuOpen}
         title={`Explore ${BRAND_NAME}`}
-        description="Find your next skincare step."
+        description="Shop by routine step or skin concern."
       >
         <nav aria-label="Mobile navigation" className="mobile-menu">
           <div>
@@ -225,7 +225,7 @@ export function SiteHeader({
         open={profileOpen}
         onOpenChange={setProfileOpen}
         title="Your skin"
-        description="Your results, your choice. Switch recommendations on or off whenever you like."
+        description="Your scan results stay in this browser only."
       >
         <div className="flex flex-col gap-3">
           {profileItems.map((item) => {

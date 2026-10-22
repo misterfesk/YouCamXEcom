@@ -2,13 +2,13 @@ import Image from "next/image";
 import { editorialImageSizes } from "@/styles/image-sizes";
 import Link from "next/link";
 import { SKIN_TYPE_LABEL } from "@/types/skin";
-import type { CSSProperties } from "react";
 import { Accent } from "@/components/ui/accent";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Button } from "@/components/ui/button";
 import { ScanButton } from "@/components/ui/scan-button";
 import { Icon } from "@/components/icons/icon";
 import { ScanCard } from "@/components/product/scan-card";
+import { GOAL_FINDING } from "@/components/scan/scan-copy";
 import { GOAL_DEFS, type GoalId } from "@/types/goal";
 import { BAND_LABEL } from "@/types/skin";
 import type { ProfileSummary, ScanSource } from "@/types/storefront";
@@ -22,13 +22,14 @@ export function HomeHero({
     <div className="home-hero-wrap">
       <div className="home-hero on-brand">
         <div className="hero-copy">
-          <Eyebrow>Skin first. Everything follows.</Eyebrow>
+          <Eyebrow>Skincare, matched to you</Eyebrow>
           <h1 className="type-display mt-6">
             Skincare that <Accent>knows</Accent> your skin.
           </h1>
           <p className="type-body-lg mt-6">
-            A little understanding changes where you start. Explore your skin,
-            then find a shelf arranged around you.
+            Take a quick selfie scan and the shop puts what your skin needs
+            first, with the reason on every pick. Shopping for someone else, or
+            restocking a favorite? Everything is right here too.
           </p>
           <div className="hero-actions">
             <ScanButton size="lg" onClick={() => onStartScan("hero")} />
@@ -37,7 +38,7 @@ export function HomeHero({
             </Button>
           </div>
           <p className="type-small mt-4">
-            Your scan is optional. Your next step is yours.
+            About 30 seconds. Your photo is never saved.
           </p>
         </div>
         <div className="hero-portrait">
@@ -51,7 +52,7 @@ export function HomeHero({
             fetchPriority="high"
           />
           <p className="hero-image-caption type-small">
-            Different skin. The same care in getting to know it.
+            Made for every skin type and every skin tone.
           </p>
         </div>
         <div className="hero-scan">
@@ -72,15 +73,13 @@ export function ConcernTiles({
     <>
       <div className="section-heading">
         <div>
-          <Eyebrow className="text-text-muted mb-3">
-            Start with what matters to you
-          </Eyebrow>
+          <Eyebrow className="text-text-muted mb-3">Shop by concern</Eyebrow>
           <h2 className="type-h2">
-            A little more <Accent>focus.</Accent>
+            Know what you want to <Accent>work on?</Accent>
           </h2>
         </div>
         <p className="text-text-muted max-w-copy">
-          You know how your skin feels. Choose a concern and explore from there.
+          Go straight to the products made for it. No scan needed.
         </p>
       </div>
       <div className="concern-tiles">
@@ -126,67 +125,35 @@ export function ConcernTiles({
     </>
   );
 }
-export function SampleResultCard({
-  profile,
-  onStartScan,
-}: ScanEntryProps & { profile: ProfileSummary }) {
+/** A friendly selfie being read: phone, face, scan line and the highlighted spots. */
+function ExplainerArt() {
   return (
-    <div className="sample-result">
-      <div className="sample-result-photo">
-        <Image
-          src="/samples/mature.jpg"
-          alt="AI-generated sample face used for recorded under-eye, firmness and oil analysis"
-          width={600}
-          height={600}
-          sizes={editorialImageSizes.sample}
-        />
-        <span className="sample-photo-label type-label">Sample face</span>
-      </div>
-      <div className="sample-result-body">
-        <Eyebrow className="text-text-muted mb-3">
-          A real recorded analysis
-        </Eyebrow>
-        <h3 className="type-h3">Three places to start.</h3>
-        <p className="type-small text-text-muted mt-2 mb-6">
-          {SKIN_TYPE_LABEL[profile.skinType]} skin · YouCam sample results
-        </p>
-        <ol className="severity-list">
-          {profile.goals.slice(0, 3).map((item) => (
-            <li key={item.goal}>
-              <div className="flex justify-between gap-3 mb-2">
-                <span>{GOAL_DEFS[item.goal].title}</span>
-                <span className="type-small text-text-muted">
-                  {BAND_LABEL[item.band]}
-                </span>
-              </div>
-              <div
-                className="severity-track"
-                role="meter"
-                aria-label={GOAL_DEFS[item.goal].title}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-valuenow={item.severity}
-                aria-valuetext={BAND_LABEL[item.band]}
-              >
-                <span
-                  style={{ "--severity": `${item.severity}%` } as CSSProperties}
-                />
-              </div>
-            </li>
-          ))}
-        </ol>
-        <Button
-          variant="secondary"
-          className="mt-6"
-          onClick={() => onStartScan("sample")}
-        >
-          Explore a sample
-        </Button>
-        <p className="type-small text-text-muted mt-4">
-          AI-generated face. Recorded scores, not a treatment result.
-        </p>
-      </div>
-    </div>
+    <svg
+      className="explainer-svg"
+      viewBox="0 0 240 280"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <circle className="art-blob" cx="196" cy="58" r="40" />
+      <circle className="art-blob" cx="34" cy="228" r="28" />
+      <rect className="art-phone" x="48" y="14" width="144" height="252" rx="26" />
+      <rect className="art-screen" x="58" y="34" width="124" height="214" rx="16" />
+      <rect className="art-notch" x="100" y="22" width="40" height="6" rx="3" />
+      <ellipse className="art-face" cx="120" cy="138" rx="40" ry="48" />
+      <path
+        className="art-hair"
+        d="M78 134c-6-46 16-70 42-70s48 24 42 70c-4-20-12-32-24-38-12 10-32 16-60 38Z"
+      />
+      <path className="art-line" d="M100 134q6-6 12 0M128 134q6-6 12 0" />
+      <path className="art-line" d="M110 160q10 9 20 0" />
+      <ellipse className="art-blush" cx="96" cy="152" rx="8" ry="5" />
+      <ellipse className="art-blush" cx="144" cy="152" rx="8" ry="5" />
+      <circle className="art-pin" cx="100" cy="170" r="5" />
+      <circle className="art-pin" cx="141" cy="168" r="4" />
+      <circle className="art-pin" cx="122" cy="178" r="3" />
+      <rect className="art-scan" x="64" y="100" width="112" height="3" rx="1.5" />
+      <path className="art-twinkle" d="M206 120v14m-7-7h14M28 74v10m-5-5h10" />
+    </svg>
   );
 }
 export function ScanExplainer({
@@ -196,38 +163,38 @@ export function ScanExplainer({
   return (
     <div className="scan-explainer">
       <div>
-        <Eyebrow className="text-text-muted mb-3">From selfie to shelf</Eyebrow>
+        <Eyebrow className="text-text-muted mb-3">How it works</Eyebrow>
         <h2 className="type-h2">
-          Less guesswork.
-          <br />A little more <Accent>you.</Accent>
+          From selfie to <Accent>shelf.</Accent>
         </h2>
         <ol className="scan-steps">
           <li>
             <span aria-hidden="true">01</span>
             <div>
-              <h3 className="type-h3">Start with your skin</h3>
+              <h3 className="type-h3">Take a selfie</h3>
               <p className="text-text-muted mt-2">
-                Take a selfie, upload a photo, or try a sample face to explore.
+                Use your camera or upload a photo. Curious first? Try a sample
+                face.
               </p>
             </div>
           </li>
           <li>
             <span aria-hidden="true">02</span>
             <div>
-              <h3 className="type-h3">See what comes into focus</h3>
+              <h3 className="type-h3">See what stands out</h3>
               <p className="text-text-muted mt-2">
-                Your analysis brings hydration, texture and other concerns into
-                view.
+                Learn your skin type and the three things most visible in your
+                photo, in plain words.
               </p>
             </div>
           </li>
           <li>
             <span aria-hidden="true">03</span>
             <div>
-              <h3 className="type-h3">Find your next step</h3>
+              <h3 className="type-h3">Shop your matches</h3>
               <p className="text-text-muted mt-2">
-                Products move around your focus, with a fit badge to explain
-                each match.
+                Products for your skin move to the front, each tagged with why.
+                Anything that may not suit you is clearly marked.
               </p>
             </div>
           </li>
@@ -237,7 +204,35 @@ export function ScanExplainer({
           <Icon name="chevron-right" />
         </Link>
       </div>
-      <SampleResultCard profile={profile} onStartScan={onStartScan} />
+      <div className="explainer-card">
+        <div className="explainer-art">
+          <ExplainerArt />
+          <div className="explainer-bubble">
+            <p className="type-label text-text-muted">Sample result</p>
+            <p className="font-bold mt-1">
+              {SKIN_TYPE_LABEL[profile.skinType]} skin
+            </p>
+            <ul className="mt-2">
+              {profile.goals.slice(0, 3).map((item) => (
+                <li key={item.goal} className="type-small">
+                  {GOAL_FINDING[item.goal].name}
+                  <span className="text-text-muted">
+                    {" "}
+                    · {BAND_LABEL[item.band]}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <Button variant="secondary" onClick={() => onStartScan("sample")}>
+          Try a sample face
+        </Button>
+        <p className="type-small text-text-muted">
+          AI-generated sample faces with real recorded results. No photo of
+          you needed.
+        </p>
+      </div>
     </div>
   );
 }
@@ -245,22 +240,24 @@ export function TrustStrip() {
   return (
     <div className="trust-strip">
       <div>
-        <h3 className="font-bold">Always optional.</h3>
+        <h3 className="font-bold">Every pick has a reason.</h3>
         <p className="type-small text-text-muted mt-2">
-          Shop the whole collection with or without a scan.
+          Each match says what it is for, and we flag anything that may not
+          suit your skin.
         </p>
       </div>
       <div>
-        <h3 className="font-bold">Your results, your choice.</h3>
+        <h3 className="font-bold">Shop for anyone.</h3>
         <p className="type-small text-text-muted mt-2">
-          Switch recommendations off or delete your results at any time.
+          Buying a gift, or a product you already trust? The whole collection
+          is open to browse, scan or no scan.
         </p>
       </div>
       <div>
-        <h3 className="font-bold">Care, with perspective.</h3>
+        <h3 className="font-bold">Your photo is never kept.</h3>
         <p className="type-small text-text-muted mt-2">
-          Everyday guidance, not a diagnosis. A professional can help with
-          persistent concerns.
+          Only your results are saved, in this browser. Delete them anytime
+          from the Skin menu.
         </p>
       </div>
     </div>

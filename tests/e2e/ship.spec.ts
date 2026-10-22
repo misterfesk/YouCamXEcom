@@ -11,7 +11,7 @@ test("scan mode follows the running server", async ({ page }) => {
   });
   await page.goto("/");
   await scanButton(page).click();
-  await expect(page.getByRole("heading", { name: "Find care for your skin" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "See what your skin needs" })).toBeVisible();
   if (process.env.EXPECT_SCAN_MODE === "live")
     await expect(page.locator(".demo-banner")).toHaveCount(0);
   else
@@ -44,12 +44,12 @@ test("mock upload pipeline reports the configured provider outcome", async ({ pa
   const scenario = process.env.YOUCAM_MOCK_SCENARIO ?? "success";
   if (scenario === "success") {
     await expect(page.locator(".goal-result")).toHaveCount(3);
-    await page.getByRole("button", { name: "✦ Continue with recommendations", exact: true }).click();
+    await page.getByRole("button", { name: "✦ See my matches", exact: true }).click();
     await expect(page).toHaveURL(/\/shop$/);
     const saved = await page.evaluate(() => localStorage.getItem("skin"));
     expect(saved).not.toMatch(/blob:|data:image|maskUrl/);
   } else {
-    await expect(page.getByRole("heading", { name: scenario === "unavailable" ? "A little pause for the scanner" : "A little closer" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: scenario === "unavailable" ? "Live scans are paused" : "Come a bit closer" })).toBeVisible();
     await expect(page.getByRole("dialog")).not.toContainText(/YouCamError|stack trace|fileId|mock\./);
     await page.getByRole("button", { name: /sample face/i }).click();
     await expect(page.getByRole("button", { name: "Try breakouts & oil sample", exact: true })).toBeVisible();
@@ -80,7 +80,7 @@ test("closing during image processing cannot retain or revive a photo", async ({
   await page.keyboard.press("Escape");
   await page.evaluate(() => (window as unknown as { finishPhoto: () => Promise<void> }).finishPhoto());
   await scanButton(page).click();
-  await expect(page.getByRole("heading", { name: "Find care for your skin" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "See what your skin needs" })).toBeVisible();
   expect(await page.evaluate(() => (window as unknown as { photoUrls: string[] }).photoUrls)).toEqual([]);
 });
 
@@ -97,7 +97,7 @@ test("key routes and personalized cards pass axe WCAG AA checks", async ({ page 
   expect(modal.violations, JSON.stringify(modal.violations, null, 2)).toEqual([]);
   await page.getByRole("button", { name: "Try with a sample face", exact: true }).click();
   await page.getByRole("button", { name: "Try breakouts & oil sample", exact: true }).click();
-  await page.getByRole("button", { name: "✦ Continue with recommendations", exact: true }).click();
+  await page.getByRole("button", { name: "✦ See my matches", exact: true }).click();
   await expect(page.locator('.product-card[data-unsuitable="true"]:visible').first()).toBeVisible();
   const personalized = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
   expect(personalized.violations, JSON.stringify(personalized.violations, null, 2)).toEqual([]);

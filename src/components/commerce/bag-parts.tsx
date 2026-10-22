@@ -109,12 +109,12 @@ export function OrderSummary({
 export function EmptyBag() {
   return (
     <div className="empty-panel">
-      <p className="type-label text-brand">A fresh start</p>
-      <h2 className="type-h2">Room for your next step.</h2>
+      <p className="type-label text-brand">Your bag</p>
+      <h2 className="type-h2">Your bag is empty.</h2>
       <p>
-        Your bag is empty. Start with a daily essential or explore a concern.
+        Start with a daily basic like a cleanser or SPF, or shop by concern.
       </p>
-      <Button href="/shop">Explore the collection</Button>
+      <Button href="/shop">Shop all</Button>
     </div>
   );
 }

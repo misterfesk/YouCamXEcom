@@ -16,7 +16,7 @@ async function sampleScan(page: Page) {
     .first();
   await activate(page, start);
   await expect(
-    page.getByRole("dialog", { name: "Find care for your skin" }),
+    page.getByRole("dialog", { name: "See what your skin needs" }),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "✦ Use camera", exact: true }),
@@ -33,7 +33,7 @@ async function sampleScan(page: Page) {
     }),
   );
   await expect(
-    page.getByText("Replaying a recorded sample", { exact: true }),
+    page.getByText("Showing a recorded sample", { exact: true }),
   ).toBeVisible();
   await expect(page.locator(".goal-result")).toHaveCount(3);
   const nextGoal = page.locator(".goal-result").nth(1);
@@ -46,7 +46,7 @@ async function sampleScan(page: Page) {
   await activate(
     page,
     page.getByRole("button", {
-      name: "✦ Continue with recommendations",
+      name: "✦ See my matches",
       exact: true,
     }),
   );
@@ -79,13 +79,12 @@ test("keyboard journey from sample scan to demo order", async ({ page }) => {
   ).toBeVisible();
   await activate(
     page,
-    page.getByRole("link", { name: "Continue to demo checkout" }),
+    page.getByRole("link", { name: "Go to checkout" }),
   );
   await expect(
-    page.getByText("This is a demo checkout.", { exact: false }),
+    page.getByText("This is a demo store.", { exact: false }),
   ).toBeVisible();
   await page.getByLabel("First name").fill("Alex");
-  await page.getByLabel("Email address").fill("alex@example.com");
   await page.getByRole("checkbox").check();
   await activate(
     page,
@@ -93,7 +92,7 @@ test("keyboard journey from sample scan to demo order", async ({ page }) => {
   );
   await expect(page).toHaveURL(/\/order-confirmation$/);
   await expect(
-    page.getByText("Your demo order is complete.", { exact: false }),
+    page.getByText("Demo order placed.", { exact: false }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Bag, 0 items", exact: true }),
@@ -102,7 +101,7 @@ test("keyboard journey from sample scan to demo order", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test("scan stays optional and reopened sample results keep the sample photo", async ({
+test("browsing without matches and reopened sample results keep the sample photo", async ({
   page,
 }) => {
   await page.goto("/");
@@ -123,7 +122,7 @@ test("scan stays optional and reopened sample results keep the sample photo", as
   await activate(
     page,
     page.getByRole("button", {
-      name: "Continue without recommendations",
+      name: "Browse the full shop",
       exact: true,
     }),
   );
@@ -221,7 +220,7 @@ test("search supports terms, synonyms and keyboard focus return", async ({
   ).toBeVisible();
   await search.fill("nothing matches this");
   await expect(
-    page.getByRole("heading", { name: "A different word might help." }),
+    page.getByRole("heading", { name: "No products found." }),
   ).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
@@ -274,7 +273,7 @@ test("For you keeps the complete catalog available for every sample", async ({
       .click();
     await page
       .getByRole("button", {
-        name: "✦ Continue with recommendations",
+        name: "✦ See my matches",
         exact: true,
       })
       .click();
@@ -303,10 +302,10 @@ test("unknown catalog URLs render the branded not-found page", async ({
     const response = await page.goto(route);
     expect(response?.status()).toBe(404);
     await expect(
-      page.getByText("404 / A small detour", { exact: true }),
+      page.getByText("404 / Page not found", { exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "Shop the collection", exact: true }),
+      page.getByRole("main").getByRole("link", { name: "Shop all", exact: true }),
     ).toBeVisible();
   }
 });

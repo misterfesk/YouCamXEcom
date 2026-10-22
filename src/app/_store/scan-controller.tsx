@@ -240,7 +240,7 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
   const onContinue = (enabled: boolean) => {
     if (result && !revisiting) setProfile(result.profile, result.sampleId);
     setRecommendations(enabled);
-    if (!revisiting && result) notify(enabled ? "Your shelf is arranged around your skin" : "Results saved. Recommendations are off");
+    if (!revisiting && result) notify(enabled ? "Your matches come first" : "Results saved. Matches are hidden");
     close();
     // A first scan from a landing page leads to For you; otherwise stay put.
     const from = scan.returnPath;

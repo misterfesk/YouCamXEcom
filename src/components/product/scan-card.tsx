@@ -11,23 +11,21 @@ export function ScanCard({
 }) {
   return (
     <div className="scan-card">
-      <Eyebrow className="text-text-muted mb-3">
-        A little skin understanding
-      </Eyebrow>
+      <Eyebrow className="text-text-muted mb-3">Selfie scan</Eyebrow>
       <h2 className="type-h3 mb-3">
-        {profile ? "Your skin, your starting point" : "Meet your next routine"}
+        {profile ? "Your skin at a glance" : "Not sure where to start?"}
       </h2>
       {profile ? (
         <SkinSummary profile={profile} />
       ) : (
         <>
           <p className="type-small text-text-muted mb-6">
-            A selfie scan brings products for your skin concerns to the front.
-            Or explore with a sample face.
+            Scan once and the shop sorts itself around your skin: best matches
+            first, anything to skip clearly marked.
           </p>
           <ScanButton fullWidth onClick={() => onStartScan("hero")} />
           <p className="type-small text-text-muted mt-3">
-            Optional, always. Shop freely without a scan.
+            No selfie handy? Try a sample face from the scan.
           </p>
         </>
       )}
@@ -44,14 +42,15 @@ export function InlineScanCard({
       <div className="scan-orbit" aria-hidden="true">
         <span>YOU</span>
       </div>
-      <Eyebrow className="text-text-muted">A more personal shelf</Eyebrow>
-      <h3 className="type-h3 mt-3">Not sure what fits?</h3>
+      <Eyebrow className="text-text-muted">Selfie scan</Eyebrow>
+      <h3 className="type-h3 mt-3">Not sure what suits you?</h3>
       <p className="text-text-muted mt-3 mb-6">
-        Start with your skin. A quick scan helps put your next step in focus.
+        A 30-second scan moves the products your skin needs to the top of
+        this list.
       </p>
       <ScanButton fullWidth onClick={() => onStartScan("grid")} />
       <p className="type-small text-text-muted mt-3">
-        Try a sample face. No selfie needed.
+        No selfie? Try a sample face instead.
       </p>
     </aside>
   );

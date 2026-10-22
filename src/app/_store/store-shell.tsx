@@ -62,7 +62,7 @@ function Header() {
       onToggleRecommendations={() => {
         const { recommendations: on, setRecommendations } = useSkinStore.getState();
         setRecommendations(!on);
-        notify(on ? "Recommendations are off" : "Recommendations are on");
+        notify(on ? "Matches hidden" : "Matches showing");
       }}
       onDeleteResults={() => {
         useSkinStore.getState().clear();

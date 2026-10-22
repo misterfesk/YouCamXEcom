@@ -116,8 +116,8 @@ export function CatalogView({
         <header className="catalog-hero on-brand">
           <Eyebrow className="mb-4">
             {profile && recommendations
-              ? "A little skin understanding"
-              : "The skincare collection"}
+              ? "Matched to your scan"
+              : "The collection"}
           </Eyebrow>
           <h1 className="type-h1">
             {title}
@@ -215,7 +215,7 @@ export function CatalogView({
             )}
             <p className="type-small text-text-muted" role="status">
               {countLabel}
-              {profile && recommendations ? " · Match badges on" : ""}
+              {profile && recommendations ? " · Tagged for your skin" : ""}
             </p>
           </div>
           <label className="catalog-sort type-small">
@@ -244,10 +244,7 @@ export function CatalogView({
               checked={hideUnsuitable}
               onChange={(event) => onHideUnsuitableChange(event.target.checked)}
             />
-            Hide unsuitable products
-            <span className="type-small text-text-muted">
-              (Not for your skin)
-            </span>
+            Hide products marked “Not for your skin”
           </label>
         )}
         {loading ? (
@@ -285,12 +282,12 @@ export function CatalogView({
                 <div className="section-heading">
                   <div>
                     <Eyebrow className="text-text-muted mb-3">
-                      A little more to explore
+                      The rest of the shop
                     </Eyebrow>
                     <h2 className="type-h2">Everything else</h2>
                     <p className="text-text-muted mt-3">
-                      Other options in the collection, with the same fit
-                      guidance.
+                      Good for gifts, favorites or another concern. Each one
+                      is still tagged for your skin.
                     </p>
                   </div>
                 </div>
@@ -313,15 +310,15 @@ export function CatalogView({
           </div>
         )}
         <p className="type-small text-text-muted catalog-demo-note">
-          Demo collection and sample matches. Everyday skincare guidance, not a
-          diagnosis.
+          Demo store with fictional products. Matches are skincare guidance,
+          not a diagnosis.
         </p>
       </Container>
       <Modal
         open={filtersOpen}
         onOpenChange={setFiltersOpen}
-        title="Refine your shelf"
-        description="A few thoughtful filters can help you find your next step."
+        title="Filters"
+        description="Narrow the shop by step, skin type, concern or ingredient."
         footer={
           <>
             <Button variant="secondary" onClick={onClearFilters}>

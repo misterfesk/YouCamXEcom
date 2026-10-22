@@ -30,13 +30,13 @@ const SORTS: CatalogSort[] = ["featured", "best", "price-low", "price-high", "na
 
 const STEP_COPY: Record<Step, string> = {
   cleanse:
-    "Take the day off. Start fresh. Find a cleansing texture that feels right for your routine.",
+    "Gels and foams for oilier skin, creams and balms for drier skin. Find the wash that feels right.",
   treat:
-    "A little focus goes a long way. Explore targeted layers for the concerns on your mind.",
+    "Serums and spot care for a specific concern, from breakouts to dark spots.",
   moisturize:
-    "From light gels to richer final layers, find a comfortable finish for your skin.",
+    "Light gels for oily skin, richer creams for dry skin, and everything in between.",
   protect:
-    "Make sun protection your last morning step, with a texture you will reach for again.",
+    "The last step every morning. Daily sunscreens, including tinted ones.",
 };
 
 export function CatalogPage({ step, goal }: { step?: Step; goal?: GoalId }) {
@@ -125,16 +125,16 @@ export function CatalogPage({ step, goal }: { step?: Step; goal?: GoalId }) {
 
   return (
     <CatalogView
-      title={step ? STEP_LABEL[step] : goal ? GOAL_DEFS[goal].title : forYou ? "A shelf arranged around" : "Find your"}
-      accent={!step && !goal ? (forYou ? "you." : "starting point.") : undefined}
+      title={step ? STEP_LABEL[step] : goal ? GOAL_DEFS[goal].title : forYou ? "Picked for" : "Shop"}
+      accent={!step && !goal ? (forYou ? "your skin." : "everything.") : undefined}
       description={
         step
           ? STEP_COPY[step]
           : goal
             ? GOAL_DEFS[goal].blurb
             : forYou
-              ? "Your concerns set the order. Bring another focus to the front, or explore every product with match guidance."
-              : "From a fresh cleanse to daily SPF. Explore a considered collection, one good step at a time."
+              ? "Products for what stood out in your scan come first. Every product is still here, each tagged with how it fits you."
+              : "Cleansers, treatments, moisturizers and SPF. Browse it all, or scan your skin to see what suits you first."
       }
       step={step}
       goal={goal}

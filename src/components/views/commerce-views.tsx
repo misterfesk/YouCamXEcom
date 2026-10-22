@@ -24,9 +24,7 @@ export function BagView({
   return (
     <main id="main-content" tabIndex={-1} className="section">
       <Container>
-        <p className="type-label text-brand mb-3">
-          Your routine, coming together
-        </p>
+        <p className="type-label text-brand mb-3">Your bag</p>
         <h1 className="type-h1 mb-8">
           In your <Accent>bag.</Accent>
         </h1>
@@ -42,11 +40,11 @@ export function BagView({
                 />
               ))}
               <Button variant="ghost" href="/shop">
-                Keep exploring
+                Keep shopping
               </Button>
             </div>
             <OrderSummary subtotal={subtotal}>
-              <Button href="/checkout">Continue to demo checkout</Button>
+              <Button href="/checkout">Go to checkout</Button>
             </OrderSummary>
           </div>
         ) : (
@@ -66,13 +64,12 @@ export function CheckoutView({
   return (
     <main id="main-content" tabIndex={-1} className="section">
       <Container>
-        <p className="type-label text-brand mb-3">Try the last step</p>
+        <p className="type-label text-brand mb-3">Checkout</p>
         <h1 className="type-h1 mb-6">
-          Make it a <Accent>routine.</Accent>
+          Almost <Accent>yours.</Accent>
         </h1>
         <p className="demo-banner mb-8">
-          This is a demo checkout. No payment, delivery or email. Use made-up
-          details.
+          This is a demo store. Nothing is charged, shipped or emailed.
         </p>
         {items.length ? (
           <div className="commerce-layout">
@@ -83,37 +80,41 @@ export function CheckoutView({
                 onPlaceOrder();
               }}
             >
-              <h2 className="type-h3">Demo contact</h2>
+              <h2 className="type-h3">Your details</h2>
               <label className="field-label">
-                First name
+                <span>
+                  First name{" "}
+                  <span className="text-text-muted">(optional)</span>
+                </span>
                 <input
                   className="text-control"
                   name="demo-name"
                   autoComplete="off"
-                  required
                   maxLength={80}
                   placeholder="Alex"
                 />
               </label>
               <label className="field-label">
-                Email address
+                <span>
+                  Email address{" "}
+                  <span className="text-text-muted">(optional)</span>
+                </span>
                 <input
                   className="text-control"
                   name="demo-email"
                   type="email"
                   autoComplete="off"
-                  required
                   maxLength={160}
                   placeholder="alex@example.com"
                 />
               </label>
               <p className="type-small text-text-muted">
-                These fields only demonstrate the form. We do not send or save
-                them. No delivery address or payment information is needed.
+                Leave these blank if you like. Nothing you type here is sent or
+                saved, and no address or payment is needed.
               </p>
               <label className="check-control">
                 <input type="checkbox" required />
-                <span>I understand this is a demo order.</span>
+                <span>I understand this is a demo and nothing will ship.</span>
               </label>
               <Button type="submit" size="lg">
                 Place demo order
@@ -147,30 +148,30 @@ export function ConfirmationView({ order }: { order?: DemoOrder }) {
           <h1 className="type-h1">
             {order ? (
               <>
-                A little care,
+                Your routine is
                 <br />
-                all <Accent>lined up.</Accent>
+                <Accent>all set.</Accent>
               </>
             ) : (
               <>
-                Your next routine
+                Nothing to
                 <br />
-                starts here.
+                confirm yet.
               </>
             )}
           </h1>
           <p>
             {order
-              ? "Your demo order is complete. No payment was taken, and nothing will be shipped or emailed."
-              : "There is no demo order in this visit. Explore the collection and try the checkout whenever you like."}
+              ? "Demo order placed. Nothing was charged, and nothing will be shipped or emailed."
+              : "You haven’t placed a demo order in this visit yet."}
           </p>
           <Button variant="secondary-on-brand" href="/shop">
-            Keep exploring
+            Keep shopping
           </Button>
         </div>
         {order && (
           <section className="section confirmation-items">
-            <h2 className="type-h2 mb-6">Your demo routine</h2>
+            <h2 className="type-h2 mb-6">What you ordered</h2>
             <ul>
               {order.items.map((item) => (
                 <li key={item.product.id}>
@@ -187,8 +188,7 @@ export function ConfirmationView({ order }: { order?: DemoOrder }) {
               Demo total · ${order.total.toFixed(2)} USD
             </p>
             <p className="type-small text-text-muted mt-4">
-              This summary lives only in this visit. Refreshing clears the demo
-              order.
+              This summary disappears when you refresh the page.
             </p>
           </section>
         )}
