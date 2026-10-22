@@ -4,7 +4,11 @@ import { expect, test, type Page } from "@playwright/test";
 const scanButton = (page: Page) => page.getByRole("button", { name: "✦ Scan my skin", exact: true }).first();
 
 test("scan mode follows the running server", async ({ page }) => {
-  await page.route("**/api/scan**", (route) => route.abort());
+  const scanRequests: string[] = [];
+  await page.route("**/api/scan**", (route) => {
+    scanRequests.push(route.request().url());
+    return route.abort();
+  });
   await page.goto("/");
   await scanButton(page).click();
   await expect(page.getByRole("heading", { name: "Find care for your skin" })).toBeVisible();
@@ -12,6 +16,17 @@ test("scan mode follows the running server", async ({ page }) => {
     await expect(page.locator(".demo-banner")).toHaveCount(0);
   else
     await expect(page.locator(".demo-banner")).toContainText("Demo mode");
+
+  for (const label of ["breakouts & oil", "dehydration & redness", "under-eyes & firmness"]) {
+    await page.getByRole("button", { name: "Try with a sample face", exact: true }).click();
+    await page.getByRole("button", { name: `Try ${label} sample`, exact: true }).click();
+    await expect(page.locator(".goal-result")).toHaveCount(3);
+    expect(scanRequests, "Recorded samples must never request scan APIs").toEqual([]);
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    if (label !== "under-eyes & firmness") await scanButton(page).click();
+  }
+  expect(scanRequests).toEqual([]);
 });
 
 async function upload(page: Page) {
