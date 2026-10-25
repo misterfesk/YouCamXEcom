@@ -16,3 +16,4 @@ playwright-report
 coverage
 *.log
 *.tsbuildinfo
+video

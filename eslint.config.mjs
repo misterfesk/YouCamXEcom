@@ -17,6 +17,8 @@ const eslintConfig = defineConfig([
     // Local tool folders (caches, editor and agent settings).
     ".*/**",
     "output/**",
+    // Local video project, built and checked on its own.
+    "video/**",
   ]),
 ]);
 
