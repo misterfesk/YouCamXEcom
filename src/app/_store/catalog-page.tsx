@@ -7,7 +7,8 @@ import { dailyEssentials, goalShelf, routinePicks, sortByFit, targetsGoal } from
 import { useSkinStore } from "@/stores/skin";
 import { STEP_LABEL, type Step } from "@/types/catalog";
 import { GOAL_DEFS, type GoalId } from "@/types/goal";
-import type { SkinType } from "@/types/skin";
+import { SKIN_TYPE_LABEL, type SkinType } from "@/types/skin";
+import { stoodOut } from "@/components/scan/scan-copy";
 import {
   EMPTY_FILTERS,
   type CatalogFilters,
@@ -125,16 +126,18 @@ export function CatalogPage({ step, goal }: { step?: Step; goal?: GoalId }) {
 
   return (
     <CatalogView
-      title={step ? STEP_LABEL[step] : goal ? GOAL_DEFS[goal].title : forYou ? "Picked for" : "Shop"}
+      title={step ? STEP_LABEL[step] : goal ? GOAL_DEFS[goal].title : forYou ? "Shop for" : "Shop"}
       accent={!step && !goal ? (forYou ? "your skin." : "everything.") : undefined}
       description={
         step
           ? STEP_COPY[step]
           : goal
             ? GOAL_DEFS[goal].blurb
-            : forYou
-              ? "Products for what stood out in your scan come first. Every product is still here, each tagged with how it fits you."
-              : "Cleansers, treatments, moisturizers and SPF. Browse it all, or scan your skin to see what suits you first."
+            : forYou && summary
+              ? `${SKIN_TYPE_LABEL[summary.skinType]} skin, with ${stoodOut(summary.goals)} standing out. Products for those come first; the rest follow, each tagged with its fit.`
+              : showFits
+                ? "Every product, sorted by how well it fits your skin. Anything marked Not for your skin sits at the end."
+                : "Cleansers, treatments, moisturizers and SPF. Browse it all, or scan your skin to see what suits you first."
       }
       step={step}
       goal={goal}

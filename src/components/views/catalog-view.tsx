@@ -22,6 +22,8 @@ import {
 } from "@/components/catalog/catalog-sections";
 import { STEPS, STEP_LABEL, type Step } from "@/types/catalog";
 import type { GoalId } from "@/types/goal";
+import { BAND_LABEL } from "@/types/skin";
+import { GOAL_FINDING } from "@/components/scan/scan-copy";
 import type { CatalogGoalSection, CatalogSort } from "@/types/catalog-view";
 import type {
   ProductListing,
@@ -96,6 +98,20 @@ export function CatalogView({
     moisturize: "All moisturizers",
     protect: "All SPF",
   };
+  const matched = !!profile && recommendations;
+  const goalScore = goal && profile?.goals.find((item) => item.goal === goal);
+  // The eyebrow says where this page sits: in the routine, or in your scan.
+  const eyebrow = forYou
+    ? "Your matches"
+    : goal
+      ? matched && goalScore
+        ? `${GOAL_FINDING[goal].name} · ${BAND_LABEL[goalScore.band]} in your scan`
+        : "Shop by concern"
+      : step
+        ? `Step ${STEPS.indexOf(step) + 1} of ${STEPS.length}${matched ? " · Sorted for your skin" : ""}`
+        : matched
+          ? "Sorted for your skin"
+          : "The collection";
   const subtypeOptions = filters.options.subtype.filter(
     (option) => option.value,
   );
@@ -114,11 +130,7 @@ export function CatalogView({
           )}
         </nav>
         <header className="catalog-hero on-brand">
-          <Eyebrow className="mb-4">
-            {profile && recommendations
-              ? "Matched to your scan"
-              : "The collection"}
-          </Eyebrow>
+          <Eyebrow className="mb-4">{eyebrow}</Eyebrow>
           <h1 className="type-h1">
             {title}
             {accent && (
@@ -129,9 +141,6 @@ export function CatalogView({
             )}
           </h1>
           <p className="type-body-lg mt-5 max-w-copy">{description}</p>
-          <p className="type-small mt-6">
-            Cleanse. Treat. Moisturize. Protect.
-          </p>
         </header>
         <div className="catalog-navigation">
           <nav className="category-chips" aria-label="Shop by routine step">
@@ -215,7 +224,7 @@ export function CatalogView({
             )}
             <p className="type-small text-text-muted" role="status">
               {countLabel}
-              {profile && recommendations ? " · Tagged for your skin" : ""}
+              {profile && recommendations ? " · Each tagged with its fit" : ""}
             </p>
           </div>
           <label className="catalog-sort type-small">
@@ -287,7 +296,7 @@ export function CatalogView({
                     <h2 className="type-h2">Everything else</h2>
                     <p className="text-text-muted mt-3">
                       Good for gifts, favorites or another concern. Each one
-                      is still tagged for your skin.
+                      still shows how it fits you.
                     </p>
                   </div>
                 </div>
@@ -318,7 +327,7 @@ export function CatalogView({
         open={filtersOpen}
         onOpenChange={setFiltersOpen}
         title="Filters"
-        description="Narrow the shop by step, skin type, concern or ingredient."
+        description="Narrow by routine step, skin type, concern or ingredient."
         footer={
           <>
             <Button variant="secondary" onClick={onClearFilters}>

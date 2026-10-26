@@ -61,7 +61,7 @@ export function FocusStrip({
             aria-label={`Move ${GOAL_DEFS[goal].title} to the top`}
           >
             <span aria-hidden="true">{index + 1}.</span>
-            {GOAL_DEFS[goal].title}
+            {GOAL_FINDING[goal].name}
             <span className="type-small">
               {
                 BAND_LABEL[
@@ -175,7 +175,7 @@ export function MoreForYourSkin({
             pressed={false}
             onPressedChange={() => onSetFocus(item.goal)}
           >
-            {GOAL_DEFS[item.goal].title}
+            {GOAL_FINDING[item.goal].name}
             <span className="type-small">{BAND_LABEL[item.band]}</span>
             <Icon name="plus" />
           </Chip>
