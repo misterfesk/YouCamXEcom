@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ScanButton } from "@/components/ui/scan-button";
 import { Icon } from "@/components/icons/icon";
 import { ScanCard } from "@/components/product/scan-card";
-import { GOAL_FINDING } from "@/components/scan/scan-copy";
+import { GOAL_FINDING, stoodOut } from "@/components/scan/scan-copy";
 import { GOAL_DEFS, type GoalId } from "@/types/goal";
 import { BAND_LABEL } from "@/types/skin";
 import type { ProfileSummary, ScanSource } from "@/types/storefront";
@@ -22,23 +22,29 @@ export function HomeHero({
     <div className="home-hero-wrap">
       <div className="home-hero on-brand">
         <div className="hero-copy">
-          <Eyebrow>Skincare, matched to you</Eyebrow>
+          <Eyebrow>
+            {profile ? "Matched to your scan" : "Skincare, matched to you"}
+          </Eyebrow>
           <h1 className="type-display mt-6">
             Skincare that <Accent>knows</Accent> your skin.
           </h1>
           <p className="type-body-lg mt-6">
-            Take a quick selfie scan and the shop puts what your skin needs
-            first, with the reason on every pick. Shopping for someone else, or
-            restocking a favorite? Everything is right here too.
+            {profile
+              ? `Your shop now leads with products for ${stoodOut(profile.goals)}. Every product shows how it fits your ${SKIN_TYPE_LABEL[profile.skinType].toLowerCase()} skin.`
+              : "Scan once and the whole shop sorts itself around your skin, with the reason on every match. Or skip the scan and browse everything."}
           </p>
           <div className="hero-actions">
-            <ScanButton size="lg" onClick={() => onStartScan("hero")} />
+            <ScanButton size="lg" onClick={() => onStartScan("hero")}>
+              {profile ? "✦ Rescan my skin" : undefined}
+            </ScanButton>
             <Button href="/shop" size="lg" variant="secondary-on-brand">
               Shop all
             </Button>
           </div>
           <p className="type-small mt-4">
-            About 30 seconds. Your photo is never saved.
+            {profile
+              ? "Hide, rescan or delete your results anytime from your skin menu."
+              : "Your photo is never saved. Results stay in this browser."}
           </p>
         </div>
         <div className="hero-portrait">
@@ -240,7 +246,7 @@ export function TrustStrip() {
   return (
     <div className="trust-strip">
       <div>
-        <h3 className="font-bold">Every pick has a reason.</h3>
+        <h3 className="font-bold">Every tag has a reason.</h3>
         <p className="type-small text-text-muted mt-2">
           Each match says what it is for, and we flag anything that may not
           suit your skin.
@@ -257,7 +263,7 @@ export function TrustStrip() {
         <h3 className="font-bold">Your photo is never kept.</h3>
         <p className="type-small text-text-muted mt-2">
           Only your results are saved, in this browser. Delete them anytime
-          from the Skin menu.
+          from your skin menu.
         </p>
       </div>
     </div>

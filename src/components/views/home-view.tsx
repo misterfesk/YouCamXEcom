@@ -45,13 +45,13 @@ export function HomeView({
       <Section>
         <div className="section-heading">
           <div>
-            <p className="type-label text-text-muted mb-3">The everyday edit</p>
+            <p className="type-label text-text-muted mb-3">Bestsellers</p>
             <h2 className="type-h2">
               Good places to <Accent>begin.</Accent>
             </h2>
           </div>
           <Button href="/shop" variant="secondary">
-            Shop bestsellers
+            Shop all
           </Button>
         </div>
         <ProductRail

@@ -1,5 +1,5 @@
 import { GOAL_FINDING } from "./scan-copy";
-import { BAND_LABEL, SKIN_TYPE_LABEL } from "@/types/skin";
+import { BAND_LABEL } from "@/types/skin";
 import type { ProfileSummary } from "@/types/storefront";
 import { Button } from "@/components/ui/button";
 export function SkinSummary({
@@ -12,7 +12,7 @@ export function SkinSummary({
   return (
     <div>
       <p className="type-label text-text-muted mb-4">
-        {SKIN_TYPE_LABEL[profile.skinType]} skin · What stood out
+        What stood out
       </p>
       <ol className="skin-goals">
         {profile.goals.slice(0, 3).map((item) => (
