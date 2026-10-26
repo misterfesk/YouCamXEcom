@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { STEPS, STEP_LABEL } from "@/types/catalog";
 import { GOALS, GOAL_DEFS } from "@/types/goal";
+import { SKIN_TYPE_LABEL } from "@/types/skin";
+import { GOAL_FINDING } from "@/components/scan/scan-copy";
 import type { ProfileSummary, ScanSource } from "@/types/storefront";
 import { Icon } from "@/components/icons/icon";
 import { IconButton } from "@/components/ui/icon-button";
@@ -37,7 +39,16 @@ export function ProfileChip({
         data-on={recommendations}
         aria-hidden="true"
       />
-      <span>{recommendations ? profile.label : "Matches · off"}</span>
+      <span>
+        {recommendations
+          ? [
+              SKIN_TYPE_LABEL[profile.skinType],
+              profile.goals[0] && GOAL_FINDING[profile.goals[0].goal].name,
+            ]
+              .filter(Boolean)
+              .join(" · ")
+          : "Matches · off"}
+      </span>
       <Icon name="chevron-down" />
     </button>
   );
@@ -181,7 +192,7 @@ export function SiteHeader({
         open={menuOpen}
         onOpenChange={setMenuOpen}
         title={`Explore ${BRAND_NAME}`}
-        description="Shop by routine step or skin concern."
+        description="Shop by routine step or skin concern, or scan for your matches."
       >
         <nav aria-label="Mobile navigation" className="mobile-menu">
           <div>
@@ -225,7 +236,7 @@ export function SiteHeader({
         open={profileOpen}
         onOpenChange={setProfileOpen}
         title="Your skin"
-        description="Your scan results stay in this browser only."
+        description="Your results stay in this browser. Hide, rescan or delete them here."
       >
         <div className="flex flex-col gap-3">
           {profileItems.map((item) => {

@@ -79,7 +79,7 @@ export function OrderSummary({
 }) {
   return (
     <aside className="order-summary">
-      <h2 className="type-h3">The details</h2>
+      <h2 className="type-h3">Order summary</h2>
       <dl>
         <div>
           <dt>Products</dt>
@@ -112,7 +112,7 @@ export function EmptyBag() {
       <p className="type-label text-brand">Your bag</p>
       <h2 className="type-h2">Your bag is empty.</h2>
       <p>
-        Start with a daily basic like a cleanser or SPF, or shop by concern.
+        Start with the basics: a cleanser, a moisturizer and SPF.
       </p>
       <Button href="/shop">Shop all</Button>
     </div>

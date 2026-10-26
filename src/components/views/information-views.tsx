@@ -10,7 +10,7 @@ export function MethodView({ sources }: { sources: MethodSource[] }) {
         <section className="confirmation-hero on-brand">
           <p className="type-label">How we recommend</p>
           <h1 className="type-h1">
-            Every pick has a<br />
+            Every tag has a<br />
             <Accent>reason.</Accent>
           </h1>
           <p>
@@ -66,7 +66,7 @@ export function MethodView({ sources }: { sources: MethodSource[] }) {
             Every product stays in the shop, scan or no scan. A flagged product
             can still be the right buy: a gift, something your dermatologist
             recommended, or a favorite that already works for you. Hide your
-            matches, rescan or delete your results anytime from Skin in the
+            matches, rescan or delete your results anytime from your skin
             menu.
           </p>
           <h2 className="type-h2">Guidance, not a diagnosis</h2>

@@ -217,16 +217,24 @@ export function ProductView({
               </div>
             ) : (
               <div className="pdp-fit">
-                <p>Does this suit my skin?</p>
                 {profile ? (
-                  <p className="type-small">
-                    Your matches are switched off. Turn them back on from Skin
-                    in the menu to see how this fits you.
-                  </p>
+                  <>
+                    <p>Your matches are hidden.</p>
+                    <p className="type-small">
+                      Choose Show my matches in your skin menu to see how this
+                      fits your skin.
+                    </p>
+                  </>
                 ) : (
-                  <ScanButton onClick={onStartScan}>
-                    ✦ Does this suit my skin?
-                  </ScanButton>
+                  <>
+                    <p>
+                      One selfie, about 30 seconds. You’ll come back to this
+                      page with the answer.
+                    </p>
+                    <ScanButton onClick={onStartScan}>
+                      ✦ Does this suit my skin?
+                    </ScanButton>
+                  </>
                 )}
               </div>
             )}
@@ -248,7 +256,7 @@ export function ProductView({
           </h2>
           <p className="mb-6 text-text-muted">
             {fit
-              ? "Other routine steps that suit your scan."
+              ? "Other routine steps that fit your skin."
               : "Other routine steps that go with it."}
           </p>
           <ProductRail

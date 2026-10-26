@@ -24,7 +24,11 @@ export function BagView({
   return (
     <main id="main-content" tabIndex={-1} className="section">
       <Container>
-        <p className="type-label text-brand mb-3">Your bag</p>
+        <p className="type-label text-brand mb-3">
+          {items.length
+            ? `${items.reduce((sum, item) => sum + item.quantity, 0)} ${items.length === 1 && items[0].quantity === 1 ? "item" : "items"}`
+            : "Your bag"}
+        </p>
         <h1 className="type-h1 mb-8">
           In your <Accent>bag.</Accent>
         </h1>
@@ -148,9 +152,9 @@ export function ConfirmationView({ order }: { order?: DemoOrder }) {
           <h1 className="type-h1">
             {order ? (
               <>
-                Your routine is
+                Order
                 <br />
-                <Accent>all set.</Accent>
+                <Accent>received.</Accent>
               </>
             ) : (
               <>
