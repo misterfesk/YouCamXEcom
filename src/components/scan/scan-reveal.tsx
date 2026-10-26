@@ -121,9 +121,6 @@ export function ScanReveal({
           dermatologist can help alongside your routine.
         </p>
       )}
-      <p className="type-small text-text-muted">
-        Based on one photo, so lighting and angle can shift results.
-      </p>
       <Link
         className="scan-method-link text-brand underline"
         href="/how-we-recommend"

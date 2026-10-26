@@ -4,17 +4,30 @@ import type {
   ScanStep,
 } from "@/types/scan";
 import type { FitzpatrickType, SkinType } from "@/types/skin";
-import type { GoalId } from "@/types/goal";
+import type { GoalId, GoalScore } from "@/types/goal";
 export const SCAN_TITLES: Record<ScanStep, string> = {
   intro: "See what your skin needs",
   camera: "Find soft, even light",
   upload: "Choose a photo",
-  samples: "Try a sample face",
+  samples: "Pick a sample face",
   preview: "Check your photo",
   analyzing: "Reading your skin",
   reveal: "Your skin results",
   error: "Let’s try that again",
   unavailable: "Live scans are paused",
+};
+/** One line under each step title: what happens next, never a repeat of the body. */
+export const SCAN_DESCRIPTIONS: Record<ScanStep, string> = {
+  intro: "Close anytime and you stay on this page.",
+  camera: "Line up with the guide. The checks tick as you get it right.",
+  upload: "You’ll check the photo before anything is sent.",
+  samples: "Pick the one closest to your skin to see how the shop changes.",
+  preview: "Nothing is sent until you choose Use this photo.",
+  analyzing: "Your results open here in a few seconds.",
+  reveal:
+    "From one photo, so light and angle can shift it. Skincare guidance, not a diagnosis.",
+  error: "Your photo wasn’t saved. Choose how to try again.",
+  unavailable: "The shop works as usual. Only live scans are paused.",
 };
 export const SCAN_ERRORS: Record<
   ScanErrorCode,
@@ -106,9 +119,18 @@ export const GOAL_FINDING: Record<GoalId, { name: string; seen: string }> = {
   "under-eyes": { name: "Under-eyes", seen: "Shadows or puffiness showed up under your eyes." },
   "smooth-firm": { name: "Fine lines", seen: "Fine lines or softening skin showed up." },
 };
+/** The top three findings as one phrase: "breakouts, oil & pores, and redness". */
+export function stoodOut(goals: GoalScore[]) {
+  const names = goals
+    .slice(0, 3)
+    .map((item) => GOAL_FINDING[item.goal].name.toLowerCase());
+  return names.length > 1
+    ? `${names.slice(0, -1).join(", ")}${names.length > 2 ? "," : ""} and ${names.at(-1)}`
+    : (names[0] ?? "");
+}
 export const ANALYSIS_STEPS = [
   "Reading skin type",
-  "Looking at visible concerns",
-  "Considering sun sensitivity",
-  "Arranging the collection",
+  "Finding what stands out",
+  "Checking sun sensitivity",
+  "Sorting your matches",
 ];

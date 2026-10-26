@@ -22,9 +22,9 @@ const loadScanFlow = () => import("@/components/scan/scan-flow");
 const ScanModal = dynamic(() => loadScanFlow().then((m) => m.ScanModal), { ssr: false });
 
 export const SAMPLES: ScanSample[] = [
-  { id: "oily", label: "Breakouts & oil", detail: "Breakouts, oil and pores, hydration" },
-  { id: "dry", label: "Dehydration & redness", detail: "Redness, hydration and texture" },
-  { id: "mature", label: "Under-eyes & firmness", detail: "Under-eye care, firmness, oil and pores" },
+  { id: "oily", label: "Breakouts & oil", detail: "Stood out: breakouts, oil & pores, dryness & texture" },
+  { id: "dry", label: "Redness & dryness", detail: "Stood out: redness, dryness & texture, oil & pores" },
+  { id: "mature", label: "Under-eyes & fine lines", detail: "Stood out: under-eyes, fine lines, oil & pores" },
 ];
 
 const NO_CHECKS: CameraChecks = { hasFace: false, position: false, frontal: false, lighting: false };

@@ -17,14 +17,14 @@ test("scan mode follows the running server", async ({ page }) => {
   else
     await expect(page.locator(".demo-banner")).toContainText("Demo mode");
 
-  for (const label of ["breakouts & oil", "dehydration & redness", "under-eyes & firmness"]) {
+  for (const label of ["breakouts & oil", "redness & dryness", "under-eyes & fine lines"]) {
     await page.getByRole("button", { name: "Try with a sample face", exact: true }).click();
     await page.getByRole("button", { name: `Try ${label} sample`, exact: true }).click();
     await expect(page.locator(".goal-result")).toHaveCount(3);
     expect(scanRequests, "Recorded samples must never request scan APIs").toEqual([]);
     await page.keyboard.press("Escape");
     await expect(page.getByRole("dialog")).toHaveCount(0);
-    if (label !== "under-eyes & firmness") await scanButton(page).click();
+    if (label !== "under-eyes & fine lines") await scanButton(page).click();
   }
   expect(scanRequests).toEqual([]);
 });

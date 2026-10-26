@@ -122,7 +122,7 @@ test("browsing without matches and reopened sample results keep the sample photo
   await activate(
     page,
     page.getByRole("button", {
-      name: "Browse the full shop",
+      name: "Shop without matches",
       exact: true,
     }),
   );
@@ -246,8 +246,8 @@ test("For you keeps the complete catalog available for every sample", async ({
 }) => {
   for (const label of [
     "breakouts & oil",
-    "dehydration & redness",
-    "under-eyes & firmness",
+    "redness & dryness",
+    "under-eyes & fine lines",
   ]) {
     // Start each sample from a fresh visitor: the profile persists in localStorage.
     await page.goto("/shop");
