@@ -64,6 +64,8 @@ function statusFor(error: ScanApiError): number {
 }
 
 function errorResponse(error: ScanApiError, status = statusFor(error)): Response {
+  // The cap and reserve messages read alike to a visitor; the log tells them apart.
+  if (error.kind === "scan_unavailable") console.warn("scan: unavailable", error.reason);
   const body: ScanErrorBody = { error };
   return json(body, status);
 }
