@@ -143,9 +143,15 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
 
   const startCamera = async (signal: AbortSignal) => {
     camera.current?.close();
-    const mount = document.getElementById(CAMERA_KIT_MOUNT_ID);
-    if (!mount) return;
     const { openCameraSession } = await import("@/lib/scan/camera-kit");
+    // The slot can mount or get its size a few frames after the step changes.
+    let mount = document.getElementById(CAMERA_KIT_MOUNT_ID);
+    for (let frame = 0; frame < 60 && !mount?.parentElement?.clientWidth; frame++) {
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      if (signal.aborted) return;
+      mount = document.getElementById(CAMERA_KIT_MOUNT_ID);
+    }
+    if (!mount) return fail({ kind: "scan_error", code: "camera_unavailable" });
     try {
       const frame = mount.parentElement ?? mount;
       const session = await openCameraSession({
@@ -175,6 +181,12 @@ function ScanSession({ demoMode }: { demoMode: boolean }) {
       if (!signal.aborted) fail({ kind: "scan_error", code: "camera_unavailable" });
     }
   };
+
+  // Fetch the Camera Kit while the visitor reads the intro, so "Use camera" opens it at once.
+  useEffect(() => {
+    if (!scan.open) return;
+    void import("@/lib/scan/camera-kit").then((kit) => kit.loadCameraKit()).catch(() => {});
+  }, [scan.open]);
 
   // The Camera Kit mounts into the camera step's slot once it is on screen.
   useEffect(() => {
